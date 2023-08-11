@@ -14,19 +14,17 @@ const Header = () => {
     setIsDropdownOpen(false);
   };
 
-  // 각 드롭다운 메뉴에 해당하는 아이템 배열 정의
-  const teamIntroductionItems = ["팀소개"];
-  const newsItems = ["공지사항", "업데이트", "이벤트"];
-  const gameInfoItems = ["개발중인 게임", "출시된 게임"];
-  const communityItems = ["공략", "자유", "갤러리", "팬아트"];
-  const mediaItems = ["유튜브"];
-  const webshopItems = ["캐시아이템", "경매장"];
-  const customerServiceItems = [
-    "버그제보",
-    "FAQ",
-    "신고",
-    "고객센터",
-    "건의사항",
+  const menuItems = [
+    { label: "팀소개", items: ["팀소개"] },
+    { label: "새소식", items: ["공지사항", "업데이트", "이벤트"] },
+    { label: "게임정보", items: ["개발중인 게임", "출시된 게임"] },
+    { label: "커뮤니티", items: ["공략", "자유", "갤러리", "팬아트"] },
+    { label: "미디어", items: ["유튜브"] },
+    { label: "웹샵", items: ["캐시아이템", "경매장"] },
+    {
+      label: "고객센터",
+      items: ["버그제보", "FAQ", "신고", "고객센터", "건의사항"],
+    },
   ];
 
   return (
@@ -36,55 +34,16 @@ const Header = () => {
       </div>
       <nav>
         <ul className={styles["nav-links"]}>
-          <li
-            onMouseEnter={handleDropdownEnter}
-            onMouseLeave={handleDropdownLeave}
-          >
-            <Link to="/team-introduction">팀소개</Link>
-            {isDropdownOpen && <DropdownMenu items={teamIntroductionItems} />}
-          </li>
-          <li
-            onMouseEnter={handleDropdownEnter}
-            onMouseLeave={handleDropdownLeave}
-          >
-            <Link to="#">새소식</Link>
-            {isDropdownOpen && <DropdownMenu items={newsItems} />}
-          </li>
-          <li
-            onMouseEnter={handleDropdownEnter}
-            onMouseLeave={handleDropdownLeave}
-          >
-            <Link to="/game-info">게임정보</Link>
-            {isDropdownOpen && <DropdownMenu items={gameInfoItems} />}
-          </li>
-          <li
-            onMouseEnter={handleDropdownEnter}
-            onMouseLeave={handleDropdownLeave}
-          >
-            <Link to="/community">커뮤니티</Link>
-            {isDropdownOpen && <DropdownMenu items={communityItems} />}
-          </li>
-          <li
-            onMouseEnter={handleDropdownEnter}
-            onMouseLeave={handleDropdownLeave}
-          >
-            <Link to="/media">미디어</Link>
-            {isDropdownOpen && <DropdownMenu items={mediaItems} />}
-          </li>
-          <li
-            onMouseEnter={handleDropdownEnter}
-            onMouseLeave={handleDropdownLeave}
-          >
-            <Link to="/webshop">웹샵</Link>
-            {isDropdownOpen && <DropdownMenu items={webshopItems} />}
-          </li>
-          <li
-            onMouseEnter={handleDropdownEnter}
-            onMouseLeave={handleDropdownLeave}
-          >
-            <Link to="/customer-service">고객센터</Link>
-            {isDropdownOpen && <DropdownMenu items={customerServiceItems} />}
-          </li>
+          {menuItems.map((menuItem, index) => (
+            <li
+              key={index}
+              onMouseEnter={handleDropdownEnter}
+              onMouseLeave={handleDropdownLeave}
+            >
+              <Link to="#">{menuItem.label}</Link>
+              {isDropdownOpen && <DropdownMenu items={menuItem.items} />}
+            </li>
+          ))}
         </ul>
       </nav>
       <div className={styles.auth}>
