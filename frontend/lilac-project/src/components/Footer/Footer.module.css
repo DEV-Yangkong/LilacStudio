@@ -1,0 +1,52 @@
+.footer {
+  background-color: #333;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  color: #fff;
+}
+
+.contact {
+  display: flex;
+  gap: 20px;
+}
+
+.contactInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon {
+  font-size: 20px;
+}
+
+.socialMedia {
+  margin-top: 10px;
+}
+
+.socialLink {
+  color: #fff;
+  margin: 0 10px;
+}
+
+.socialIcon {
+  font-size: 24px;
+}
+
+.footerInfo {
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.footerInfo a {
+  margin: 0 10px;
+  color: #fff;
+}
+
+.footerInfo a:hover {
+  text-decoration: underline;
+}

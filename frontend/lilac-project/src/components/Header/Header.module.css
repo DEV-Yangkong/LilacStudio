@@ -1,0 +1,85 @@
+.header {
+  background-color: #333;
+  color: #fff;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.logo a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  margin: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #9f86c0;
+}
+
+.auth button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  background-color: #9f86c0;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+/* 드롭다운 메뉴 스타일 */
+.dropdownMenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #f0f0f0;
+  padding: 10px;
+  z-index: 1;
+  width: 150px;
+}
+
+.dropdownMenu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdownMenu ul li {
+  margin-bottom: 5px;
+}
+
+.dropdownMenu ul li a {
+  color: #000;
+  text-decoration: none;
+}
+
+/* 드롭다운 메뉴를 보여줄 때의 스타일 */
+.header li:hover .dropdownMenu {
+  display: block;
+}

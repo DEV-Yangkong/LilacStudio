@@ -1,0 +1,62 @@
+.sidebarContainer {
+  display: flex;
+  flex-direction: row-reverse; /* 배치를 오른쪽으로 변경 */
+}
+
+.sidebar {
+  width: 300px;
+  padding: 20px;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.searchContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.searchInput {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px 0 0 5px;
+}
+
+.searchButton {
+  background-color: #134f2c;
+  color: #ffffff;
+  border: none;
+  padding: 10px;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+
+.links {
+  margin-bottom: 20px;
+}
+
+.links h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.links ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.links li {
+  margin-bottom: 5px;
+}
+
+.links a {
+  text-decoration: none;
+  color: #134f2c;
+  transition: color 0.3s ease;
+}
+
+.links a:hover {
+  color: #0b311a;
+}

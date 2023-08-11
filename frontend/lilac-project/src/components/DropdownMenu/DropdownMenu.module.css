@@ -1,0 +1,36 @@
+.dropdownMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #9f86c0;
+  padding: 10px;
+  z-index: 1;
+  width: 100%;
+}
+
+.dropdownMenu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdownMenu ul li {
+  margin-bottom: 5px;
+}
+
+.dropdownMenu ul li a {
+  color: #000;
+  text-decoration: none;
+}
+
+.header li:hover .dropdownMenu {
+  display: block;
+}
+
+.header li:hover > .dropdownMenu {
+  display: block;
+}
+
+.header li {
+  position: relative;
+}
