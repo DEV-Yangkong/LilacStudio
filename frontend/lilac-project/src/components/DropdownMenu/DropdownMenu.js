@@ -1,17 +1,25 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import styles from "./DropdownMenu.module.css";
 
-const DropdownMenu = () => {
+const DropdownMenu = ({ title, items }) => {
   return (
-    <div className={styles.dropdownMenu}>
-      <ul>
-        <li>
-          <Link to="/news">새소식 1</Link>
-        </li>
-        <li>
-          <Link to="/news2">새소식 2</Link>
-        </li>
+    <div className="dropdown">
+      {" "}
+      {/* styles.dropdown -> "dropdown" */}
+      <div className="dropdownTitle">
+        {" "}
+        {/* styles.dropdownTitle -> "dropdownTitle" */}
+        {title}
+      </div>
+      <ul className="dropdownItems">
+        {" "}
+        {/* styles.dropdownItems -> "dropdownItems" */}
+        {items.map((item, index) => (
+          <li key={index} className="dropdownItem">
+            {" "}
+            {/* styles.dropdownItem -> "dropdownItem" */}
+            <a href="#">{item}</a>
+          </li>
+        ))}
       </ul>
     </div>
   );
