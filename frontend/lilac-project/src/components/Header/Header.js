@@ -14,6 +14,10 @@ const Header = () => {
     setIsDropdownOpen(false);
   };
 
+  const handleHeaderMouseLeave = () => {
+    setIsDropdownOpen(false);
+  };
+
   const menuItems = [
     { label: "팀소개", items: ["팀소개"] },
     { label: "새소식", items: ["공지사항", "업데이트", "이벤트"] },
@@ -28,18 +32,18 @@ const Header = () => {
   ];
 
   return (
-    <header className={styles.header}>
+    <header
+      className={styles.header}
+      onMouseEnter={handleDropdownEnter}
+      onMouseLeave={handleHeaderMouseLeave}
+    >
       <div className={styles.logo}>
         <Link to="/">Lilac Studio</Link>
       </div>
       <nav>
         <ul className={styles["nav-links"]}>
           {menuItems.map((menuItem, index) => (
-            <li
-              key={index}
-              onMouseEnter={handleDropdownEnter}
-              onMouseLeave={handleDropdownLeave}
-            >
+            <li key={index}>
               <Link to="#">{menuItem.label}</Link>
               {isDropdownOpen && <DropdownMenu items={menuItem.items} />}
             </li>
