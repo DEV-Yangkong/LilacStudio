@@ -1,0 +1,7 @@
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('gameinfo/', views.game_info, name='game_info'),
+    # 다른 URL 패턴들을 여기에 추가할 수 있습니다.
+]
