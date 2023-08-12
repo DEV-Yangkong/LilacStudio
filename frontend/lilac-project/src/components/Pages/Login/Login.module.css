@@ -1,0 +1,37 @@
+/* Login.module.css */
+
+.loginContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+}
+
+.loginContainer h2 {
+  margin-bottom: 20px;
+}
+
+.loginContainer div {
+  margin-bottom: 10px;
+}
+
+.loginContainer label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.loginContainer input {
+  padding: 5px;
+}
+
+.loginContainer button {
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.loginContainer button:hover {
+  background-color: #0056b3;
+}
