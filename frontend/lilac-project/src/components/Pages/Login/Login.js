@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import styles from "./Login.module.css"; // 스타일을 적용하기 위한 CSS 모듈을 불러옵니다.
+import styles from "./Login.module.css";
 
 const Login = () => {
-  const [username, setUsername] = useState(""); // 사용자의 아이디 상태
-  const [password, setPassword] = useState(""); // 사용자의 비밀번호 상태
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -14,26 +14,53 @@ const Login = () => {
   };
 
   const handleLogin = () => {
-    // 실제 로그인 처리를 수행할 함수
     console.log("Logging in with username:", username);
   };
 
   return (
     <div className={styles.loginContainer}>
-      <h2>Login</h2>
-      <div>
-        <label>Username:</label>
-        <input type="text" value={username} onChange={handleUsernameChange} />
+      <h1 className={styles.loginTitle}>Lilac Studio</h1>
+      <div className={styles.inputFieldContainer}>
+        <div>
+          <input
+            type="text"
+            value={username}
+            onChange={handleUsernameChange}
+            placeholder="이메일 또는 아이디"
+            className={styles.inputField}
+          />
+        </div>
+        <div>
+          <input
+            type="password"
+            value={password}
+            onChange={handlePasswordChange}
+            placeholder="비밀번호"
+            className={styles.inputField}
+          />
+        </div>
       </div>
-      <div>
-        <label>Password:</label>
-        <input
-          type="password"
-          value={password}
-          onChange={handlePasswordChange}
-        />
+      <button onClick={handleLogin} className={styles.loginButton}>
+        로그인
+      </button>
+      <div className={styles.snsLogin}>
+        <button className={styles.snsButton}>네이버</button>
+        <button className={styles.snsButton}>구글</button>
+        <button className={styles.snsButton}>애플</button>
       </div>
-      <button onClick={handleLogin}>Login</button>
+      <div className={styles.signup}>
+        <a href="#" className={styles.forgotLinks}>
+          아이디 찾기
+        </a>
+        <div className={styles.separator} />
+        <a href="#" className={styles.forgotLinks}>
+          비밀번호 찾기
+        </a>
+        <div className={styles.separator} />
+        <a href="#" className={styles.signupLink}>
+          회원가입
+        </a>
+      </div>
     </div>
   );
 };

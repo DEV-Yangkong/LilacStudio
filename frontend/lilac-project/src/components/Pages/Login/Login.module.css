@@ -1,37 +1,125 @@
-/* Login.module.css */
-
 .loginContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 100px;
+  justify-content: center;
+  height: 100vh;
+  margin: 0 auto;
 }
 
-.loginContainer h2 {
+.loginBox {
+  width: 500px;
+  padding: 30px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.loginTitle {
+  font-size: 80px;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+.loginBox h2 {
+  font-size: 42px;
+  margin-top: 20px;
   margin-bottom: 20px;
+  text-align: center;
 }
 
-.loginContainer div {
-  margin-bottom: 10px;
+.inputFieldContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 25px;
+  margin-right: 100px;
 }
 
-.loginContainer label {
-  font-weight: bold;
-  margin-right: 10px;
+.inputField {
+  padding: 15px 45px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  width: 100%;
+  margin-bottom: 25px;
+  text-align: start;
 }
 
-.loginContainer input {
-  padding: 5px;
-}
-
-.loginContainer button {
-  padding: 8px 16px;
-  background-color: #007bff;
+.loginButton {
+  padding: 15px 153px;
+  background-color: #9f86c0;
   color: #fff;
   border: none;
+  border-radius: 8px;
+  font-size: 16px;
   cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
 }
 
-.loginContainer button:hover {
-  background-color: #0056b3;
+.loginButton:hover {
+  background-color: #7a5b8f;
+}
+
+.snsLogin {
+  margin-top: 30px;
+  display: flex;
+  gap: 15px;
+}
+
+.snsButton {
+  padding: 12px 24px;
+  background-color: #9f86c0;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+
+.links {
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+}
+
+.link {
+  font-size: 16px;
+  color: #9f86c0;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
+}
+
+.link:hover {
+  color: #7a5b8f;
+}
+
+.signup {
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.signupLink {
+  font-size: 18px;
+  color: #9f86c0;
+  text-decoration: none;
+}
+
+.forgotLinks {
+  font-size: 18px;
+  color: #9f86c0;
+  text-decoration: none;
+}
+
+.separator {
+  width: 1px;
+  height: 20px;
+  background-color: #ccc;
+  margin: 0 10px; /* 선의 양쪽 간격을 조정할 수 있습니다 */
 }
