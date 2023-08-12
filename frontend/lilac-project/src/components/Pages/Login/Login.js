@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styles from "./Login.module.css";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -26,7 +27,7 @@ const Login = () => {
             type="text"
             value={username}
             onChange={handleUsernameChange}
-            placeholder="이메일 또는 아이디"
+            placeholder="이메일"
             className={styles.inputField}
           />
         </div>
@@ -57,9 +58,9 @@ const Login = () => {
           비밀번호 찾기
         </a>
         <div className={styles.separator} />
-        <a href="#" className={styles.signupLink}>
+        <Link to="/signup" className={styles.signupLink}>
           회원가입
-        </a>
+        </Link>
       </div>
     </div>
   );

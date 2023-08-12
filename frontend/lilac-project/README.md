@@ -68,6 +68,8 @@
 - react-scripts@5.0.1
 - react@^18.2.0
 - web-vitals@^2.1.4
+- react-router-dom
+- axios
 
 아래 명령어로 설치된 라이브러리를 확인할 수 있습니다:
 
