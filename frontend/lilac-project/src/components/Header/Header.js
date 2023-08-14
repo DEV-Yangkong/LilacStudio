@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./Header.module.css";
-import DropdownMenu from "../DropdownMenu/DropdownMenu";
 
 const Header = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -80,24 +79,30 @@ const Header = () => {
       <div className={styles.logo}>
         <Link to="/">Lilac Studio</Link>
       </div>
-      <nav>
+      <nav className={styles.nav}>
         <ul className={styles["nav-links"]}>
           {menuItems.map((menuItem, index) => (
             <li key={index}>
               <Link to={menuItem.path}>{menuItem.label}</Link>
-              {isDropdownOpen && (
-                <DropdownMenu
-                  items={menuItem.items}
-                  onItemClick={(item) => console.log(`Clicked: ${item}`)} // 아이템을 클릭했을 때 수행할 동작을 정의
-                />
-              )}
+              <div
+                className={`${styles.dropdownMenu} ${
+                  isDropdownOpen ? styles.open : ""
+                }`}
+              >
+                <ul>
+                  {menuItem.items.map((item, itemIndex) => (
+                    <li key={itemIndex}>
+                      <Link to={menuItem.itemPaths[itemIndex]}>{item}</Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </li>
           ))}
         </ul>
       </nav>
       <div className={styles.auth}>
-        <button onClick={() => navigate("/login")}>로그인</button>{" "}
-        {/* 로그인 버튼 클릭 시 /login 경로로 이동 */}
+        <button onClick={() => navigate("/login")}>로그인</button>
       </div>
     </header>
   );

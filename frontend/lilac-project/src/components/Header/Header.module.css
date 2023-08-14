@@ -1,5 +1,3 @@
-/* Header.module.css */
-
 .header {
   background-color: #333;
   color: #fff;
@@ -23,14 +21,14 @@
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 1rem;
+  gap: 7rem;
   margin: 0;
   padding: 0;
 }
 
 .nav-links li {
   margin: 0;
-  position: relative; /* 필요한 경우 아래에서 나타나게 하기 위해 추가 */
+  position: relative;
 }
 
 .nav-links a {
@@ -60,13 +58,15 @@
   display: none;
   position: absolute;
   top: 100%;
-  left: 0;
-  background-color: #f0f0f0;
+  left: 50%; /* 드롭다운을 가운데로 이동 */
+  transform: translateX(-50%); /* 왼쪽으로 50%만큼 이동하여 가운데 정렬 */
+  background-color: #333;
   padding: 10px;
   z-index: 1;
   width: 150px;
   border-radius: 5px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
 }
 
 .dropdownMenu ul {
@@ -76,15 +76,19 @@
 }
 
 .dropdownMenu ul li {
-  margin-bottom: 5px;
+  margin-bottom: 0; /* 아이템 사이의 간격 제거 */
+  height: 40px; /* 아이템 높이 설정 */
+  display: flex; /* 아이템을 수직 가운데 정렬하기 위해 */
+  align-items: center; /* 아이템을 수직 가운데 정렬하기 위해 */
 }
 
 .dropdownMenu ul li a {
-  color: #000;
+  color: #fff;
   text-decoration: none;
+  flex: 1; /* 아이템 내용을 평균적으로 확장시키기 위해 */
+  padding: 0 10px; /* 내용과 좌우 간격 주기 */
 }
 
-/* 드롭다운 메뉴를 보여줄 때의 스타일 */
-.header li:hover .dropdownMenu {
+.header:hover .dropdownMenu {
   display: block;
 }

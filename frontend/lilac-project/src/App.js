@@ -5,7 +5,10 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 
 import Home from "./components/Pages/Home/Home";
+
 import News from "./components/Pages/News/News";
+import NoticeList from "./components/Pages/News/NoticeList";
+
 import GameInfo from "./components/Pages/GameInfo/GameInfo";
 import Community from "./components/Pages/Community/Community";
 import Media from "./components/Pages/Media/Media";
@@ -27,6 +30,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/team-introduction" element={<TeamIntroduction />} />
           <Route path="/news" element={<News />} />
+          <Route path="/notice-list" element={<NoticeList />} />
           <Route path="/game-info" element={<GameInfo />} />
           <Route path="/community" element={<Community />} />
           <Route path="/media" element={<Media />} />
