@@ -8,8 +8,6 @@ import Modal from "react-modal";
 const WritePostNB = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [videoUrl, setVideoUrl] = useState("");
-  const [thumbnailUrl, setThumbnailUrl] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const [isPostSuccess, setIsPostSuccess] = useState(false);
@@ -29,22 +27,6 @@ const WritePostNB = () => {
     setContent(e.target.value);
   };
 
-  const handleVideoUrlChange = (e) => {
-    const newVideoUrl = e.target.value;
-    setVideoUrl(newVideoUrl);
-    extractThumbnailUrl(newVideoUrl);
-  };
-
-  const extractThumbnailUrl = (url) => {
-    const videoId = url.match(/v=([^&]+)/);
-    if (videoId) {
-      const thumbnailUrl = `https://i.ytimg.com/vi/${videoId[1]}/maxresdefault.jpg`;
-      setThumbnailUrl(thumbnailUrl);
-    } else {
-      setThumbnailUrl("");
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -53,8 +35,6 @@ const WritePostNB = () => {
         {
           title,
           content,
-          video_url: videoUrl,
-          thumbnail_url: thumbnailUrl,
         }
       );
 
@@ -106,28 +86,6 @@ const WritePostNB = () => {
     <div className={styles["write-post"]}>
       <h1 className={styles["post-title"]}>포스트 작성하기</h1>
       <form onSubmit={handleSubmit}>
-        <div className={styles["form-group"]}>
-          <label htmlFor="videoUrl">영상 주소</label>
-          <input
-            type="url"
-            id="videoUrl"
-            value={videoUrl}
-            onChange={handleVideoUrlChange}
-            required
-            className={styles.input}
-          />
-        </div>
-        {thumbnailUrl && (
-          <div className={styles["form-group"]}>
-            <label htmlFor="thumbnail">썸네일 미리보기</label>
-            <img
-              src={thumbnailUrl}
-              alt="Video Thumbnail"
-              className={styles.thumbnail}
-              style={{ maxWidth: "100%", maxHeight: "200px" }}
-            />
-          </div>
-        )}
         <div className={styles["form-group"]}>
           <label htmlFor="title">제목</label>
           <input

@@ -8,7 +8,7 @@ const NoticeBoard = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [noticePosts, setNoticePosts] = useState([]);
 
-  const postsPerPage = 5; // 페이지당 게시글 수
+  const postsPerPage = 6; // 페이지당 게시글 수
 
   useEffect(() => {
     const fetchData = async () => {

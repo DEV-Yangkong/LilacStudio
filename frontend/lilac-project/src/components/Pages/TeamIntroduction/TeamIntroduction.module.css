@@ -207,7 +207,7 @@
   left: 0;
   width: 100%;
   height: 2px;
-  background-color: #000;
+  background-color: #9f86c0;
   transform: scaleX(0);
   transform-origin: left;
   animation: underlineAnimation 3s linear infinite;

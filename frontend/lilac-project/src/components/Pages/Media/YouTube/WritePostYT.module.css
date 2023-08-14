@@ -47,7 +47,7 @@
 .input:focus,
 .textarea:hover,
 .textarea:focus {
-  border-color: #134f2c;
+  border-color: #9f86c0;
 }
 
 .form-group textarea {
@@ -64,14 +64,12 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition:
-    background-color 0.3s,
-    transform 0.3s;
+  transition: background-color 0.3s, transform 0.3s;
 }
 
 .submit-button:hover {
   transform: scale(1.05);
-  background-color: #134f2c;
+  background-color: #9f86c0;
 }
 
 .cancel-button {
@@ -83,13 +81,11 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition:
-    background-color 0.3s,
-    transform 0.3s;
+  transition: background-color 0.3s, transform 0.3s;
 }
 
 .cancel-button:hover {
-  background-color: #134f2c;
+  background-color: #9f86c0;
   transform: scale(1.05);
 }
 

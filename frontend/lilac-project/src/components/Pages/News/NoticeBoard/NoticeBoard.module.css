@@ -86,7 +86,7 @@
 
 .search-bar input:hover,
 .search-bar input:focus {
-  border: 1.5px solid #134f2c;
+  border: 1.5px solid #9f86c0;
 }
 
 .search-icon {
@@ -135,7 +135,7 @@
 }
 
 .top-button:hover {
-  background-color: #134f2c;
+  background-color: #9f86c0;
   color: #fff;
 }
 
@@ -161,7 +161,7 @@
 }
 
 .write-button:hover {
-  background-color: #134f2c;
+  background-color: #9f86c0;
   color: #fff;
 }
 
@@ -223,9 +223,11 @@
     width: 250px;
     padding: 5px 10px;
   }
+
   .search-icon i {
     font-size: 20px;
   }
+
   .top-button {
     position: sticky;
     bottom: 500px;
