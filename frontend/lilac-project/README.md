@@ -46,30 +46,24 @@
 ## 사용된 기술과 라이브러리
 
 - @babel/plugin-proposal-private-property-in-object@7.21.11
+- @fortawesome/fontawesome-svg-core@6.4.2
+- @fortawesome/free-brands-svg-icons@6.4.2
+- @fortawesome/free-regular-svg-icons@6.4.2
+- @fortawesome/free-solid-svg-icons@6.4.2
+- @fortawesome/react-fontawesome@0.2.0
 - @testing-library/jest-dom@5.17.0
 - @testing-library/react@13.4.0
 - @testing-library/user-event@13.5.0
+- axios@1.4.0
 - react-dom@18.2.0
+- react-icon@1.0.0
+- react-icons@4.10.1
+- react-modal@3.16.1
+- react-router-dom@6.15.0
 - react-scripts@5.0.1
 - react@18.2.0
 - web-vitals@2.1.4
-- @fortawesome/fontawesome-svg-core@^6.4.2
-- @fortawesome/free-brands-svg-icons@^6.4.2
-- @fortawesome/free-regular-svg-icons@^6.4.2
-- @fortawesome/free-solid-svg-icons@^6.4.2
-- @fortawesome/react-fontawesome@^0.2.0
-- @testing-library/jest-dom@^5.17.0
-- @testing-library/react@^13.4.0
-- @testing-library/user-event@^13.5.0
-- react-dom@^18.2.0
-- react-icon@^1.0.0
-- react-icons@^4.10.1
-- react-router-dom@^6.14.2
-- react-scripts@5.0.1
-- react@^18.2.0
-- web-vitals@^2.1.4
-- react-router-dom
-- axios
+- font-awesome
 
 아래 명령어로 설치된 라이브러리를 확인할 수 있습니다:
 

@@ -19,13 +19,13 @@ const Header = () => {
       label: "팀소개",
       path: "/team-introduction",
       items: ["팀소개"],
-      itemPaths: ["/team-introduction"],
+      itemPaths: ["/team-introduction/team-introduction"],
     },
     {
       label: "새소식",
       path: "/news",
       items: ["공지사항", "업데이트", "이벤트"],
-      itemPaths: ["/news/notice", "/news/update", "/news/event"],
+      itemPaths: ["/news/notice-board", "/news/update", "/news/event"],
     },
     {
       label: "게임정보",
