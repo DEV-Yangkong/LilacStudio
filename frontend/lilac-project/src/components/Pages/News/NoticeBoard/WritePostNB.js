@@ -21,6 +21,10 @@ const WritePostNB = () => {
 
   useEffect(() => {
     Modal.setAppElement("#root");
+
+    // axios 요청 전에 CSRF 토큰 설정
+    axios.defaults.xsrfCookieName = "csrftoken";
+    axios.defaults.xsrfHeaderName = "X-CSRFToken";
   }, []);
 
   const handleTitleChange = (e) => {
