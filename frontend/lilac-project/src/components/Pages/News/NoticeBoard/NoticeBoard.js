@@ -8,7 +8,7 @@ const NoticeBoard = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [scrollButtonVisible, setScrollButtonVisible] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [youtubePosts, setYoutubePosts] = useState([]);
+  const [noticePosts, setNoticePosts] = useState([]);
 
   const postsPerPage = 9;
 
@@ -18,7 +18,7 @@ const NoticeBoard = () => {
         const response = await axios.get(
           "http://127.0.0.1:8000/api/v1/notice_board/"
         );
-        setYoutubePosts(response.data);
+        setNoticePosts(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -60,7 +60,7 @@ const NoticeBoard = () => {
     return formattedDateString.replace(/\./g, "-"); // '.'을 '-'로 변경
   };
 
-  const filteredPosts = NoticeBoard.filter(
+  const filteredPosts = noticePosts.filter(
     (post) =>
       searchTerm === "" ||
       post.title.toLowerCase().includes(searchTerm.toLowerCase())
@@ -99,10 +99,9 @@ const NoticeBoard = () => {
           {postsToShow.map((post) => (
             <div className={styles["post-item"]} key={post.id}>
               <Link
-                to={`/youtube/${post.id}`}
+                to={`/news/notice-board-detail/${post.id}`}
                 className={styles["post-title-link"]}
               >
-                <img src={post.thumbnail_url} alt={post.title} />
                 <div className={styles["post-title"]}>{post.title}</div>
               </Link>
               <div className={styles["post-info"]}>

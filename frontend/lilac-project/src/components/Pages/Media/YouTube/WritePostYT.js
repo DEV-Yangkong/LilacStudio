@@ -98,11 +98,6 @@ const WritePostYT = () => {
     }
   };
 
-  // const closeModal = () => {
-  //   setModalIsOpen(false);
-  //   setModalMessage('');
-  // };
-
   const handleCancel = () => {
     navigate("/media/youtube");
   };

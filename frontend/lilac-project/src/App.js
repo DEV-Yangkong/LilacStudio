@@ -1,34 +1,35 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
+import "./App.css";
+// 헤더와 푸터
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-
-import Home from "./components/Pages/Home/Home";
-
-import TeamIntroduction from "./components/Pages/TeamIntroduction/TeamIntroduction";
-
-import News from "./components/Pages/News/News";
-import NoticeBoard from "./components/Pages/News/NoticeBoard/NoticeBoard";
-import WritePostNB from "./components/Pages/News/NoticeBoard/WritePostNB";
-
-import GameInfo from "./components/Pages/GameInfo/GameInfo";
-
-import Community from "./components/Pages/Community/Community";
-
-import Media from "./components/Pages/Media/Media";
-import YouTube from "./components/Pages/Media/YouTube/YouTubeList";
-import WritePostYT from "./components/Pages/Media/YouTube/WritePostYT";
-
-import WebShop from "./components/Pages/WebShop/WebShop";
-
-import CustomerService from "./components/Pages/CustomerService/CustomerService";
-
 import PrivacyPolicy from "./components/Pages/FooterPage/PrivacyPolicy";
 import TermsOfUse from "./components/Pages/FooterPage/TermsOfUse";
 import Login from "./components/Pages/Login/Login";
 import Signup from "./components/Pages/Login/Signup";
-import "./App.css";
+// 홈
+import Home from "./components/Pages/Home/Home";
+// 팀소개
+import TeamIntroduction from "./components/Pages/TeamIntroduction/TeamIntroduction";
+// 새소식
+import News from "./components/Pages/News/News";
+import NoticeBoard from "./components/Pages/News/NoticeBoard/NoticeBoard";
+import NoticeBoardDetail from "./components/Pages/News/NoticeBoard/NoticeBoardDetail";
+import WritePostNB from "./components/Pages/News/NoticeBoard/WritePostNB";
+// 게임정보
+import GameInfo from "./components/Pages/GameInfo/GameInfo";
+// 커뮤니티
+import Community from "./components/Pages/Community/Community";
+// 미디어
+import Media from "./components/Pages/Media/Media";
+import YouTube from "./components/Pages/Media/YouTube/YouTubeList";
+import YouTubeDetail from "./components/Pages/Media/YouTube/YouTubeDetail";
+import WritePostYT from "./components/Pages/Media/YouTube/WritePostYT";
+// 웹샨
+import WebShop from "./components/Pages/WebShop/WebShop";
+// 고객센터
+import CustomerService from "./components/Pages/CustomerService/CustomerService";
 
 function App() {
   return (
@@ -49,6 +50,10 @@ function App() {
           <Route path="/news" element={<News />} />
           <Route path="/news/notice-board" element={<NoticeBoard />} />
           <Route
+            path="/news/notice-board-detail"
+            element={<NoticeBoardDetail />}
+          />
+          <Route
             path="/news/notice-board/write-post-nb"
             element={<WritePostNB />}
           />
@@ -62,6 +67,7 @@ function App() {
           {/* 미디어 */}
           <Route path="/media" element={<Media />} />
           <Route path="/media/youtube" element={<YouTube />} />
+          <Route path="/media/youtube-detail" element={<YouTubeDetail />} />
           <Route
             path="/media/youtube/write-post-yt"
             element={<WritePostYT />}

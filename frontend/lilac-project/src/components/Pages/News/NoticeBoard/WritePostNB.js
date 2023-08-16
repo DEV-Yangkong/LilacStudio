@@ -8,6 +8,9 @@ import Modal from "react-modal";
 const WritePostNB = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [videoUrl, setVideoUrl] = useState("");
+  const [thumbnailUrl, setThumbnailUrl] = useState("");
+  const [userImage, setUserImage] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const [isPostSuccess, setIsPostSuccess] = useState(false);
@@ -27,14 +30,46 @@ const WritePostNB = () => {
     setContent(e.target.value);
   };
 
+  const handleVideoUrlChange = (e) => {
+    const newVideoUrl = e.target.value;
+    setVideoUrl(newVideoUrl);
+    extractThumbnailUrl(newVideoUrl);
+  };
+
+  const handleImageChange = (e) => {
+    const selectedImage = e.target.files[0];
+    if (selectedImage) {
+      setUserImage(selectedImage);
+    }
+  };
+
+  const extractThumbnailUrl = (url) => {
+    const videoId = url.match(/v=([^&]+)/);
+    if (videoId) {
+      const thumbnailUrl = `https://i.ytimg.com/vi/${videoId[1]}/maxresdefault.jpg`;
+      setThumbnailUrl(thumbnailUrl);
+    } else {
+      setThumbnailUrl("");
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("content", content);
+    formData.append("video_url", videoUrl);
+    formData.append("thumbnail_url", thumbnailUrl);
+    formData.append("user_image", userImage); // 추가: 사용자 이미지
+
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/api/v1/youtube_videos/",
+        "http://127.0.0.1:8000/api/v1/notice_board/",
+        formData,
         {
-          title,
-          content,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         }
       );
 
@@ -56,7 +91,7 @@ const WritePostNB = () => {
       // API 요청이 실패한 경우 처리
       console.error("에러의 원인을 추적합니다");
       // 에러 상태에 따라 사용자에게 알림을 제공하거나 적절한 조치를 취할 수 있음
-      if (error.response.data.thumbnail_url) {
+      if (error.response && error.response.data.thumbnail_url) {
         console.error("영상의 URL이 유효하지 않습니다.");
         setModalMessage(
           "작성에 실패하였습니다. 영상의 URL이 유효하지 않습니다."
@@ -86,6 +121,47 @@ const WritePostNB = () => {
     <div className={styles["write-post"]}>
       <h1 className={styles["post-title"]}>포스트 작성하기</h1>
       <form onSubmit={handleSubmit}>
+        <div className={styles["form-group"]}>
+          <label htmlFor="videoUrl">영상 주소</label>
+          <input
+            type="url"
+            id="videoUrl"
+            value={videoUrl}
+            onChange={handleVideoUrlChange}
+            required
+            className={styles.input}
+          />
+        </div>
+        {/* 이미지 주소 입력 부분 추가 */}
+        <div className={styles["form-group"]}>
+          <label htmlFor="imageUrl">이미지 주소</label>
+          <input
+            type="url"
+            id="imageUrl"
+            value={userImage} // 이미지 URL 상태 사용
+            onChange={(e) => setUserImage(e.target.value)}
+            className={styles.input}
+          />
+          {userImage && (
+            <img
+              src={userImage}
+              alt="User Image"
+              className={styles.thumbnail}
+              style={{ maxWidth: "100%", maxHeight: "200px" }}
+            />
+          )}
+        </div>
+        {thumbnailUrl && (
+          <div className={styles["form-group"]}>
+            <label htmlFor="thumbnail">썸네일 미리보기</label>
+            <img
+              src={thumbnailUrl}
+              alt="Video Thumbnail"
+              className={styles.thumbnail}
+              style={{ maxWidth: "100%", maxHeight: "200px" }}
+            />
+          </div>
+        )}
         <div className={styles["form-group"]}>
           <label htmlFor="title">제목</label>
           <input
