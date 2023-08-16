@@ -10,16 +10,17 @@ const WritePostNB = () => {
   const [content, setContent] = useState("");
   const [videoUrl, setVideoUrl] = useState("");
   const [thumbnailUrl, setThumbnailUrl] = useState("");
-  const [userImage, setUserImage] = useState(null);
+  const [userImageType, setUserImageType] = useState("url"); // 기본값은 "url"
+  const [userImageUrl, setUserImageUrl] = useState("");
+  const [userImageFile, setUserImageFile] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const [isPostSuccess, setIsPostSuccess] = useState(false);
 
   const navigate = useNavigate();
 
-  // 모달이 열릴 때 스크린 리더가 메인 컨텐츠를 인식하지 못하도록 설정
   useEffect(() => {
-    Modal.setAppElement("#root"); // 모달의 앱 엘리먼트 설정을 제거
+    Modal.setAppElement("#root");
   }, []);
 
   const handleTitleChange = (e) => {
@@ -36,10 +37,17 @@ const WritePostNB = () => {
     extractThumbnailUrl(newVideoUrl);
   };
 
+  const handleUserImageTypeChange = (e) => {
+    setUserImageType(e.target.value);
+    setUserImageFile(null);
+    setUserImageUrl("");
+  };
+
   const handleImageChange = (e) => {
     const selectedImage = e.target.files[0];
     if (selectedImage) {
-      setUserImage(selectedImage);
+      setUserImageFile(selectedImage);
+      setUserImageUrl("");
     }
   };
 
@@ -53,6 +61,35 @@ const WritePostNB = () => {
     }
   };
 
+  const UserImagePreview = () => {
+    if (userImageType === "url" && userImageUrl) {
+      return (
+        <div className={styles["form-group"]}>
+          <label>이미지 미리보기</label>
+          <img
+            src={userImageUrl}
+            alt="User Image Preview"
+            className={styles.thumbnail}
+            style={{ maxWidth: "100%", maxHeight: "200px" }}
+          />
+        </div>
+      );
+    } else if (userImageType === "file" && userImageFile) {
+      return (
+        <div className={styles["form-group"]}>
+          <label>이미지 미리보기</label>
+          <img
+            src={URL.createObjectURL(userImageFile)}
+            alt="User Image Preview"
+            className={styles.thumbnail}
+            style={{ maxWidth: "100%", maxHeight: "200px" }}
+          />
+        </div>
+      );
+    }
+    return null;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -60,7 +97,12 @@ const WritePostNB = () => {
     formData.append("content", content);
     formData.append("video_url", videoUrl);
     formData.append("thumbnail_url", thumbnailUrl);
-    formData.append("user_image", userImage); // 추가: 사용자 이미지
+
+    if (userImageType === "url") {
+      formData.append("user_image_url", userImageUrl);
+    } else if (userImageType === "file") {
+      formData.append("user_image_file", userImageFile);
+    }
 
     try {
       const response = await axios.post(
@@ -73,39 +115,31 @@ const WritePostNB = () => {
         }
       );
 
-      console.log(response.data); // 응답 데이터 출력
-
       if (response.status === 201) {
-        // 작성 완료 후 필요한 동작 수행
-        setIsPostSuccess(true); // 작성 성공한 경우 상태 변경
+        setIsPostSuccess(true);
         setModalMessage("작성이 완료되었습니다.");
         setModalIsOpen(true);
       } else {
-        // 응답 상태 코드가 201이 아닌 경우 처리
         setIsPostSuccess(false);
         console.error("작성에 실패하였습니다.");
-        setModalMessage("작성에 실패하였습니다."); // 모달 메시지 설정
-        setModalIsOpen(true); // 모달 열기
+        setModalMessage("작성에 실패하였습니다.");
+        setModalIsOpen(true);
       }
     } catch (error) {
-      // API 요청이 실패한 경우 처리
       console.error("에러의 원인을 추적합니다");
-      // 에러 상태에 따라 사용자에게 알림을 제공하거나 적절한 조치를 취할 수 있음
+
       if (error.response && error.response.data.thumbnail_url) {
         console.error("영상의 URL이 유효하지 않습니다.");
         setModalMessage(
           "작성에 실패하였습니다. 영상의 URL이 유효하지 않습니다."
         );
       } else if (error.response) {
-        // 응답이 도착했지만 응답 상태가 에러인 경우 (e.g. 4xx, 5xx)
         console.error("API response error:", error.response.data);
         setModalMessage("작성에 실패하였습니다. 응답 에러");
       } else if (error.request) {
-        // 응답이 도착하지 않은 경우 (e.g. 네트워크 오류)
         console.error("No API response:", error.request);
         setModalMessage("작성에 실패하였습니다. 네트워크 오류");
       } else {
-        // 그 외의 에러 (e.g. 코드 실행 중 예외 발생)
         console.error("Other error:", error.message);
         setModalMessage("작성에 실패하였습니다.");
       }
@@ -133,27 +167,40 @@ const WritePostNB = () => {
           />
         </div>
         <div className={styles["form-group"]}>
-          <label htmlFor="imageUrl">이미지 주소</label>
-          <input
-            type="url"
-            id="imageUrl"
-            value={userImage} // 이미지 URL 상태 사용
-            onChange={(e) => setUserImage(e.target.value)}
-            className={styles.input}
-          />
+          <label htmlFor="userImageType">이미지 타입 선택</label>
+          <select
+            id="userImageType"
+            value={userImageType}
+            onChange={handleUserImageTypeChange}
+          >
+            <option value="url">URL</option>
+            <option value="file">첨부</option>
+          </select>
         </div>
-
-        {userImage && (
+        {userImageType === "url" ? (
           <div className={styles["form-group"]}>
-            <label htmlFor="userImage">이미지 미리보기</label>
-            <img
-              src={userImage}
-              alt="User Image"
-              className={styles.thumbnail}
-              style={{ maxWidth: "100%", maxHeight: "200px" }}
+            <label htmlFor="userImageUrl">이미지 URL</label>
+            <input
+              type="url"
+              id="userImageUrl"
+              value={userImageUrl}
+              onChange={(e) => setUserImageUrl(e.target.value)}
+              className={styles.input}
             />
           </div>
-        )}
+        ) : userImageType === "file" ? (
+          <div className={styles["form-group"]}>
+            <label htmlFor="userImageFile">이미지 첨부</label>
+            <input
+              type="file"
+              id="userImageFile"
+              accept="image/*"
+              onChange={handleImageChange}
+              className={styles.input}
+            />
+          </div>
+        ) : null}
+        <UserImagePreview />
         <div className={styles["form-group"]}>
           <label htmlFor="videoUrl">영상 주소</label>
           <input
@@ -176,7 +223,6 @@ const WritePostNB = () => {
             />
           </div>
         )}
-
         <div className={styles["form-group"]}>
           <label htmlFor="content">내용</label>
           <textarea
@@ -203,8 +249,8 @@ const WritePostNB = () => {
             setModalIsOpen(false);
             setModalMessage("");
             if (isPostSuccess) {
-              setIsPostSuccess(false); // 확인 후 작성 완료 상태 초기화
-              navigate("/news/notice-board"); // 작성 성공한 경우 페이지 이동
+              setIsPostSuccess(false);
+              navigate("/news/notice-board");
             }
           }}
           message={modalMessage}

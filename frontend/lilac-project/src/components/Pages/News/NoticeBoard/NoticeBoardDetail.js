@@ -152,6 +152,26 @@ const NoticeBoardDetail = () => {
             isEditMode ? editedPost.video_url : selectedPost.video_url
           )}
         </div>
+        <div className={styles["post-image-container"]}>
+          {/* 이미지 미리보기 부분 */}
+          {isEditMode ? (
+            <div className={styles["image-url-container"]}>
+              <input
+                className={styles["image-url-input"]}
+                value={editedPost.image_url}
+                onChange={(e) =>
+                  setEditedPost({ ...editedPost, image_url: e.target.value })
+                }
+              />
+            </div>
+          ) : (
+            <img
+              src={selectedPost.image_url}
+              alt="Post Thumbnail"
+              className={styles["post-image"]}
+            />
+          )}
+        </div>
         <div className={styles["post-content"]}>
           {isEditMode ? (
             <textarea

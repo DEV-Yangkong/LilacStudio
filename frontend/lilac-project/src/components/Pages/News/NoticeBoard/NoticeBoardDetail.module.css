@@ -1,4 +1,4 @@
-.youtube-detail {
+.notice-board-detail {
   max-width: 800px;
   margin: 50px auto;
   padding: 20px;
@@ -7,7 +7,7 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-.youtube-detail h2 {
+.notice-board-detail h2 {
   font-size: 28px;
   margin-bottom: 25px;
   color: #333;
@@ -64,6 +64,34 @@
 .post-views {
   margin-left: 10px;
   color: #999;
+  font-size: 14px;
+}
+
+.post-image-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.post-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.image-url-container {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.image-url-input {
+  flex-grow: 1;
+  width: 560px;
+  padding: 10px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
   font-size: 14px;
 }
 
