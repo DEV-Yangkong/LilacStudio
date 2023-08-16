@@ -68,7 +68,7 @@ const WritePostNB = () => {
           <label>이미지 미리보기</label>
           <img
             src={userImageUrl}
-            alt="User Image Preview"
+            alt=""
             className={styles.thumbnail}
             style={{ maxWidth: "100%", maxHeight: "200px" }}
           />
@@ -80,7 +80,7 @@ const WritePostNB = () => {
           <label>이미지 미리보기</label>
           <img
             src={URL.createObjectURL(userImageFile)}
-            alt="User Image Preview"
+            alt=""
             className={styles.thumbnail}
             style={{ maxWidth: "100%", maxHeight: "200px" }}
           />
@@ -133,17 +133,20 @@ const WritePostNB = () => {
         setModalMessage(
           "작성에 실패하였습니다. 영상의 URL이 유효하지 않습니다."
         );
+        setModalIsOpen(true);
       } else if (error.response) {
         console.error("API response error:", error.response.data);
         setModalMessage("작성에 실패하였습니다. 응답 에러");
+        setModalIsOpen(true);
       } else if (error.request) {
         console.error("No API response:", error.request);
         setModalMessage("작성에 실패하였습니다. 네트워크 오류");
+        setModalIsOpen(true);
       } else {
         console.error("Other error:", error.message);
         setModalMessage("작성에 실패하였습니다.");
+        setModalIsOpen(true);
       }
-      setModalIsOpen(true);
     }
   };
 
@@ -208,7 +211,6 @@ const WritePostNB = () => {
             id="videoUrl"
             value={videoUrl}
             onChange={handleVideoUrlChange}
-            required
             className={styles.input}
           />
         </div>
@@ -243,6 +245,9 @@ const WritePostNB = () => {
         >
           취소
         </button>
+        {modalMessage && (
+          <div className={styles["modal-message"]}>{modalMessage}</div>
+        )}
         <AlertModal
           isOpen={modalIsOpen}
           onClose={() => {
