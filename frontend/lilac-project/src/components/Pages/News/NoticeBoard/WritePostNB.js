@@ -122,17 +122,16 @@ const WritePostNB = () => {
       <h1 className={styles["post-title"]}>포스트 작성하기</h1>
       <form onSubmit={handleSubmit}>
         <div className={styles["form-group"]}>
-          <label htmlFor="videoUrl">영상 주소</label>
+          <label htmlFor="title">제목</label>
           <input
-            type="url"
-            id="videoUrl"
-            value={videoUrl}
-            onChange={handleVideoUrlChange}
+            type="text"
+            id="title"
+            value={title}
+            onChange={handleTitleChange}
             required
             className={styles.input}
           />
         </div>
-        {/* 이미지 주소 입력 부분 추가 */}
         <div className={styles["form-group"]}>
           <label htmlFor="imageUrl">이미지 주소</label>
           <input
@@ -142,14 +141,29 @@ const WritePostNB = () => {
             onChange={(e) => setUserImage(e.target.value)}
             className={styles.input}
           />
-          {userImage && (
+        </div>
+
+        {userImage && (
+          <div className={styles["form-group"]}>
+            <label htmlFor="userImage">이미지 미리보기</label>
             <img
               src={userImage}
               alt="User Image"
               className={styles.thumbnail}
               style={{ maxWidth: "100%", maxHeight: "200px" }}
             />
-          )}
+          </div>
+        )}
+        <div className={styles["form-group"]}>
+          <label htmlFor="videoUrl">영상 주소</label>
+          <input
+            type="url"
+            id="videoUrl"
+            value={videoUrl}
+            onChange={handleVideoUrlChange}
+            required
+            className={styles.input}
+          />
         </div>
         {thumbnailUrl && (
           <div className={styles["form-group"]}>
@@ -162,17 +176,7 @@ const WritePostNB = () => {
             />
           </div>
         )}
-        <div className={styles["form-group"]}>
-          <label htmlFor="title">제목</label>
-          <input
-            type="text"
-            id="title"
-            value={title}
-            onChange={handleTitleChange}
-            required
-            className={styles.input}
-          />
-        </div>
+
         <div className={styles["form-group"]}>
           <label htmlFor="content">내용</label>
           <textarea
