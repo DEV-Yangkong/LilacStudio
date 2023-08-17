@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import styles from "./NoticeBoard.module.css";
 import "font-awesome/css/font-awesome.min.css";
+import formatDate from "../../../modules/formatDate/formatDate";
 
 const NoticeBoard = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -52,12 +53,6 @@ const NoticeBoard = () => {
       top: 0,
       behavior: "smooth",
     });
-  };
-
-  const formatDate = (dateString) => {
-    const isoDateString = dateString; // 예: '2023-08-08T11:59:01.894580+09:00'
-    const formattedDateString = isoDateString.split("T")[0]; // '2023-08-08'
-    return formattedDateString.replace(/\./g, "-"); // '.'을 '-'로 변경
   };
 
   const filteredPosts = noticePosts.filter(

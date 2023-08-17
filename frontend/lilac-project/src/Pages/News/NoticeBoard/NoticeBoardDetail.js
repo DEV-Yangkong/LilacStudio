@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import styles from "./YouTubeDetail.module.css";
-import AlertModal from "../../../AlertModal/AlertModal";
+import styles from "./NoticeBoardDetail.module.css";
+import AlertModal from "../../../modules/AlertModal/AlertModal";
+import formatDate from "../../../modules/formatDate/formatDate";
+import generateEmbedCode from "../../../modules/generateEmbedCode/generateEmbedCode";
+import {
+  handleEditClick,
+  handleSaveClick,
+  handleDelete,
+} from "../../../modules/handleActions/handleActions";
 
-const YouTubeDetail = () => {
+const NoticeBoardDetail = () => {
   const { postId } = useParams();
   const navigate = useNavigate();
   const [selectedPost, setSelectedPost] = useState(null);
@@ -14,98 +21,36 @@ const YouTubeDetail = () => {
   const [editedPost, setEditedPost] = useState({});
   const [videoError, setVideoError] = useState(false);
 
-  const generateEmbedCode = (videoUrl) => {
-    try {
-      const videoId = videoUrl.split("v=")[1];
-      const embedUrl = `https://www.youtube.com/embed/${videoId}`;
-      return (
-        <iframe
-          className={styles["video-frame"]}
-          src={embedUrl}
-          title={selectedPost.title}
-          frameBorder="0"
-          allowFullScreen
-        ></iframe>
-      );
-    } catch (error) {
-      // 비디오 URL 파싱 오류 시 모달 표시
-      setVideoError(true);
-      return null;
-    }
-  };
-
-  const formatDate = (dateString) => {
-    const isoDateString = dateString;
-    const formattedDateString = isoDateString.split("T")[0];
-    return formattedDateString.replace(/\./g, "-");
-  };
-
-  const handleEditClick = () => {
-    setIsEditMode(true);
-    setEditedPost({ ...selectedPost });
-  };
-
-  const handleSaveClick = async () => {
-    try {
-      const response = await axios.put(
-        `http://127.0.0.1:8000/api/v1/youtube_videos/${postId}/`,
-        editedPost
-      );
-      if (response.status === 200) {
-        setIsEditMode(false);
-        setSelectedPost(response.data);
-      }
-    } catch (error) {
-      console.error("Error updating post:", error);
-      // 추가: 비디오 URL 오류 처리
-      if (error.response && error.response.status === 400) {
-        setVideoError(true);
-      }
-    }
-  };
-
-  const handleDelete = async () => {
-    try {
-      const response = await axios.delete(
-        `http://127.0.0.1:8000/api/v1/youtube_videos/${postId}/`
-      );
-      if (response.status === 204) {
-        if (!isDeleteModalVisible) {
-          setIsDeleteModalVisible(true);
-
-          setTimeout(() => {
-            setIsDeleteModalVisible(false);
-            navigate("/media/youtube"); // 리스트 페이지로 이동합니다.
-          }, 1500);
-        }
-      }
-    } catch (error) {
-      console.error("Error deleting post:", error);
-    }
-  };
-
   useEffect(() => {
-    const fetchPostDetail = async () => {
-      try {
-        const response = await axios.get(
-          `http://127.0.0.1:8000/api/v1/youtube_videos/${postId}/`
-        );
-        setSelectedPost(response.data);
-        setIsLoading(false);
-      } catch (error) {
-        console.error("Error fetching post detail:", error);
-      }
-    };
+    if (!selectedPost) {
+      // selectedPost가 null인 경우에만 데이터를 가져옴
+      const fetchPostDetail = async () => {
+        try {
+          console.log("Fetching post detail...");
+          const response = await axios.get(
+            `http://127.0.0.1:8000/api/v1/notice_board/notices/${postId}/`
+          );
+          console.log("Response:", response);
+          setSelectedPost(response.data); // 데이터를 업데이트
+        } catch (error) {
+          console.error("Error fetching post detail:", error);
+        } finally {
+          console.log("Setting isLoading to false...");
+          setIsLoading(false); // 데이터 가져오기 완료 후 로딩 상태 해제
+        }
+      };
 
-    fetchPostDetail();
-  }, [postId]);
+      console.log("Calling fetchPostDetail...");
+      fetchPostDetail();
+    }
+  }, [postId, selectedPost]);
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
   return (
-    <div className={styles["youtube-detail"]}>
+    <div className={styles["notice-board-detail"]}>
       <h2>
         {isEditMode ? (
           <input
@@ -127,7 +72,7 @@ const YouTubeDetail = () => {
           조회수 {selectedPost.views_count}
         </span>
       </div>
-      <div className={styles["video-content-container"]}>
+      <div className={styles["notice-content-container"]}>
         {isEditMode && (
           <div className={styles["video-url-container"]}>
             <input
@@ -150,6 +95,26 @@ const YouTubeDetail = () => {
           )}
           {generateEmbedCode(
             isEditMode ? editedPost.video_url : selectedPost.video_url
+          )}
+        </div>
+        <div className={styles["post-image-container"]}>
+          {/* 이미지 미리보기 부분 */}
+          {isEditMode ? (
+            <div className={styles["image-url-container"]}>
+              <input
+                className={styles["image-url-input"]}
+                value={editedPost.image_url}
+                onChange={(e) =>
+                  setEditedPost({ ...editedPost, image_url: e.target.value })
+                }
+              />
+            </div>
+          ) : (
+            <img
+              src={selectedPost.image_url}
+              alt="Post Thumbnail"
+              className={styles["post-image"]}
+            />
           )}
         </div>
         <div className={styles["post-content"]}>
@@ -183,12 +148,31 @@ const YouTubeDetail = () => {
             <button className={styles["edit-button"]} onClick={handleEditClick}>
               수정
             </button>
-            <button className={styles["delete-button"]} onClick={handleDelete}>
+            <button
+              className={styles["delete-button"]}
+              onClick={() =>
+                handleDelete(
+                  postId,
+                  setIsDeleteModalVisible,
+                  isDeleteModalVisible,
+                  navigate,
+                  "/news/notice-board"
+                )
+              }
+            >
               삭제
             </button>
             <button
               className={styles["list-button"]}
-              onClick={() => navigate("/media/youtube")}
+              onClick={() =>
+                handleDelete(
+                  postId,
+                  setIsDeleteModalVisible,
+                  isDeleteModalVisible,
+                  navigate,
+                  "/news/notice-board"
+                )
+              }
             >
               목록
             </button>
@@ -206,4 +190,4 @@ const YouTubeDetail = () => {
   );
 };
 
-export default YouTubeDetail;
+export default NoticeBoardDetail;

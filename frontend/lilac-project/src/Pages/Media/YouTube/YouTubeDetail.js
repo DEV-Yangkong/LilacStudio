@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import styles from "./NoticeBoardDetail.module.css";
-import AlertModal from "../../../AlertModal/AlertModal";
+import styles from "./YouTubeDetail.module.css";
+import AlertModal from "../../../modules/AlertModal/AlertModal";
 
-const NoticeBoardDetail = () => {
+const YouTubeDetail = () => {
   const { postId } = useParams();
   const navigate = useNavigate();
   const [selectedPost, setSelectedPost] = useState(null);
@@ -48,7 +48,7 @@ const NoticeBoardDetail = () => {
   const handleSaveClick = async () => {
     try {
       const response = await axios.put(
-        `http://127.0.0.1:8000/api/v1/notice_board/${postId}/`,
+        `http://127.0.0.1:8000/api/v1/youtube_videos/${postId}/`,
         editedPost
       );
       if (response.status === 200) {
@@ -67,7 +67,7 @@ const NoticeBoardDetail = () => {
   const handleDelete = async () => {
     try {
       const response = await axios.delete(
-        `http://127.0.0.1:8000/api/v1/notice_board/${postId}/`
+        `http://127.0.0.1:8000/api/v1/youtube_videos/${postId}/`
       );
       if (response.status === 204) {
         if (!isDeleteModalVisible) {
@@ -75,7 +75,7 @@ const NoticeBoardDetail = () => {
 
           setTimeout(() => {
             setIsDeleteModalVisible(false);
-            navigate("/news/notice-board"); // 리스트 페이지로 이동합니다.
+            navigate("/media/youtube"); // 리스트 페이지로 이동합니다.
           }, 1500);
         }
       }
@@ -88,7 +88,7 @@ const NoticeBoardDetail = () => {
     const fetchPostDetail = async () => {
       try {
         const response = await axios.get(
-          `http://127.0.0.1:8000/api/v1/notice_board/${postId}/`
+          `http://127.0.0.1:8000/api/v1/youtube_videos/${postId}/`
         );
         setSelectedPost(response.data);
         setIsLoading(false);
@@ -105,7 +105,7 @@ const NoticeBoardDetail = () => {
   }
 
   return (
-    <div className={styles["notice-board-detail"]}>
+    <div className={styles["youtube-detail"]}>
       <h2>
         {isEditMode ? (
           <input
@@ -127,7 +127,7 @@ const NoticeBoardDetail = () => {
           조회수 {selectedPost.views_count}
         </span>
       </div>
-      <div className={styles["notice-content-container"]}>
+      <div className={styles["video-content-container"]}>
         {isEditMode && (
           <div className={styles["video-url-container"]}>
             <input
@@ -150,26 +150,6 @@ const NoticeBoardDetail = () => {
           )}
           {generateEmbedCode(
             isEditMode ? editedPost.video_url : selectedPost.video_url
-          )}
-        </div>
-        <div className={styles["post-image-container"]}>
-          {/* 이미지 미리보기 부분 */}
-          {isEditMode ? (
-            <div className={styles["image-url-container"]}>
-              <input
-                className={styles["image-url-input"]}
-                value={editedPost.image_url}
-                onChange={(e) =>
-                  setEditedPost({ ...editedPost, image_url: e.target.value })
-                }
-              />
-            </div>
-          ) : (
-            <img
-              src={selectedPost.image_url}
-              alt="Post Thumbnail"
-              className={styles["post-image"]}
-            />
           )}
         </div>
         <div className={styles["post-content"]}>
@@ -226,4 +206,4 @@ const NoticeBoardDetail = () => {
   );
 };
 
-export default NoticeBoardDetail;
+export default YouTubeDetail;

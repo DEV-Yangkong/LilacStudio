@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./WritePostNB.module.css";
-import AlertModal from "../../../AlertModal/AlertModal";
+import AlertModal from "../../../modules/AlertModal/AlertModal";
 import axios from "axios";
 import Modal from "react-modal";
 

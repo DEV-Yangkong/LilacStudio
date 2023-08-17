@@ -3,6 +3,8 @@ from rest_framework.decorators import api_view
 from .models import Notice
 from .serializers import NoticeSerializer
 from rest_framework import status
+from rest_framework.views import APIView
+from rest_framework.status import HTTP_200_OK
 
 
 @api_view(['GET', 'POST'])
@@ -17,3 +19,10 @@ def get_notice_board(request):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class NoticeDetailAPIView(APIView):
+    def get(self, request, pk):
+        queryset = Notice.objects.get(pk=pk)
+        serializer_class = NoticeSerializer(queryset)
+        return Response(serializer_class.data, status=HTTP_200_OK)
