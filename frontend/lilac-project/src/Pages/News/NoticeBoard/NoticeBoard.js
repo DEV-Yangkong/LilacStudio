@@ -94,7 +94,7 @@ const NoticeBoard = () => {
           {postsToShow.map((post) => (
             <div className={styles["post-item"]} key={post.id}>
               <Link
-                to={`/news/notice-board-detail/${post.id}`}
+                to={`/news/notice-board/notice-board-detail/${post.id}`}
                 className={styles["post-title-link"]}
               >
                 <div className={styles["post-title"]}>{post.title}</div>

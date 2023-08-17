@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./generateEmbedCode.module.css";
 
-const generateEmbedCode = (videoUrl, selectedPost, setVideoError) => {
+// generateEmbedCode.js
+const generateEmbedCode = (videoUrl, selectedPost) => {
   try {
     const videoId = videoUrl.split("v=")[1];
     const embedUrl = `https://www.youtube.com/embed/${videoId}`;
@@ -15,8 +16,7 @@ const generateEmbedCode = (videoUrl, selectedPost, setVideoError) => {
       ></iframe>
     );
   } catch (error) {
-    // 비디오 URL 파싱 오류 시 모달 표시
-    setVideoError(true);
+    // 오류 발생 시 null 반환
     return null;
   }
 };

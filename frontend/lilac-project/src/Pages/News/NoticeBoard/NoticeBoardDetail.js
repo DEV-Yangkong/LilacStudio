@@ -49,6 +49,11 @@ const NoticeBoardDetail = () => {
     return <div>Loading...</div>;
   }
 
+  const embeddedCode = generateEmbedCode(
+    isEditMode ? editedPost.video_url : selectedPost.video_url,
+    selectedPost
+  );
+
   return (
     <div className={styles["notice-board-detail"]}>
       <h2>
@@ -93,11 +98,7 @@ const NoticeBoardDetail = () => {
               message="유효하지 않은 비디오 URL입니다."
             />
           )}
-          {generateEmbedCode(
-            isEditMode ? editedPost.video_url : selectedPost.video_url,
-            selectedPost,
-            setVideoError
-          )}
+          {embeddedCode}
         </div>
         <div className={styles["post-image-container"]}>
           {/* 이미지 미리보기 부분 */}
