@@ -87,7 +87,7 @@ const NoticeBoardDetail = () => {
               />
             )}
             {selectedPost.video_url && (
-              <div className={styles["media-video"]}>
+              <div className={styles["video-container"]}>
                 {/* 비디오 플레이어 또는 임베드 코드 표시 */}
                 {embeddedCode}
               </div>

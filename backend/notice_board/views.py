@@ -1,5 +1,6 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from django.http import Http404
 from .models import Notice
 from .serializers import NoticeSerializer
 from rest_framework import status
@@ -22,7 +23,21 @@ def get_notice_board(request):
 
 
 class NoticeDetailAPIView(APIView):
+    def get_object(self, pk):
+        try:
+            return Notice.objects.get(pk=pk)
+        except Notice.DoesNotExist:
+            raise Http404
+
     def get(self, request, pk):
-        queryset = Notice.objects.get(pk=pk)
-        serializer_class = NoticeSerializer(queryset)
-        return Response(serializer_class.data, status=HTTP_200_OK)
+        notice = self.get_object(pk)
+        serializer = NoticeSerializer(notice)
+        return Response(serializer.data, status=HTTP_200_OK)
+
+    def put(self, request, pk):
+        notice = self.get_object(pk)
+        serializer = NoticeSerializer(notice, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

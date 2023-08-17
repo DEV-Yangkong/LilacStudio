@@ -2,7 +2,12 @@ import axios from "axios";
 
 export const handleEditClick = (setIsEditMode, setEditedPost, selectedPost) => {
   setIsEditMode(true);
-  setEditedPost({ ...selectedPost });
+  setEditedPost({
+    title: selectedPost.title,
+    content: selectedPost.content,
+    image_url: selectedPost.image_url,
+    video_url: selectedPost.video_url,
+  });
 };
 
 export const handleSaveClick = async (
