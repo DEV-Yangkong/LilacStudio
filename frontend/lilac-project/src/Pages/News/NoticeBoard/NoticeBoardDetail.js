@@ -23,7 +23,6 @@ const NoticeBoardDetail = () => {
 
   useEffect(() => {
     if (!selectedPost) {
-      // selectedPost가 null인 경우에만 데이터를 가져옴
       const fetchPostDetail = async () => {
         try {
           console.log("Fetching post detail...");
@@ -31,12 +30,12 @@ const NoticeBoardDetail = () => {
             `http://127.0.0.1:8000/api/v1/notice_board/notices/${postId}/`
           );
           console.log("Response:", response);
-          setSelectedPost(response.data); // 데이터를 업데이트
+          setSelectedPost(response.data);
         } catch (error) {
           console.error("Error fetching post detail:", error);
         } finally {
           console.log("Setting isLoading to false...");
-          setIsLoading(false); // 데이터 가져오기 완료 후 로딩 상태 해제
+          setIsLoading(false);
         }
       };
 
@@ -78,48 +77,23 @@ const NoticeBoardDetail = () => {
         </span>
       </div>
       <div className={styles["notice-content-container"]}>
-        {isEditMode && (
-          <div className={styles["video-url-container"]}>
-            <input
-              className={styles["video-url-input"]}
-              value={editedPost.video_url}
-              onChange={(e) =>
-                setEditedPost({ ...editedPost, video_url: e.target.value })
-              }
-            />
+        {(selectedPost.image_url || selectedPost.video_url) && (
+          <div className={styles["media-container"]}>
+            {selectedPost.image_url && (
+              <img
+                src={selectedPost.image_url}
+                alt="Image"
+                className={styles["media-image"]}
+              />
+            )}
+            {selectedPost.video_url && (
+              <div className={styles["media-video"]}>
+                {/* 비디오 플레이어 또는 임베드 코드 표시 */}
+                {embeddedCode}
+              </div>
+            )}
           </div>
         )}
-        <div className={styles["video-container"]}>
-          {/* 비디오 URL 오류 시 모달 표시 */}
-          {videoError && (
-            <AlertModal
-              isOpen={videoError}
-              onClose={() => setVideoError(false)}
-              message="유효하지 않은 비디오 URL입니다."
-            />
-          )}
-          {embeddedCode}
-        </div>
-        <div className={styles["post-image-container"]}>
-          {/* 이미지 미리보기 부분 */}
-          {isEditMode ? (
-            <div className={styles["image-url-container"]}>
-              <input
-                className={styles["image-url-input"]}
-                value={editedPost.image_url}
-                onChange={(e) =>
-                  setEditedPost({ ...editedPost, image_url: e.target.value })
-                }
-              />
-            </div>
-          ) : (
-            <img
-              src={selectedPost.image_url}
-              alt="Post Thumbnail"
-              className={styles["post-image"]}
-            />
-          )}
-        </div>
         <div className={styles["post-content"]}>
           {isEditMode ? (
             <textarea
