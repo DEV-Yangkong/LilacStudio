@@ -94,7 +94,9 @@ const NoticeBoardDetail = () => {
             />
           )}
           {generateEmbedCode(
-            isEditMode ? editedPost.video_url : selectedPost.video_url
+            isEditMode ? editedPost.video_url : selectedPost.video_url,
+            selectedPost,
+            setVideoError
           )}
         </div>
         <div className={styles["post-image-container"]}>
@@ -133,7 +135,22 @@ const NoticeBoardDetail = () => {
       <div className={styles["button-container"]}>
         {isEditMode ? (
           <>
-            <button className={styles["save-button"]} onClick={handleSaveClick}>
+            <button
+              className={styles["save-button"]}
+              onClick={() =>
+                handleSaveClick(
+                  setIsEditMode,
+                  setEditedPost,
+                  editedPost,
+                  postId,
+                  setSelectedPost,
+                  setVideoError,
+                  navigate,
+                  (postId) =>
+                    `http://127.0.0.1:8000/api/v1/notice_board/${postId}/`
+                )
+              }
+            >
               저장
             </button>
             <button
@@ -156,7 +173,9 @@ const NoticeBoardDetail = () => {
                   setIsDeleteModalVisible,
                   isDeleteModalVisible,
                   navigate,
-                  "/news/notice-board"
+                  "/news/notice-board",
+                  (postId) =>
+                    `http://127.0.0.1:8000/api/v1/notice_board/${postId}/`
                 )
               }
             >
@@ -164,15 +183,7 @@ const NoticeBoardDetail = () => {
             </button>
             <button
               className={styles["list-button"]}
-              onClick={() =>
-                handleDelete(
-                  postId,
-                  setIsDeleteModalVisible,
-                  isDeleteModalVisible,
-                  navigate,
-                  "/news/notice-board"
-                )
-              }
+              onClick={() => navigate("/news/notice-board")}
             >
               목록
             </button>

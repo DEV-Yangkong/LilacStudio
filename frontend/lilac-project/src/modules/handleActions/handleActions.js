@@ -12,11 +12,12 @@ export const handleSaveClick = async (
   postId,
   setSelectedPost,
   setVideoError,
-  navigate
+  navigate,
+  updateApiPath // API 경로를 전달받는 매개변수
 ) => {
   try {
     const response = await axios.put(
-      `http://127.0.0.1:8000/api/v1/notice_board/${postId}/`,
+      updateApiPath(postId), // 전달받은 경로를 사용
       editedPost
     );
     if (response.status === 200) {
@@ -37,11 +38,12 @@ export const handleDelete = async (
   setIsDeleteModalVisible,
   isDeleteModalVisible,
   navigate,
-  destination // 이동할 경로를 전달받는 매개변수
+  destination, // 이동할 경로를 전달받는 매개변수
+  deleteApiPath // API 경로를 전달받는 매개변수
 ) => {
   try {
     const response = await axios.delete(
-      `http://127.0.0.1:8000/api/v1/notice_board/${postId}/`
+      deleteApiPath(postId) // 전달받은 경로를 사용
     );
     if (response.status === 204) {
       if (!isDeleteModalVisible) {
