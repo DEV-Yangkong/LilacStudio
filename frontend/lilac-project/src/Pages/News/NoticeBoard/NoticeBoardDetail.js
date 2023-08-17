@@ -19,7 +19,7 @@ const NoticeBoardDetail = () => {
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const [editedPost, setEditedPost] = useState({});
-  const [videoError, setVideoError] = useState(false);
+  const [setVideoError] = useState(false);
 
   useEffect(() => {
     if (!selectedPost) {
@@ -29,17 +29,13 @@ const NoticeBoardDetail = () => {
           const response = await axios.get(
             `http://127.0.0.1:8000/api/v1/notice_board/notices/${postId}/`
           );
-          console.log("Response:", response);
           setSelectedPost(response.data);
         } catch (error) {
           console.error("Error fetching post detail:", error);
         } finally {
-          console.log("Setting isLoading to false...");
           setIsLoading(false);
         }
       };
-
-      console.log("Calling fetchPostDetail...");
       fetchPostDetail();
     }
   }, [postId, selectedPost]);
