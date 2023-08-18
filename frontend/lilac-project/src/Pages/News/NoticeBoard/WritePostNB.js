@@ -49,8 +49,10 @@ const WritePostNB = () => {
 
   const handleImageChange = (e) => {
     const selectedImage = e.target.files[0];
+    console.log("Selected Image:", selectedImage); // 콘솔에 이미지 출력
     if (selectedImage) {
       setUserImageFile(selectedImage);
+      setUserImageType("file");
       setUserImageUrl("");
     }
   };
@@ -100,13 +102,14 @@ const WritePostNB = () => {
     formData.append("title", title);
     formData.append("content", content);
     formData.append("video_url", videoUrl);
-    formData.append("thumbnail_url", thumbnailUrl);
 
+    // Check if user chose URL or file for the user image
     if (userImageType === "url") {
-      formData.append("user_image_url", userImageUrl);
+      formData.append("image_url", userImageUrl);
     } else if (userImageType === "file") {
-      formData.append("user_image_file", userImageFile);
+      formData.append("image", userImageFile); // 필드명을 "image"로 수정
     }
+    console.log("FormData:", formData); // 콘솔에 FormData 출력
 
     try {
       const response = await axios.post(
@@ -118,6 +121,8 @@ const WritePostNB = () => {
           },
         }
       );
+
+      console.log("Response:", response.data);
 
       if (response.status === 201) {
         setIsPostSuccess(true);

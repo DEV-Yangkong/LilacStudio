@@ -25,7 +25,6 @@ const NoticeBoardDetail = () => {
     if (!selectedPost) {
       const fetchPostDetail = async () => {
         try {
-          console.log("Fetching post detail...");
           const response = await axios.get(
             `http://127.0.0.1:8000/api/v1/notice_board/notices/${postId}/`
           );
@@ -73,13 +72,23 @@ const NoticeBoardDetail = () => {
         </span>
       </div>
       <div className={styles["notice-content-container"]}>
-        {(selectedPost.image_url || selectedPost.video_url) && (
-          <div className={styles["media-container"]}>
+        {(selectedPost.image ||
+          selectedPost.image_url ||
+          selectedPost.video_url) && (
+          <div className={styles["post-image-container"]}>
+            {selectedPost.image && selectedPost.image instanceof Blob && (
+              <img
+                src={URL.createObjectURL(selectedPost.image)}
+                alt="Image"
+                className={styles["post-image"]}
+              />
+            )}
+
             {selectedPost.image_url && (
               <img
                 src={selectedPost.image_url}
                 alt="Image"
-                className={styles["media-image"]}
+                className={styles["post-image"]}
               />
             )}
             {selectedPost.video_url && (
