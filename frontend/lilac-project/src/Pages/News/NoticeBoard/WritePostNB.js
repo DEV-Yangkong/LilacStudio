@@ -107,9 +107,10 @@ const WritePostNB = () => {
     if (userImageType === "url") {
       formData.append("image_url", userImageUrl);
     } else if (userImageType === "file") {
-      formData.append("image", userImageFile); // 필드명을 "image"로 수정
+      // Generate a new file name (you can use a timestamp or any unique identifier)
+      const newFileName = `${Date.now()}.jpg`;
+      formData.append("image", userImageFile, newFileName);
     }
-    console.log("FormData:", formData); // 콘솔에 FormData 출력
 
     try {
       const response = await axios.post(

@@ -79,7 +79,7 @@ const NoticeBoardDetail = () => {
             {selectedPost.image && selectedPost.image instanceof Blob && (
               <img
                 src={URL.createObjectURL(selectedPost.image)}
-                alt="Image"
+                alt="Post Image"
                 className={styles["post-image"]}
               />
             )}
@@ -87,7 +87,7 @@ const NoticeBoardDetail = () => {
             {selectedPost.image_url && (
               <img
                 src={selectedPost.image_url}
-                alt="Image"
+                alt="URL Image"
                 className={styles["post-image"]}
               />
             )}
