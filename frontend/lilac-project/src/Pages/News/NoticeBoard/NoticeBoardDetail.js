@@ -76,14 +76,13 @@ const NoticeBoardDetail = () => {
           selectedPost.image_url ||
           selectedPost.video_url) && (
           <div className={styles["post-image-container"]}>
-            {selectedPost.image && selectedPost.image instanceof Blob && (
+            {selectedPost.image && typeof selectedPost.image === "string" && (
               <img
-                src={URL.createObjectURL(selectedPost.image)}
+                src={`http://127.0.0.1:8000${selectedPost.image}`}
                 alt="Post Image"
                 className={styles["post-image"]}
               />
             )}
-
             {selectedPost.image_url && (
               <img
                 src={selectedPost.image_url}
