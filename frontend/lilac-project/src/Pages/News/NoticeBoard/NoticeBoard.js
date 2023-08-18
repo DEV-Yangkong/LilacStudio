@@ -82,6 +82,14 @@ const NoticeBoard = () => {
           <i className="fa fa-search"></i>
         </span>
       </div>
+      <div className={styles["write-button-container"]}>
+        <Link
+          to="/news/notice-board/write-post-nb"
+          className={styles["write-button"]}
+        >
+          UPLOAD
+        </Link>
+      </div>
       {searchTerm && (
         <div className={styles["search-result"]}>
           <p>검색 결과: "{searchTerm}"</p>
@@ -131,14 +139,6 @@ const NoticeBoard = () => {
           )}
         </div>
       )}
-      <div className={styles["write-button-container"]}>
-        <Link
-          to="/news/notice-board/write-post-nb"
-          className={styles["write-button"]}
-        >
-          UPLOAD
-        </Link>
-      </div>
     </div>
   );
 };
