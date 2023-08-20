@@ -6,11 +6,11 @@ import axios from "axios";
 import Modal from "react-modal";
 import {
   handleTitleChange,
-  handleContentChange,
   handleUserImageTypeChange,
-  handleImageChange,
-  setUserImageFile,
-  setUserImageUrl,
+  // handleContentChange,
+  // handleImageChange,
+  // setUserImageFile,
+  // setUserImageUrl,
 } from "../../../modules/handleChange/handleChange";
 
 const WritePostNB = () => {
