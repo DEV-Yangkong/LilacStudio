@@ -9,6 +9,8 @@ import {
   handleContentChange,
   handleUserImageTypeChange,
   handleImageChange,
+  setUserImageFile,
+  setUserImageUrl,
 } from "../../../modules/handleChange/handleChange";
 
 const WritePostNB = () => {
@@ -17,11 +19,11 @@ const WritePostNB = () => {
   const [videoUrl, setVideoUrl] = useState("");
   const [thumbnailUrl, setThumbnailUrl] = useState("");
   const [userImageType, setUserImageType] = useState("url");
-  const [userImageUrl, setUserImageUrl] = useState("");
-  const [userImageFile, setUserImageFile] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const [isPostSuccess, setIsPostSuccess] = useState(false);
+  const [userImageUrl, setUserImageUrl] = useState("");
+  const [userImageFile, setUserImageFile] = useState(null);
 
   const navigate = useNavigate();
 
@@ -47,49 +49,28 @@ const WritePostNB = () => {
     }
   };
 
-  // const handleVideoUrlChange = (e) => {
-  //   const newVideoUrl = e.target.value;
-  //   setVideoUrl(newVideoUrl);
-  //   extractThumbnailUrl(newVideoUrl);
-  // };
-
-  // const extractThumbnailUrl = (url) => {
-  //   const videoId = url.match(/v=([^&]+)/);
-  //   if (videoId) {
-  //     const thumbnailUrl = `https://i.ytimg.com/vi/${videoId[1]}/maxresdefault.jpg`;
-  //     setThumbnailUrl(thumbnailUrl);
-  //   } else {
-  //     setThumbnailUrl("");
-  //   }
-  // };
-
   const UserImagePreview = () => {
-    if (userImageType === "url" && userImageUrl) {
-      return (
-        <div className={styles["form-group"]}>
-          <label>이미지 미리보기</label>
+    return (
+      <div className={styles["form-group"]}>
+        <label>이미지 미리보기</label>
+        {userImageType === "url" && userImageUrl && (
           <img
             src={userImageUrl}
             alt=""
             className={styles.thumbnail}
             style={{ maxWidth: "100%", maxHeight: "200px" }}
           />
-        </div>
-      );
-    } else if (userImageType === "file" && userImageFile) {
-      return (
-        <div className={styles["form-group"]}>
-          <label>이미지 미리보기</label>
+        )}
+        {userImageType === "file" && userImageFile && (
           <img
             src={URL.createObjectURL(userImageFile)}
             alt=""
             className={styles.thumbnail}
             style={{ maxWidth: "100%", maxHeight: "200px" }}
           />
-        </div>
-      );
-    }
-    return null;
+        )}
+      </div>
+    );
   };
 
   const handleSubmit = async (e) => {
@@ -180,7 +161,14 @@ const WritePostNB = () => {
           <select
             id="userImageType"
             value={userImageType}
-            onChange={handleUserImageTypeChange}
+            onChange={(e) =>
+              handleUserImageTypeChange(
+                e,
+                setUserImageType,
+                setUserImageUrl,
+                setUserImageFile
+              )
+            }
           >
             <option value="url">URL</option>
             <option value="file">첨부</option>
@@ -204,14 +192,7 @@ const WritePostNB = () => {
               type="file"
               id="userImageFile"
               accept="image/*"
-              onChange={(e) =>
-                handleImageChange(
-                  e,
-                  setUserImageFile,
-                  setUserImageType,
-                  setUserImageUrl
-                )
-              }
+              onChange={(e) => setUserImageFile(e.target.files[0])}
               className={styles.input}
             />
           </div>
@@ -243,7 +224,7 @@ const WritePostNB = () => {
           <textarea
             id="content"
             value={content}
-            onChange={(e) => handleContentChange(e, setContent)}
+            onChange={(e) => setContent(e.target.value)}
             required
             className={styles.textarea}
           />
