@@ -3,6 +3,13 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import styles from "./YouTubeDetail.module.css";
 import AlertModal from "../../../modules/AlertModal/AlertModal";
+import generateEmbedCode from "../../../modules/generateEmbedCode/generateEmbedCode";
+import formatDate from "../../../modules/formatDate/formatDate";
+import {
+  handleEditClick,
+  handleSaveClick,
+  handleDelete,
+} from "../../../modules/handleActions/handleActions";
 
 const YouTubeDetail = () => {
   const { postId } = useParams();
@@ -13,76 +20,6 @@ const YouTubeDetail = () => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [editedPost, setEditedPost] = useState({});
   const [videoError, setVideoError] = useState(false);
-
-  const generateEmbedCode = (videoUrl) => {
-    try {
-      const videoId = videoUrl.split("v=")[1];
-      const embedUrl = `https://www.youtube.com/embed/${videoId}`;
-      return (
-        <iframe
-          className={styles["video-frame"]}
-          src={embedUrl}
-          title={selectedPost.title}
-          frameBorder="0"
-          allowFullScreen
-        ></iframe>
-      );
-    } catch (error) {
-      // 비디오 URL 파싱 오류 시 모달 표시
-      setVideoError(true);
-      return null;
-    }
-  };
-
-  const formatDate = (dateString) => {
-    const isoDateString = dateString;
-    const formattedDateString = isoDateString.split("T")[0];
-    return formattedDateString.replace(/\./g, "-");
-  };
-
-  const handleEditClick = () => {
-    setIsEditMode(true);
-    setEditedPost({ ...selectedPost });
-  };
-
-  const handleSaveClick = async () => {
-    try {
-      const response = await axios.put(
-        `http://127.0.0.1:8000/api/v1/youtube_videos/${postId}/`,
-        editedPost
-      );
-      if (response.status === 200) {
-        setIsEditMode(false);
-        setSelectedPost(response.data);
-      }
-    } catch (error) {
-      console.error("Error updating post:", error);
-      // 추가: 비디오 URL 오류 처리
-      if (error.response && error.response.status === 400) {
-        setVideoError(true);
-      }
-    }
-  };
-
-  const handleDelete = async () => {
-    try {
-      const response = await axios.delete(
-        `http://127.0.0.1:8000/api/v1/youtube_videos/${postId}/`
-      );
-      if (response.status === 204) {
-        if (!isDeleteModalVisible) {
-          setIsDeleteModalVisible(true);
-
-          setTimeout(() => {
-            setIsDeleteModalVisible(false);
-            navigate("/media/youtube"); // 리스트 페이지로 이동합니다.
-          }, 1500);
-        }
-      }
-    } catch (error) {
-      console.error("Error deleting post:", error);
-    }
-  };
 
   useEffect(() => {
     const fetchPostDetail = async () => {

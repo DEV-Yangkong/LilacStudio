@@ -4,13 +4,19 @@ import styles from "./WritePostNB.module.css";
 import AlertModal from "../../../modules/AlertModal/AlertModal";
 import axios from "axios";
 import Modal from "react-modal";
+import {
+  handleTitleChange,
+  handleContentChange,
+  handleUserImageTypeChange,
+  handleImageChange,
+} from "../../../modules/handleChange/handleChange";
 
 const WritePostNB = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [videoUrl, setVideoUrl] = useState("");
   const [thumbnailUrl, setThumbnailUrl] = useState("");
-  const [userImageType, setUserImageType] = useState("url"); // 기본값은 "url"
+  const [userImageType, setUserImageType] = useState("url");
   const [userImageUrl, setUserImageUrl] = useState("");
   const [userImageFile, setUserImageFile] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -27,38 +33,12 @@ const WritePostNB = () => {
     axios.defaults.xsrfHeaderName = "X-CSRFToken";
   }, []);
 
-  const handleTitleChange = (e) => {
-    setTitle(e.target.value);
-  };
-
-  const handleContentChange = (e) => {
-    setContent(e.target.value);
-  };
-
   const handleVideoUrlChange = (e) => {
     const newVideoUrl = e.target.value;
     setVideoUrl(newVideoUrl);
-    extractThumbnailUrl(newVideoUrl);
-  };
 
-  const handleUserImageTypeChange = (e) => {
-    setUserImageType(e.target.value);
-    setUserImageFile(null);
-    setUserImageUrl("");
-  };
-
-  const handleImageChange = (e) => {
-    const selectedImage = e.target.files[0];
-    console.log("Selected Image:", selectedImage); // 콘솔에 이미지 출력
-    if (selectedImage) {
-      setUserImageFile(selectedImage);
-      setUserImageType("file");
-      setUserImageUrl("");
-    }
-  };
-
-  const extractThumbnailUrl = (url) => {
-    const videoId = url.match(/v=([^&]+)/);
+    // 직접 setThumbnailUrl을 호출하여 썸네일 업데이트
+    const videoId = newVideoUrl.match(/v=([^&]+)/);
     if (videoId) {
       const thumbnailUrl = `https://i.ytimg.com/vi/${videoId[1]}/maxresdefault.jpg`;
       setThumbnailUrl(thumbnailUrl);
@@ -66,6 +46,22 @@ const WritePostNB = () => {
       setThumbnailUrl("");
     }
   };
+
+  // const handleVideoUrlChange = (e) => {
+  //   const newVideoUrl = e.target.value;
+  //   setVideoUrl(newVideoUrl);
+  //   extractThumbnailUrl(newVideoUrl);
+  // };
+
+  // const extractThumbnailUrl = (url) => {
+  //   const videoId = url.match(/v=([^&]+)/);
+  //   if (videoId) {
+  //     const thumbnailUrl = `https://i.ytimg.com/vi/${videoId[1]}/maxresdefault.jpg`;
+  //     setThumbnailUrl(thumbnailUrl);
+  //   } else {
+  //     setThumbnailUrl("");
+  //   }
+  // };
 
   const UserImagePreview = () => {
     if (userImageType === "url" && userImageUrl) {
@@ -174,7 +170,7 @@ const WritePostNB = () => {
             type="text"
             id="title"
             value={title}
-            onChange={handleTitleChange}
+            onChange={(e) => handleTitleChange(e, setTitle)}
             required
             className={styles.input}
           />
@@ -208,7 +204,14 @@ const WritePostNB = () => {
               type="file"
               id="userImageFile"
               accept="image/*"
-              onChange={handleImageChange}
+              onChange={(e) =>
+                handleImageChange(
+                  e,
+                  setUserImageFile,
+                  setUserImageType,
+                  setUserImageUrl
+                )
+              }
               className={styles.input}
             />
           </div>
@@ -240,7 +243,7 @@ const WritePostNB = () => {
           <textarea
             id="content"
             value={content}
-            onChange={handleContentChange}
+            onChange={(e) => handleContentChange(e, setContent)}
             required
             className={styles.textarea}
           />
