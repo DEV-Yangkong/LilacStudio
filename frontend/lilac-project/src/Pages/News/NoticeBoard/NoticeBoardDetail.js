@@ -127,7 +127,7 @@ const NoticeBoardDetail = () => {
                   setVideoError,
                   navigate,
                   (postId) =>
-                    `http://127.0.0.1:8000/api/v1/notice_board/${postId}/`
+                    `http://127.0.0.1:8000/api/v1/notice_board/notices/${postId}/`
                 )
               }
             >
@@ -155,7 +155,7 @@ const NoticeBoardDetail = () => {
                   navigate,
                   "/news/notice-board",
                   (postId) =>
-                    `http://127.0.0.1:8000/api/v1/notice_board/${postId}/`
+                    `http://127.0.0.1:8000/api/v1/notice_board/notices/${postId}/`
                 )
               }
             >

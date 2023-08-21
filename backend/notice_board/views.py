@@ -54,3 +54,8 @@ class NoticeDetailAPIView(APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk):
+        notice = self.get_object(pk)
+        notice.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

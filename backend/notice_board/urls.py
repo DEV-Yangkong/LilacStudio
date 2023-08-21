@@ -6,6 +6,7 @@ app_name = 'notice_board'
 urlpatterns = [
     path('api/v1/notice_board/notices/',
          get_notice_board, name='notice_board_api'),
-    path('api/v1/notice_board/notice/<int:pk>/',
+    path('api/v1/notice_board/notices/<int:pk>/',
          NoticeDetailAPIView.as_view(), name='notice_detail_api'),
+
 ]
