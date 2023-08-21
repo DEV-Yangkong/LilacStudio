@@ -19,7 +19,7 @@ const NoticeBoardDetail = () => {
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const [editedPost, setEditedPost] = useState({});
-  const [videoError, setVideoError] = useState(false);
+  const [setVideoError] = useState(false);
 
   useEffect(() => {
     if (!selectedPost) {
