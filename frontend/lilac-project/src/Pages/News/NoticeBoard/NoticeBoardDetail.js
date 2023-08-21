@@ -19,7 +19,7 @@ const NoticeBoardDetail = () => {
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const [editedPost, setEditedPost] = useState({});
-  const [setVideoError] = useState(false);
+  const [videoError, setVideoError] = useState(false);
 
   useEffect(() => {
     if (!selectedPost) {
@@ -78,7 +78,7 @@ const NoticeBoardDetail = () => {
             <label htmlFor="image_Url">이미지 주소</label>
             <input
               type="url"
-              value={editedPost.image_url}
+              value={editedPost.image_url || ""}
               onChange={(e) =>
                 setEditedPost({ ...editedPost, image_url: e.target.value })
               }
@@ -88,16 +88,27 @@ const NoticeBoardDetail = () => {
         )}
         {/* 이미지 컨테이너 */}
         <div className={styles["post-image-container"]}>
-          {selectedPost.image && typeof selectedPost.image === "string" && (
-            <img
-              src={`http://127.0.0.1:8000${selectedPost.image}`}
-              alt="Post-Img"
-              className={styles["post-image"]}
-            />
+          {!isEditMode && (
+            <>
+              {selectedPost.image && typeof selectedPost.image === "string" && (
+                <img
+                  src={`http://127.0.0.1:8000${selectedPost.image}`}
+                  alt="Post-Img"
+                  className={styles["post-image"]}
+                />
+              )}
+              {selectedPost.image_url && (
+                <img
+                  src={selectedPost.image_url}
+                  alt="URL-Img"
+                  className={styles["post-image"]}
+                />
+              )}
+            </>
           )}
-          {selectedPost.image_url && (
+          {isEditMode && editedPost.image_url && (
             <img
-              src={selectedPost.image_url}
+              src={editedPost.image_url}
               alt="URL-Img"
               className={styles["post-image"]}
             />

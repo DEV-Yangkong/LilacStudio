@@ -11,7 +11,7 @@ class Notice(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(
         upload_to='notice_images/', null=True, blank=True)
-    image_url = models.URLField(max_length=200, null=True, blank=True)
+    image_url = models.URLField(max_length=800, null=True, blank=True)
     video_url = models.URLField(
         max_length=200, null=True, blank=True)  # 비디오 URL 필드 추가
 
