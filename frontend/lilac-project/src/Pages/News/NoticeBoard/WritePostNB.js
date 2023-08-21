@@ -4,7 +4,8 @@ import styles from "./WritePostNB.module.css";
 import AlertModal from "../../../modules/AlertModal/AlertModal";
 import axios from "axios";
 import Modal from "react-modal";
-import * as handleChange from "../../../modules/handleChange/handleChange";
+import UserImagePreview from "../../../modules/userImagePreview/UserImagePreview";
+import * as handleChange from "../../../modules/handleFunction/handleChange";
 
 const WritePostNB = () => {
   const [title, setTitle] = useState("");
@@ -40,30 +41,6 @@ const WritePostNB = () => {
     } else {
       setThumbnailUrl("");
     }
-  };
-
-  const UserImagePreview = () => {
-    return (
-      <div className={styles["form-group"]}>
-        <label>이미지 미리보기</label>
-        {userImageType === "url" && userImageUrl && (
-          <img
-            src={userImageUrl}
-            alt=""
-            className={styles.thumbnail}
-            style={{ maxWidth: "100%", maxHeight: "200px" }}
-          />
-        )}
-        {userImageType === "file" && userImageFile && (
-          <img
-            src={URL.createObjectURL(userImageFile)}
-            alt=""
-            className={styles.thumbnail}
-            style={{ maxWidth: "100%", maxHeight: "200px" }}
-          />
-        )}
-      </div>
-    );
   };
 
   const handleSubmit = async (e) => {
@@ -206,7 +183,11 @@ const WritePostNB = () => {
             />
           </div>
         ) : null}
-        <UserImagePreview />
+        <UserImagePreview
+          userImageType={userImageType}
+          userImageUrl={userImageUrl}
+          userImageFile={userImageFile}
+        />
         <div className={styles["form-group"]}>
           <label htmlFor="videoUrl">영상 주소</label>
           <input

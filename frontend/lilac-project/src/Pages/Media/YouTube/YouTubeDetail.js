@@ -9,7 +9,7 @@ import {
   handleEditClick,
   handleSaveClick,
   handleDelete,
-} from "../../../modules/handleActions/handleActions";
+} from "../../../modules/handleFunction/handleActions";
 
 const YouTubeDetail = () => {
   const { postId } = useParams();

@@ -12,6 +12,10 @@ export const handleTitleChange = (e, setTitle) => {
   setTitle(e.target.value);
 };
 
+export const handleContentChange = (e, setContent) => {
+  setContent(e.target.value);
+};
+
 export const handleUserImageTypeChange = (
   e,
   setUserImageType,
@@ -43,7 +47,3 @@ export const handleImageChange = (
     setUserImageUrl(""); // Clear userImageUrl
   }
 };
-
-// export const handleContentChange = (e, setContent) => {
-//   setContent(e.target.value);
-// };

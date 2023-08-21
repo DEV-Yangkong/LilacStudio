@@ -1,3 +1,5 @@
+// handleActions.js
+
 import axios from "axios";
 
 export const handleEditClick = (setIsEditMode, setEditedPost, selectedPost) => {
