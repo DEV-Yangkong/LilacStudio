@@ -91,14 +91,14 @@ const NoticeBoardDetail = () => {
           {selectedPost.image && typeof selectedPost.image === "string" && (
             <img
               src={`http://127.0.0.1:8000${selectedPost.image}`}
-              alt="Post Image"
+              alt="Post-Img"
               className={styles["post-image"]}
             />
           )}
           {selectedPost.image_url && (
             <img
               src={selectedPost.image_url}
-              alt="URL Image"
+              alt="URL-Img"
               className={styles["post-image"]}
             />
           )}
