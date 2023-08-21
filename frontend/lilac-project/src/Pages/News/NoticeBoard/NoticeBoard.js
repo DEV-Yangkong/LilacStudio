@@ -4,10 +4,14 @@ import axios from "axios";
 import styles from "./NoticeBoard.module.css";
 import "font-awesome/css/font-awesome.min.css";
 import formatDate from "../../../modules/formatDate/formatDate";
+import {
+  ScrollToTop,
+  HandlePageChange,
+  UseScrollToTop,
+} from "../../../modules/UseScroll/UseScroll";
 
 const NoticeBoard = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [scrollButtonVisible, setScrollButtonVisible] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [noticePosts, setNoticePosts] = useState([]);
 
@@ -28,32 +32,8 @@ const NoticeBoard = () => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.pageYOffset > 130) {
-        setScrollButtonVisible(true);
-      } else {
-        setScrollButtonVisible(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  const handlePageChange = (newPage) => {
-    setCurrentPage(newPage);
-    scrollToTop();
-  };
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
+  const { scrollButtonVisible } = UseScrollToTop();
+  const handlePageChange = HandlePageChange(setCurrentPage, ScrollToTop);
 
   const filteredPosts = noticePosts.filter(
     (post) =>
@@ -120,7 +100,7 @@ const NoticeBoard = () => {
         </div>
       )}
       {scrollButtonVisible && (
-        <button className={styles["top-button"]} onClick={scrollToTop}>
+        <button className={styles["top-button"]} onClick={ScrollToTop}>
           TOP
         </button>
       )}
