@@ -4,8 +4,8 @@ import styles from "./WritePostNB.module.css";
 import AlertModal from "../../../modules/AlertModal/AlertModal";
 import axios from "axios";
 import Modal from "react-modal";
-import UserImagePreview from "../../../modules/userImagePreview/UserImagePreview";
-import * as handleChange from "../../../modules/handleFunction/handleChange";
+import UserImagePreview from "../../../modules/UserImagePreview/UserImagePreview";
+import * as HandleChange from "../../../modules/HandleFunction/HandleChange";
 
 const WritePostNB = () => {
   const [title, setTitle] = useState("");
@@ -29,7 +29,7 @@ const WritePostNB = () => {
     axios.defaults.xsrfHeaderName = "X-CSRFToken";
   }, []);
 
-  const handleVideoUrlChange = (e) => {
+  const HandleVideoUrlChange = (e) => {
     const newVideoUrl = e.target.value;
     setVideoUrl(newVideoUrl);
 
@@ -43,7 +43,7 @@ const WritePostNB = () => {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const HandleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("title", title);
@@ -115,21 +115,21 @@ const WritePostNB = () => {
     }
   };
 
-  const handleCancel = () => {
+  const HandleCancel = () => {
     navigate("/news/notice-board");
   };
 
   return (
     <div className={styles["write-post"]}>
       <h1 className={styles["post-title"]}>포스트 작성하기</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={HandleSubmit}>
         <div className={styles["form-group"]}>
           <label htmlFor="title">제목</label>
           <input
             type="text"
             id="title"
             value={title}
-            onChange={(e) => handleChange.handleTitleChange(e, setTitle)}
+            onChange={(e) => HandleChange.HandleTitleChange(e, setTitle)}
             required
             className={styles.input}
           />
@@ -140,7 +140,7 @@ const WritePostNB = () => {
             id="userImageType"
             value={userImageType}
             onChange={(e) =>
-              handleChange.handleUserImageTypeChange(
+              HandleChange.HandleUserImageTypeChange(
                 e,
                 setUserImageType,
                 setUserImageUrl,
@@ -171,8 +171,8 @@ const WritePostNB = () => {
               id="userImageFile"
               accept="image/*"
               onChange={(e) =>
-                handleChange.handleImageChange(
-                  // handleChange 객체를 통해 함수 호출
+                HandleChange.HandleImageChange(
+                  // HandleChange 객체를 통해 함수 호출
                   e,
                   setUserImageFile,
                   setUserImageType,
@@ -194,7 +194,7 @@ const WritePostNB = () => {
             type="url"
             id="videoUrl"
             value={videoUrl}
-            onChange={handleVideoUrlChange}
+            onChange={HandleVideoUrlChange}
             className={styles.input}
           />
         </div>
@@ -225,7 +225,7 @@ const WritePostNB = () => {
         <button
           type="button"
           className={styles["cancel-button"]}
-          onClick={handleCancel}
+          onClick={HandleCancel}
         >
           취소
         </button>

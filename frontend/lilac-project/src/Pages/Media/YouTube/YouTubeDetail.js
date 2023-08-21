@@ -3,13 +3,13 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import styles from "./YouTubeDetail.module.css";
 import AlertModal from "../../../modules/AlertModal/AlertModal";
-import generateEmbedCode from "../../../modules/generateEmbedCode/generateEmbedCode";
-import formatDate from "../../../modules/formatDate/formatDate";
+import GenerateEmbedCode from "../../../modules/GenerateEmbedCode/GenerateEmbedCode";
+import FormatDate from "../../../modules/FormatDate/FormatDate";
 import {
-  handleEditClick,
-  handleSaveClick,
-  handleDelete,
-} from "../../../modules/handleFunction/handleActions";
+  HandleEditClick,
+  HandleSaveClick,
+  HandleDelete,
+} from "../../../modules/HandleFunction/HandleActions";
 
 const YouTubeDetail = () => {
   const { postId } = useParams();
@@ -58,7 +58,7 @@ const YouTubeDetail = () => {
       </h2>
       <div className={styles["post-info"]}>
         <span className={styles["post-date"]}>
-          {formatDate(selectedPost.created_at)}
+          {FormatDate(selectedPost.created_at)}
         </span>
         <span className={styles["post-views"]}>
           조회수 {selectedPost.views_count}
@@ -85,7 +85,7 @@ const YouTubeDetail = () => {
               message="유효하지 않은 비디오 URL입니다."
             />
           )}
-          {generateEmbedCode(
+          {GenerateEmbedCode(
             isEditMode ? editedPost.video_url : selectedPost.video_url
           )}
         </div>
@@ -105,7 +105,7 @@ const YouTubeDetail = () => {
       <div className={styles["button-container"]}>
         {isEditMode ? (
           <>
-            <button className={styles["save-button"]} onClick={handleSaveClick}>
+            <button className={styles["save-button"]} onClick={HandleSaveClick}>
               저장
             </button>
             <button
@@ -117,10 +117,10 @@ const YouTubeDetail = () => {
           </>
         ) : (
           <>
-            <button className={styles["edit-button"]} onClick={handleEditClick}>
+            <button className={styles["edit-button"]} onClick={HandleEditClick}>
               수정
             </button>
-            <button className={styles["delete-button"]} onClick={handleDelete}>
+            <button className={styles["delete-button"]} onClick={HandleDelete}>
               삭제
             </button>
             <button

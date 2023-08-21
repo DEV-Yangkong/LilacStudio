@@ -3,13 +3,13 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import styles from "./NoticeBoardDetail.module.css";
 import AlertModal from "../../../modules/AlertModal/AlertModal";
-import formatDate from "../../../modules/formatDate/formatDate";
-import generateEmbedCode from "../../../modules/generateEmbedCode/generateEmbedCode";
+import FormatDate from "../../../modules/FormatDate/FormatDate";
+import GenerateEmbedCode from "../../../modules/GenerateEmbedCode/GenerateEmbedCode";
 import {
-  handleEditClick,
-  handleSaveClick,
-  handleDelete,
-} from "../../../modules/handleFunction/handleActions";
+  HandleEditClick,
+  HandleSaveClick,
+  HandleDelete,
+} from "../../../modules/HandleFunction/HandleActions";
 
 const NoticeBoardDetail = () => {
   const { postId } = useParams();
@@ -43,7 +43,7 @@ const NoticeBoardDetail = () => {
     return <div>Loading...</div>;
   }
 
-  const embeddedCode = generateEmbedCode(
+  const EmbeddedCode = GenerateEmbedCode(
     isEditMode ? editedPost.video_url : selectedPost.video_url,
     selectedPost
   );
@@ -65,7 +65,7 @@ const NoticeBoardDetail = () => {
       </h2>
       <div className={styles["post-info"]}>
         <span className={styles["post-date"]}>
-          {formatDate(selectedPost.created_at)}
+          {FormatDate(selectedPost.created_at)}
         </span>
         <span className={styles["post-views"]}>
           조회수 {selectedPost.views_count}
@@ -135,7 +135,7 @@ const NoticeBoardDetail = () => {
           {selectedPost.video_url && (
             <div className={styles["video-container"]}>
               {/* 비디오 플레이어 또는 임베드 코드 표시 */}
-              {embeddedCode}
+              {EmbeddedCode}
             </div>
           )}
         </div>
@@ -159,7 +159,7 @@ const NoticeBoardDetail = () => {
             <button
               className={styles["save-button"]}
               onClick={() =>
-                handleSaveClick(
+                HandleSaveClick(
                   setIsEditMode,
                   setEditedPost,
                   editedPost,
@@ -194,7 +194,7 @@ const NoticeBoardDetail = () => {
             <button
               className={styles["delete-button"]}
               onClick={() =>
-                handleDelete(
+                HandleDelete(
                   postId,
                   setIsDeleteModalVisible,
                   isDeleteModalVisible,

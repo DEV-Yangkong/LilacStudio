@@ -1,15 +1,16 @@
-import React from "react";
-import styles from "./generateEmbedCode.module.css";
+// GenerateEmbedCode.js
 
-// generateEmbedCode.js
-const generateEmbedCode = (videoUrl, selectedPost) => {
+import React from "react";
+import Styles from "./GenerateEmbedCode.module.css";
+
+const GenerateEmbedCode = (videoUrl, selectedPost) => {
   try {
-    const videoId = videoUrl.split("v=")[1];
-    const embedUrl = `https://www.youtube.com/embed/${videoId}`;
+    const VideoId = videoUrl.split("v=")[1];
+    const EmbedUrl = `https://www.youtube.com/embed/${VideoId}`;
     return (
       <iframe
-        className={styles["video-frame"]}
-        src={embedUrl}
+        className={Styles["video-frame"]}
+        src={EmbedUrl}
         title={selectedPost.title}
         frameBorder="0"
         allowFullScreen
@@ -21,4 +22,4 @@ const generateEmbedCode = (videoUrl, selectedPost) => {
   }
 };
 
-export default generateEmbedCode;
+export default GenerateEmbedCode;

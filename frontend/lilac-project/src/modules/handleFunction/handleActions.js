@@ -1,19 +1,19 @@
-// handleActions.js
+// HandleActions.js
 
 import axios from "axios";
 
-export const handleEditClick = (setIsEditMode, setEditedPost, selectedPost) => {
+export const HandleEditClick = (setIsEditMode, setEditedPost, selectedPost) => {
   setIsEditMode(true);
   setEditedPost({
-    title: selectedPost.title,
-    content: selectedPost.content,
-    image: selectedPost.image,
-    image_url: selectedPost.image_url,
-    video_url: selectedPost.video_url,
+    Title: selectedPost.title,
+    Content: selectedPost.content,
+    Image: selectedPost.image,
+    ImageUrl: selectedPost.image_url,
+    VideoUrl: selectedPost.video_url,
   });
 };
 
-export const handleSaveClick = async (
+export const HandleSaveClick = async (
   setIsEditMode,
   setEditedPost,
   editedPost,
@@ -23,8 +23,8 @@ export const handleSaveClick = async (
   updateApiPath
 ) => {
   try {
-    if (!editedPost.video_url) {
-      editedPost.video_url = ""; // video_url을 빈 문자열로 설정
+    if (!editedPost.VideoUrl) {
+      editedPost.VideoUrl = ""; // video_url을 빈 문자열로 설정
     }
 
     const response = await axios.put(updateApiPath(postId), editedPost);
@@ -38,7 +38,7 @@ export const handleSaveClick = async (
   }
 };
 
-export const handleDelete = async (
+export const HandleDelete = async (
   postId,
   setIsDeleteModalVisible,
   isDeleteModalVisible,

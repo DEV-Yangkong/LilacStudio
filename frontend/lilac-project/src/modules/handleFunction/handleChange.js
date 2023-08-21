@@ -1,22 +1,22 @@
-// handleChange.js
+// HandleChange.js
 
-export const setUserImageFile = (file, setUserImageFile) => {
+export const SetUserImageFile = (file, setUserImageFile) => {
   setUserImageFile(file);
 };
 
-export const setUserImageUrl = (url, setUserImageUrl) => {
+export const SetUserImageUrl = (url, setUserImageUrl) => {
   setUserImageUrl(url);
 };
 
-export const handleTitleChange = (e, setTitle) => {
+export const HandleTitleChange = (e, setTitle) => {
   setTitle(e.target.value);
 };
 
-export const handleContentChange = (e, setContent) => {
+export const HandleContentChange = (e, setContent) => {
   setContent(e.target.value);
 };
 
-export const handleUserImageTypeChange = (
+export const HandleUserImageTypeChange = (
   e,
   setUserImageType,
   setUserImageUrl,
@@ -33,7 +33,7 @@ export const handleUserImageTypeChange = (
   }
 };
 
-export const handleImageChange = (
+export const HandleImageChange = (
   e,
   setUserImageFile,
   setUserImageType,

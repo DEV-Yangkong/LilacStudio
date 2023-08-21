@@ -1,7 +1,7 @@
-const formatDate = (dateString) => {
-  const isoDateString = dateString;
-  const formattedDateString = isoDateString.split("T")[0];
-  return formattedDateString.replace(/\./g, "-");
+const FormatDate = (dateString) => {
+  const IsoDateString = dateString;
+  const FormattedDateString = IsoDateString.split("T")[0];
+  return FormattedDateString.replace(/\./g, "-");
 };
 
-export default formatDate;
+export default FormatDate;

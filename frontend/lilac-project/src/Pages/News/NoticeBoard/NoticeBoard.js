@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import styles from "./NoticeBoard.module.css";
 import "font-awesome/css/font-awesome.min.css";
-import formatDate from "../../../modules/formatDate/formatDate";
+import FormatDate from "../../../modules/FormatDate/FormatDate";
 import {
   ScrollToTop,
   HandlePageChange,
@@ -89,7 +89,7 @@ const NoticeBoard = () => {
               </Link>
               <div className={styles["post-info"]}>
                 <span className={styles["post-date"]}>
-                  {formatDate(post.created_at)}
+                  {FormatDate(post.created_at)}
                 </span>
                 <span className={styles["post-views"]}>
                   조회수 {post.views_count}
