@@ -72,6 +72,20 @@ const NoticeBoardDetail = () => {
         </span>
       </div>
       <div className={styles["notice-content-container"]}>
+        {/* 이미지 편집 */}
+        {isEditMode && (
+          <div className={styles["form-group"]}>
+            <label htmlFor="image_Url">이미지 주소</label>
+            <input
+              type="url"
+              value={editedPost.image_url}
+              onChange={(e) =>
+                setEditedPost({ ...editedPost, image_url: e.target.value })
+              }
+              className={styles.input}
+            />
+          </div>
+        )}
         {/* 이미지 컨테이너 */}
         <div className={styles["post-image-container"]}>
           {selectedPost.image && typeof selectedPost.image === "string" && (
@@ -89,8 +103,24 @@ const NoticeBoardDetail = () => {
             />
           )}
         </div>
+
         {/* 동영상 컨테이너 */}
         <div className={styles["video-content-container"]}>
+          {/* 동영상 편집 */}
+          {isEditMode && (
+            <div className={styles["form-group"]}>
+              <label htmlFor="video_Url">영상 주소</label>
+              <input
+                type="url"
+                value={editedPost.video_url}
+                onChange={(e) =>
+                  setEditedPost({ ...editedPost, video_url: e.target.value })
+                }
+                className={styles.input}
+              />
+            </div>
+          )}
+          {/* 동영상 */}
           {selectedPost.video_url && (
             <div className={styles["video-container"]}>
               {/* 비디오 플레이어 또는 임베드 코드 표시 */}
