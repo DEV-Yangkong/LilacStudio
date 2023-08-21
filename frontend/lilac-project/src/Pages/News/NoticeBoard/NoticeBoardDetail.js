@@ -26,7 +26,7 @@ const NoticeBoardDetail = () => {
       const fetchPostDetail = async () => {
         try {
           const response = await axios.get(
-            `http://127.0.0.1:8000/api/v1/notice_board/notices/${postId}/`
+            `http://127.0.0.1:8000/api/v1/notice_board/notice/${postId}/`
           );
           setSelectedPost(response.data);
         } catch (error) {
@@ -127,7 +127,7 @@ const NoticeBoardDetail = () => {
                   setVideoError,
                   navigate,
                   (postId) =>
-                    `http://127.0.0.1:8000/api/v1/notice_board/notices/${postId}/`
+                    `http://127.0.0.1:8000/api/v1/notice_board/notice/${postId}/`
                 )
               }
             >
@@ -155,7 +155,7 @@ const NoticeBoardDetail = () => {
                   navigate,
                   "/news/notice-board",
                   (postId) =>
-                    `http://127.0.0.1:8000/api/v1/notice_board/notices/${postId}/`
+                    `http://127.0.0.1:8000/api/v1/notice_board/notice/${postId}/`
                 )
               }
             >

@@ -50,7 +50,7 @@ function App() {
           <Route path="/news" element={<News />} />
           <Route path="/news/notice-board" element={<NoticeBoard />} />
           <Route
-            path="/news/notice-board/notice-board-detail/:postId"
+            path="/news/notice-board/notice/:postId"
             element={<NoticeBoardDetail />}
           />
           <Route

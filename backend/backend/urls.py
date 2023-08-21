@@ -13,7 +13,7 @@ urlpatterns = [
     path('accounts/signup/', backend_views.signup, name='signup'),
     path('api/v1/notice_board/', notice_board_views.get_notice_board,
          name='notice_board_api'),
-    path('api/v1/notice_board/notices/<int:pk>/',
+    path('api/v1/notice_board/notice/<int:pk>/',
          notice_board_views.NoticeDetailAPIView.as_view(), name='notice_detail_api'),
 ]
 # 개발환경에서 미디어 파일을 제공하기 위한 URL 설정
