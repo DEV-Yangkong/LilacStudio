@@ -1,3 +1,5 @@
+// handleChange.js
+
 export const setUserImageFile = (file, setUserImageFile) => {
   setUserImageFile(file);
 };
@@ -10,10 +12,6 @@ export const handleTitleChange = (e, setTitle) => {
   setTitle(e.target.value);
 };
 
-export const handleContentChange = (e, setContent) => {
-  setContent(e.target.value);
-};
-
 export const handleUserImageTypeChange = (
   e,
   setUserImageType,
@@ -24,8 +22,10 @@ export const handleUserImageTypeChange = (
   setUserImageType(newUserImageType);
 
   if (newUserImageType === "url") {
-    setUserImageFile(null);
-    setUserImageUrl("");
+    setUserImageFile(null); // Clear userImageFile
+    setUserImageUrl(""); // Clear userImageUrl
+  } else if (newUserImageType === "file") {
+    setUserImageFile(null); // Clear userImageFile when switching to "file" type
   }
 };
 
@@ -40,6 +40,10 @@ export const handleImageChange = (
   if (selectedImage) {
     setUserImageFile(selectedImage);
     setUserImageType("file");
-    setUserImageUrl("");
+    setUserImageUrl(""); // Clear userImageUrl
   }
 };
+
+// export const handleContentChange = (e, setContent) => {
+//   setContent(e.target.value);
+// };

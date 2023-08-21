@@ -19,25 +19,18 @@ class Notice(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
-        if self.image_url and not self.image:
-            # 이미지 주소로부터 이미지를 다운로드하여 저장하는 로직
+        if not self.image_url and self.image:
+            # 이미지 URL이 없고 이미지 파일이 있는 경우에만 실행
             try:
-                response = requests.get(self.image_url)
-                response.raise_for_status()  # 에러가 발생하면 예외를 발생시킴
-
-                # 이미지 파일로 열고 크기를 검사하여 이상한 이미지인지 확인
-                img = Image.open(BytesIO(response.content))
+                img = Image.open(self.image)
                 if img.size[0] > 2000 or img.size[1] > 2000:
-                    raise ValueError("Image dimensions are too large.")
+                    raise ValueError("이미지 크기가 너무 큽니다.")
 
-                content_type = response.headers['content-type']
-                extension = content_type.split('/')[-1]  # 이미지 확장자 추출
-
-                # ContentFile을 사용하여 이미지 데이터 저장
+                # 이미지 파일을 새로운 파일명으로 저장
                 self.image.save(
-                    f'user_image.{extension}', ContentFile(response.content), save=False)
-            except (requests.RequestException, ValueError) as e:
-                print("Error:", e)
+                    f'user_image_{self.pk}.jpg', self.image, save=False)
+            except (OSError, ValueError) as e:
+                print("에러:", e)
                 pass  # 에러 처리
 
         super().save(*args, **kwargs)

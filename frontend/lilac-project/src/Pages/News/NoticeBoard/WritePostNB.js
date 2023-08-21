@@ -4,14 +4,7 @@ import styles from "./WritePostNB.module.css";
 import AlertModal from "../../../modules/AlertModal/AlertModal";
 import axios from "axios";
 import Modal from "react-modal";
-import {
-  handleTitleChange,
-  handleUserImageTypeChange,
-  // handleContentChange,
-  // handleImageChange,
-  // setUserImageFile,
-  // setUserImageUrl,
-} from "../../../modules/handleChange/handleChange";
+import * as handleChange from "../../../modules/handleChange/handleChange";
 
 const WritePostNB = () => {
   const [title, setTitle] = useState("");
@@ -83,10 +76,18 @@ const WritePostNB = () => {
     // Check if user chose URL or file for the user image
     if (userImageType === "url") {
       formData.append("image_url", userImageUrl);
+      console.log("url");
     } else if (userImageType === "file") {
-      // Generate a new file name (you can use a timestamp or any unique identifier)
-      const newFileName = `${Date.now()}.jpg`;
-      formData.append("image", userImageFile, newFileName);
+      console.log("file");
+      if (userImageFile) {
+        // Generate a new file name (you can use a timestamp or any unique identifier)
+        const newFileName = `${Date.now()}.jpg`;
+        formData.append("image", userImageFile, newFileName);
+        console.log("이미지재생성후저장");
+      } else {
+        formData.append("image", null);
+        console.log("null입력");
+      }
     }
 
     try {
@@ -151,7 +152,7 @@ const WritePostNB = () => {
             type="text"
             id="title"
             value={title}
-            onChange={(e) => handleTitleChange(e, setTitle)}
+            onChange={(e) => handleChange.handleTitleChange(e, setTitle)}
             required
             className={styles.input}
           />
@@ -162,7 +163,7 @@ const WritePostNB = () => {
             id="userImageType"
             value={userImageType}
             onChange={(e) =>
-              handleUserImageTypeChange(
+              handleChange.handleUserImageTypeChange(
                 e,
                 setUserImageType,
                 setUserImageUrl,
@@ -192,7 +193,15 @@ const WritePostNB = () => {
               type="file"
               id="userImageFile"
               accept="image/*"
-              onChange={(e) => setUserImageFile(e.target.files[0])}
+              onChange={(e) =>
+                handleChange.handleImageChange(
+                  // handleChange 객체를 통해 함수 호출
+                  e,
+                  setUserImageFile,
+                  setUserImageType,
+                  setUserImageUrl
+                )
+              }
               className={styles.input}
             />
           </div>
