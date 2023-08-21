@@ -19,7 +19,7 @@ const NoticeBoardDetail = () => {
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const [editedPost, setEditedPost] = useState({});
-  const [setVideoError] = useState(false);
+  // const [setVideoError] = useState(false);
 
   useEffect(() => {
     if (!selectedPost) {
@@ -165,7 +165,7 @@ const NoticeBoardDetail = () => {
                   editedPost,
                   postId,
                   setSelectedPost,
-                  setVideoError,
+                  // setVideoError,
                   navigate,
                   (postId) =>
                     `http://127.0.0.1:8000/api/v1/notice_board/notice/${postId}/`

@@ -19,25 +19,22 @@ export const handleSaveClick = async (
   editedPost,
   postId,
   setSelectedPost,
-  setVideoError,
   navigate,
-  updateApiPath // API 경로를 전달받는 매개변수
+  updateApiPath
 ) => {
   try {
-    const response = await axios.put(
-      updateApiPath(postId), // 전달받은 경로를 사용
-      editedPost
-    );
+    if (!editedPost.video_url) {
+      editedPost.video_url = ""; // video_url을 빈 문자열로 설정
+    }
+
+    const response = await axios.put(updateApiPath(postId), editedPost);
+
     if (response.status === 200) {
       setIsEditMode(false);
       setSelectedPost(response.data);
     }
   } catch (error) {
     console.error("Error updating post:", error);
-    // 추가: 비디오 URL 오류 처리
-    if (error.response && error.response.status === 400) {
-      setVideoError(true);
-    }
   }
 };
 

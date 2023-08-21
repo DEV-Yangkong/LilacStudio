@@ -49,7 +49,8 @@ class NoticeDetailAPIView(APIView):
 
     def put(self, request, pk):
         notice = self.get_object(pk)
-        serializer = NoticeSerializer(notice, data=request.data)
+        serializer = NoticeSerializer(
+            notice, data=request.data, partial=True)  # partial=True 옵션 사용
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)

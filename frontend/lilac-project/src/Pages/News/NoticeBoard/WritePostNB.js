@@ -48,11 +48,11 @@ const WritePostNB = () => {
     const formData = new FormData();
     formData.append("title", title);
     formData.append("content", content);
-    formData.append("video_url", videoUrl);
+    formData.append("video_url", videoUrl || "");
 
     // Check if user chose URL or file for the user image
     if (userImageType === "url") {
-      formData.append("image_url", userImageUrl);
+      formData.append("image_url", userImageUrl || "");
       console.log("url");
     } else if (userImageType === "file") {
       console.log("file");
