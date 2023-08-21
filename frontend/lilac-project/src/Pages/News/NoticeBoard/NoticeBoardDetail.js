@@ -72,32 +72,33 @@ const NoticeBoardDetail = () => {
         </span>
       </div>
       <div className={styles["notice-content-container"]}>
-        {(selectedPost.image ||
-          selectedPost.image_url ||
-          selectedPost.video_url) && (
-          <div className={styles["post-image-container"]}>
-            {selectedPost.image && typeof selectedPost.image === "string" && (
-              <img
-                src={`http://127.0.0.1:8000${selectedPost.image}`}
-                alt="Post Image"
-                className={styles["post-image"]}
-              />
-            )}
-            {selectedPost.image_url && (
-              <img
-                src={selectedPost.image_url}
-                alt="URL Image"
-                className={styles["post-image"]}
-              />
-            )}
-            {selectedPost.video_url && (
-              <div className={styles["video-container"]}>
-                {/* 비디오 플레이어 또는 임베드 코드 표시 */}
-                {embeddedCode}
-              </div>
-            )}
-          </div>
-        )}
+        {/* 이미지 컨테이너 */}
+        <div className={styles["post-image-container"]}>
+          {selectedPost.image && typeof selectedPost.image === "string" && (
+            <img
+              src={`http://127.0.0.1:8000${selectedPost.image}`}
+              alt="Post Image"
+              className={styles["post-image"]}
+            />
+          )}
+          {selectedPost.image_url && (
+            <img
+              src={selectedPost.image_url}
+              alt="URL Image"
+              className={styles["post-image"]}
+            />
+          )}
+        </div>
+        {/* 동영상 컨테이너 */}
+        <div className={styles["video-content-container"]}>
+          {selectedPost.video_url && (
+            <div className={styles["video-container"]}>
+              {/* 비디오 플레이어 또는 임베드 코드 표시 */}
+              {embeddedCode}
+            </div>
+          )}
+        </div>
+        {/* 게시물 내용 */}
         <div className={styles["post-content"]}>
           {isEditMode ? (
             <textarea
