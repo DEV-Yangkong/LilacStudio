@@ -103,7 +103,7 @@
 }
 
 .save-button:hover {
-  background-color: #134f2c;
+  background-color: #9f86c0;
   color: white;
 }
 
@@ -120,7 +120,7 @@
 }
 
 .edit-button:hover {
-  background-color: #134f2c;
+  background-color: #9f86c0;
   color: white;
 }
 
@@ -192,4 +192,37 @@
   border-radius: 5px;
   font-size: 14px;
   margin-bottom: 20px;
+}
+
+.form-group {
+  margin-top: 50px;
+  width: 100%;
+  text-align: center; /* 중앙 정렬을 위한 스타일 추가 */
+}
+
+.form-group label {
+  font-size: 18px;
+  margin-bottom: 8px;
+  display: inline-block; /* 라벨을 인라인 블록으로 설정하여 중앙 정렬을 위한 스타일 추가 */
+  color: #333;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 500px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1.5px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease-in-out;
+  max-width: 500px;
+  max-height: 300px;
+}
+
+.input:hover,
+.input:focus,
+.textarea:hover,
+.textarea:focus {
+  border-color: #9f86c0;
 }
