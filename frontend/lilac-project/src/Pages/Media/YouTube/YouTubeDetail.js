@@ -40,6 +40,11 @@ const YouTubeDetail = () => {
   if (isLoading) {
     return <div>Loading...</div>;
   }
+  // 필요할수도있음 나중에 서버 구현하고 테스트
+  // const EmbeddedCode = GenerateEmbedCode(
+  //   isEditMode ? editedPost.video_url : selectedPost.video_url,
+  //   selectedPost
+  // );
 
   return (
     <div className={styles["youtube-detail"]}>
