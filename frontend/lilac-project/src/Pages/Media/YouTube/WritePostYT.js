@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import styles from "./WritePostYT.module.css";
 import AlertModal from "../../../modules/AlertModal/AlertModal";
 import axios from "axios";
-import Modal from "react-modal";
 import * as HandleChange from "../../../modules/HandleFunction/HandleChange";
+import ButtonGroup from "../../../modules/Button/ButtonGroup";
 
 const WritePostYT = () => {
   const [title, setTitle] = useState("");
@@ -14,11 +14,10 @@ const WritePostYT = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const [isPostSuccess, setIsPostSuccess] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    Modal.setAppElement("#root");
-
     // axios 요청 전에 CSRF 토큰 설정
     axios.defaults.xsrfCookieName = "csrftoken";
     axios.defaults.xsrfHeaderName = "X-CSRFToken";
@@ -147,16 +146,10 @@ const WritePostYT = () => {
             className={styles.textarea}
           />
         </div>
-        <button type="submit" className={styles["submit-button"]}>
-          작성 완료
-        </button>
-        <button
-          type="button"
-          className={styles["cancel-button"]}
-          onClick={HandleCancel}
-        >
-          취소
-        </button>
+        <ButtonGroup
+          handleCompleteClick={HandleSubmit} // 작성 완료 버튼 클릭 시 동작
+          handleCancelPost={HandleCancel} // 취소 버튼 클릭 시 동작
+        />
         <AlertModal
           isOpen={modalIsOpen}
           onClose={() => {

@@ -89,3 +89,38 @@
   background-color: #9f86c0;
   color: white;
 }
+
+.submit-button {
+  margin-top: 20px;
+  margin-right: 10px;
+  padding: 10px 10px;
+  font-size: 18px;
+  background-color: #ccc;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.submit-button:hover {
+  transform: scale(1.05);
+  background-color: #9f86c0;
+}
+
+.cancel-post-button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 18px;
+  background-color: #ccc;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.cancel-post-button:hover {
+  background-color: #9f86c0;
+  transform: scale(1.05);
+}

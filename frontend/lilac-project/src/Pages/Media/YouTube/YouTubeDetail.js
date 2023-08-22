@@ -11,6 +11,10 @@ import {
   HandleDelete,
 } from "../../../modules/HandleFunction/HandleActions";
 import ButtonGroup from "../../../modules/Button/ButtonGroup";
+import {
+  EditModeButtons,
+  NormalModeButtons,
+} from "../../../modules/Button/DetailPageButtons";
 
 const YouTubeDetail = () => {
   const { postId } = useParams();
@@ -169,6 +173,8 @@ const YouTubeDetail = () => {
         }
         navigateToYouTubeList={() => navigate("/media/youtube")}
       />
+
+      {/* 모달 */}
       {isDeleteModalVisible && (
         <AlertModal
           isOpen={isDeleteModalVisible}

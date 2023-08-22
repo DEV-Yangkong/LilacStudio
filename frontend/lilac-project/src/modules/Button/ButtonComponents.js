@@ -41,3 +41,19 @@ export const CancelButton = ({ onClick }) => {
     </button>
   );
 };
+
+export const SubmitButton = ({ onClick }) => {
+  return (
+    <button className={styles["submit-button"]} onClick={onClick}>
+      작성 완료
+    </button>
+  );
+};
+
+export const CancelPostButton = ({ onClick }) => {
+  return (
+    <button className={styles["cancel-post-button"]} onClick={onClick}>
+      작성 취소
+    </button>
+  );
+};

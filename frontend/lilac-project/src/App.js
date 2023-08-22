@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Modal from "react-modal";
 import "./App.css";
 // 헤더와 푸터
 import Header from "./components/Header/Header";
@@ -30,6 +31,9 @@ import WritePostYT from "./Pages/Media/YouTube/WritePostYT";
 import WebShop from "./Pages/WebShop/WebShop";
 // 고객센터
 import CustomerService from "./Pages/CustomerService/CustomerService";
+
+// 모달 최상위 컴포넌트로 지정
+Modal.setAppElement("#root");
 
 function App() {
   return (
