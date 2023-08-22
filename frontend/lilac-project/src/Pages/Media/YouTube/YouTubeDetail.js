@@ -10,7 +10,7 @@ import {
   HandleSaveClick,
   HandleDelete,
 } from "../../../modules/HandleFunction/HandleActions";
-import ButtonGroup from "../../../modules/ButtonGroup/ButtonGroup";
+import ButtonGroup from "../../../modules/Button/ButtonGroup";
 
 const YouTubeDetail = () => {
   const { postId } = useParams();
@@ -139,6 +139,7 @@ const YouTubeDetail = () => {
           )}
         </div>
       </div>
+      {/* 버튼 */}
       <ButtonGroup
         isEditMode={isEditMode}
         handleEditModeClick={() =>

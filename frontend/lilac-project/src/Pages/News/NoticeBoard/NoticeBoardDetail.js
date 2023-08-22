@@ -10,7 +10,7 @@ import {
   HandleSaveClick,
   HandleDelete,
 } from "../../../modules/HandleFunction/HandleActions";
-import ButtonGroup from "../../../modules/ButtonGroup/ButtonGroup";
+import ButtonGroup from "../../../modules/Button/ButtonGroup";
 
 const NoticeBoardDetail = () => {
   const { postId } = useParams();
