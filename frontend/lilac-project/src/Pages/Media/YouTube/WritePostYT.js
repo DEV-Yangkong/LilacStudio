@@ -4,6 +4,7 @@ import styles from "./WritePostYT.module.css";
 import AlertModal from "../../../modules/AlertModal/AlertModal";
 import axios from "axios";
 import Modal from "react-modal";
+import * as HandleChange from "../../../modules/HandleFunction/HandleChange";
 
 const WritePostYT = () => {
   const [title, setTitle] = useState("");
@@ -13,7 +14,6 @@ const WritePostYT = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const [isPostSuccess, setIsPostSuccess] = useState(false);
-
   const navigate = useNavigate();
 
   // 모달이 열릴 때 스크린 리더가 메인 컨텐츠를 인식하지 못하도록 설정
@@ -21,21 +21,21 @@ const WritePostYT = () => {
     Modal.setAppElement("#root"); // 모달의 앱 엘리먼트 설정을 제거
   }, []);
 
-  const handleTitleChange = (e) => {
-    setTitle(e.target.value);
+  // const handleTitleChange = (e) => {
+  //   setTitle(e.target.value);
+  // };
+
+  // const handleContentChange = (e) => {
+  //   setContent(e.target.value);
+  // };
+
+  const HandleVideoUrlChange = (e) => {
+    const NewVideoUrl = e.target.value;
+    setVideoUrl(NewVideoUrl);
+    ExtractThumbnailUrl(NewVideoUrl);
   };
 
-  const handleContentChange = (e) => {
-    setContent(e.target.value);
-  };
-
-  const handleVideoUrlChange = (e) => {
-    const newVideoUrl = e.target.value;
-    setVideoUrl(newVideoUrl);
-    extractThumbnailUrl(newVideoUrl);
-  };
-
-  const extractThumbnailUrl = (url) => {
+  const ExtractThumbnailUrl = (url) => {
     const videoId = url.match(/v=([^&]+)/);
     if (videoId) {
       const thumbnailUrl = `https://i.ytimg.com/vi/${videoId[1]}/maxresdefault.jpg`;
@@ -45,7 +45,7 @@ const WritePostYT = () => {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const HandleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post(
@@ -98,21 +98,32 @@ const WritePostYT = () => {
     }
   };
 
-  const handleCancel = () => {
+  const HandleCancel = () => {
     navigate("/media/youtube");
   };
 
   return (
     <div className={styles["write-post"]}>
       <h1 className={styles["post-title"]}>포스트 작성하기</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={HandleSubmit}>
+        <div className={styles["form-group"]}>
+          <label htmlFor="title">제목</label>
+          <input
+            type="text"
+            id="title"
+            value={title}
+            onChange={(e) => HandleChange.HandleTitleChange(e, setTitle)}
+            required
+            className={styles.input}
+          />
+        </div>
         <div className={styles["form-group"]}>
           <label htmlFor="videoUrl">영상 주소</label>
           <input
             type="url"
             id="videoUrl"
             value={videoUrl}
-            onChange={handleVideoUrlChange}
+            onChange={HandleVideoUrlChange}
             required
             className={styles.input}
           />
@@ -128,23 +139,23 @@ const WritePostYT = () => {
             />
           </div>
         )}
-        <div className={styles["form-group"]}>
+        {/* <div className={styles["form-group"]}>
           <label htmlFor="title">제목</label>
           <input
             type="text"
             id="title"
             value={title}
-            onChange={handleTitleChange}
+            onChange={HandleTitleChange}
             required
             className={styles.input}
           />
-        </div>
+        </div> */}
         <div className={styles["form-group"]}>
           <label htmlFor="content">내용</label>
           <textarea
             id="content"
             value={content}
-            onChange={handleContentChange}
+            onChange={(e) => setContent(e.target.value)}
             required
             className={styles.textarea}
           />
@@ -155,7 +166,7 @@ const WritePostYT = () => {
         <button
           type="button"
           className={styles["cancel-button"]}
-          onClick={handleCancel}
+          onClick={HandleCancel}
         >
           취소
         </button>
