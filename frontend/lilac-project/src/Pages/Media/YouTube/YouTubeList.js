@@ -5,6 +5,10 @@ import styles from "./YouTubeList.module.css";
 import "font-awesome/css/font-awesome.min.css";
 import FormatDate from "../../../modules/FormatDate/FormatDate";
 import {
+  GenerateThumbnailUrl,
+  ExtractVideoId,
+} from "../../../modules/GenerateCode/GenerateThumbnail";
+import {
   ScrollToTop,
   HandlePageChange,
   UseScrollToTop,
@@ -83,6 +87,15 @@ const YouTubeList = () => {
                 to={`/media/youtube/detail/${post.id}`}
                 className={styles["post-title-link"]}
               >
+                {/* 동영상 썸네일 이미지 표시 */}
+                {post.video_url && (
+                  <div className={styles["post-thumbnail"]}>
+                    <img
+                      src={GenerateThumbnailUrl(post.video_url)}
+                      alt={post.title}
+                    />
+                  </div>
+                )}
                 <div className={styles["post-title"]}>{post.title}</div>
               </Link>
               <div className={styles["post-info"]}>

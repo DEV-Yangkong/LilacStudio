@@ -4,7 +4,7 @@ import axios from "axios";
 import styles from "./NoticeBoardDetail.module.css";
 import AlertModal from "../../../modules/AlertModal/AlertModal";
 import FormatDate from "../../../modules/FormatDate/FormatDate";
-import GenerateEmbedCode from "../../../modules/GenerateEmbedCode/GenerateEmbedCode";
+import GenerateEmbedCode from "../../../modules/GenerateCode/GenerateEmbedCode";
 import {
   HandleEditClick,
   HandleSaveClick,

@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import styles from "./YouTubeDetail.module.css";
 import AlertModal from "../../../modules/AlertModal/AlertModal";
-import GenerateEmbedCode from "../../../modules/GenerateEmbedCode/GenerateEmbedCode";
+import GenerateEmbedCode from "../../../modules/GenerateCode/GenerateEmbedCode";
 import FormatDate from "../../../modules/FormatDate/FormatDate";
 import {
   HandleEditClick,
