@@ -26,7 +26,7 @@ import Media from "./Pages/Media/Media";
 import YouTube from "./Pages/Media/YouTube/YouTubeList";
 import YouTubeDetail from "./Pages/Media/YouTube/YouTubeDetail";
 import WritePostYT from "./Pages/Media/YouTube/WritePostYT";
-// 웹샨
+// 웹샵
 import WebShop from "./Pages/WebShop/WebShop";
 // 고객센터
 import CustomerService from "./Pages/CustomerService/CustomerService";
@@ -67,7 +67,7 @@ function App() {
           {/* 미디어 */}
           <Route path="/media" element={<Media />} />
           <Route path="/media/youtube" element={<YouTube />} />
-          <Route path="/media/youtube-detail" element={<YouTubeDetail />} />
+          <Route path="/media/youtube/detail" element={<YouTubeDetail />} />
           <Route
             path="/media/youtube/write-post-yt"
             element={<WritePostYT />}

@@ -21,14 +21,6 @@ const WritePostYT = () => {
     Modal.setAppElement("#root"); // 모달의 앱 엘리먼트 설정을 제거
   }, []);
 
-  // const handleTitleChange = (e) => {
-  //   setTitle(e.target.value);
-  // };
-
-  // const handleContentChange = (e) => {
-  //   setContent(e.target.value);
-  // };
-
   const HandleVideoUrlChange = (e) => {
     const NewVideoUrl = e.target.value;
     setVideoUrl(NewVideoUrl);
