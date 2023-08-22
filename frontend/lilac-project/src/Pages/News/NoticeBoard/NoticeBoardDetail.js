@@ -186,7 +186,7 @@ const NoticeBoardDetail = () => {
             <button
               className={styles["edit-button"]}
               onClick={() =>
-                handleEditClick(setIsEditMode, setEditedPost, selectedPost)
+                HandleEditClick(setIsEditMode, setEditedPost, selectedPost)
               }
             >
               수정
