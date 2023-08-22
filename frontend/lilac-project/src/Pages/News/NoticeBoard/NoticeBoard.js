@@ -8,7 +8,7 @@ import {
   ScrollToTop,
   HandlePageChange,
   UseScrollToTop,
-} from "../../../modules/UseScroll/UseScroll";
+} from "../../../modules/HandleFunction/HandleScroll";
 
 const NoticeBoard = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -33,7 +33,6 @@ const NoticeBoard = () => {
   }, []);
 
   const { scrollButtonVisible } = UseScrollToTop();
-  const handlePageChange = HandlePageChange(setCurrentPage, ScrollToTop);
 
   const filteredPosts = noticePosts.filter(
     (post) =>
@@ -111,7 +110,9 @@ const NoticeBoard = () => {
               <button
                 key={page}
                 className={page === currentPage ? styles["active"] : ""}
-                onClick={() => handlePageChange(page)}
+                onClick={() =>
+                  HandlePageChange(setCurrentPage, ScrollToTop)(page)
+                }
               >
                 {page}
               </button>

@@ -10,7 +10,7 @@ export const ScrollToTop = () => {
 export const UseScrollToTop = () => {
   const [scrollButtonVisible, setScrollButtonVisible] = useState(false);
 
-  const handleScroll = () => {
+  const RangeScroll = () => {
     if (window.pageYOffset > 130) {
       setScrollButtonVisible(true);
     } else {
@@ -19,9 +19,9 @@ export const UseScrollToTop = () => {
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", RangeScroll);
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", RangeScroll);
     };
   }, []);
 
