@@ -10,6 +10,7 @@ import {
   HandleSaveClick,
   HandleDelete,
 } from "../../../modules/HandleFunction/HandleActions";
+import ButtonGroup from "../../../modules/ButtonGroup/ButtonGroup";
 
 const NoticeBoardDetail = () => {
   const { postId } = useParams();
@@ -152,69 +153,37 @@ const NoticeBoardDetail = () => {
           )}
         </div>
       </div>
-      <div className={styles["button-container"]}>
-        {isEditMode ? (
-          <>
-            <button
-              className={styles["save-button"]}
-              onClick={() =>
-                HandleSaveClick(
-                  setIsEditMode,
-                  setEditedPost,
-                  editedPost,
-                  postId,
-                  setSelectedPost,
-                  // setVideoError,
-                  navigate,
-                  (postId) =>
-                    `http://127.0.0.1:8000/api/v1/notice_board/notice/${postId}/`
-                )
-              }
-            >
-              저장
-            </button>
-            <button
-              className={styles["cancel-button"]}
-              onClick={() => setIsEditMode(false)}
-            >
-              취소
-            </button>
-          </>
-        ) : (
-          <>
-            <button
-              className={styles["edit-button"]}
-              onClick={() =>
-                HandleEditClick(setIsEditMode, setEditedPost, selectedPost)
-              }
-            >
-              수정
-            </button>
-            <button
-              className={styles["delete-button"]}
-              onClick={() =>
-                HandleDelete(
-                  postId,
-                  setIsDeleteModalVisible,
-                  isDeleteModalVisible,
-                  navigate,
-                  "/news/notice-board",
-                  (postId) =>
-                    `http://127.0.0.1:8000/api/v1/notice_board/notice/${postId}/`
-                )
-              }
-            >
-              삭제
-            </button>
-            <button
-              className={styles["list-button"]}
-              onClick={() => navigate("/news/notice-board")}
-            >
-              목록
-            </button>
-          </>
-        )}
-      </div>
+      <ButtonGroup
+        isEditMode={isEditMode}
+        handleEditModeClick={() =>
+          HandleEditClick(setIsEditMode, setEditedPost, selectedPost)
+        }
+        handleSaveClick={() =>
+          HandleSaveClick(
+            setIsEditMode,
+            setEditedPost,
+            editedPost,
+            postId,
+            setSelectedPost,
+            navigate,
+            (postId) =>
+              `http://127.0.0.1:8000/api/v1/notice_board/notice/${postId}/`
+          )
+        }
+        handleCancelClick={() => setIsEditMode(false)}
+        handleDeleteClick={() =>
+          HandleDelete(
+            postId,
+            setIsDeleteModalVisible,
+            isDeleteModalVisible,
+            navigate,
+            "/news/notice-board",
+            (postId) =>
+              `http://127.0.0.1:8000/api/v1/notice_board/notice/${postId}/`
+          )
+        }
+        navigateToYouTubeList={() => navigate("/news/notice-board")}
+      />
       {isDeleteModalVisible && (
         <AlertModal
           isOpen={isDeleteModalVisible}
