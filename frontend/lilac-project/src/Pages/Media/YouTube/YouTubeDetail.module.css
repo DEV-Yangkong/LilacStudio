@@ -226,3 +226,17 @@
 .textarea:focus {
   border-color: #9f86c0;
 }
+
+/* 수정 모드 CSS 추가 */
+
+.youtube-detail.edit-mode .edit-title-input,
+.youtube-detail.edit-mode .post-content textarea {
+  width: 100%;
+  max-width: 100%; /* 변경: 최대 너비 100%로 조정 */
+}
+
+.youtube-detail.edit-mode .form-group input,
+.youtube-detail.edit-mode .form-group textarea {
+  width: 100%;
+  max-width: 100%; /* 변경: 최대 너비 100%로 조정 */
+}

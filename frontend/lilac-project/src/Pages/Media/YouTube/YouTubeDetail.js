@@ -28,6 +28,7 @@ const YouTubeDetail = () => {
           `http://127.0.0.1:8000/api/v1/youtube/post/${postId}/`
         );
         setSelectedPost(response.data);
+        setEditedPost(response.data);
 
         // 상세 페이지 로드 시 조회수 증가 요청 보냄
         try {
@@ -64,7 +65,11 @@ const YouTubeDetail = () => {
   );
 
   return (
-    <div className={styles["youtube-detail"]}>
+    <div
+      className={`${styles["youtube-detail"]} ${
+        isEditMode ? styles["edit-mode"] : ""
+      }`}
+    >
       <h2>
         {isEditMode ? (
           <input
