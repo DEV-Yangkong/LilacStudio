@@ -16,19 +16,20 @@ const WritePostYT = () => {
   const [isPostSuccess, setIsPostSuccess] = useState(false);
   const navigate = useNavigate();
 
-  // 모달이 열릴 때 스크린 리더가 메인 컨텐츠를 인식하지 못하도록 설정
   useEffect(() => {
-    Modal.setAppElement("#root"); // 모달의 앱 엘리먼트 설정을 제거
+    Modal.setAppElement("#root");
+
+    // axios 요청 전에 CSRF 토큰 설정
+    axios.defaults.xsrfCookieName = "csrftoken";
+    axios.defaults.xsrfHeaderName = "X-CSRFToken";
   }, []);
 
   const HandleVideoUrlChange = (e) => {
-    const NewVideoUrl = e.target.value;
-    setVideoUrl(NewVideoUrl);
-    ExtractThumbnailUrl(NewVideoUrl);
-  };
+    const newVideoUrl = e.target.value;
+    setVideoUrl(newVideoUrl);
 
-  const ExtractThumbnailUrl = (url) => {
-    const videoId = url.match(/v=([^&]+)/);
+    // 직접 setThumbnailUrl을 호출하여 썸네일 업데이트
+    const videoId = newVideoUrl.match(/v=([^&]+)/);
     if (videoId) {
       const thumbnailUrl = `https://i.ytimg.com/vi/${videoId[1]}/maxresdefault.jpg`;
       setThumbnailUrl(thumbnailUrl);
@@ -39,54 +40,59 @@ const WritePostYT = () => {
 
   const HandleSubmit = async (e) => {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("content", content);
+    formData.append("video_url", videoUrl);
+
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/api/v1/youtube_videos/",
+        "http://127.0.0.1:8000/api/v1/youtube/",
+        formData,
         {
-          title,
-          content,
-          video_url: videoUrl,
-          thumbnail_url: thumbnailUrl,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         }
       );
 
-      console.log(response.data); // 응답 데이터 출력
+      console.log("Response:", response.data);
 
       if (response.status === 201) {
         // 작성 완료 후 필요한 동작 수행
-        setIsPostSuccess(true); // 작성 성공한 경우 상태 변경
+        setIsPostSuccess(true);
         setModalMessage("작성이 완료되었습니다.");
         setModalIsOpen(true);
       } else {
         // 응답 상태 코드가 201이 아닌 경우 처리
         setIsPostSuccess(false);
         console.error("작성에 실패하였습니다.");
-        setModalMessage("작성에 실패하였습니다."); // 모달 메시지 설정
-        setModalIsOpen(true); // 모달 열기
+        setModalMessage("작성에 실패하였습니다.");
+        setModalIsOpen(true);
       }
     } catch (error) {
       // API 요청이 실패한 경우 처리
       console.error("에러의 원인을 추적합니다");
-      // 에러 상태에 따라 사용자에게 알림을 제공하거나 적절한 조치를 취할 수 있음
-      if (error.response.data.thumbnail_url) {
+
+      if (error.response && error.response.data.thumbnail_url) {
         console.error("영상의 URL이 유효하지 않습니다.");
         setModalMessage(
           "작성에 실패하였습니다. 영상의 URL이 유효하지 않습니다."
         );
+        setModalIsOpen(true);
       } else if (error.response) {
-        // 응답이 도착했지만 응답 상태가 에러인 경우 (e.g. 4xx, 5xx)
         console.error("API response error:", error.response.data);
         setModalMessage("작성에 실패하였습니다. 응답 에러");
+        setModalIsOpen(true);
       } else if (error.request) {
-        // 응답이 도착하지 않은 경우 (e.g. 네트워크 오류)
         console.error("No API response:", error.request);
         setModalMessage("작성에 실패하였습니다. 네트워크 오류");
+        setModalIsOpen(true);
       } else {
-        // 그 외의 에러 (e.g. 코드 실행 중 예외 발생)
         console.error("Other error:", error.message);
         setModalMessage("작성에 실패하였습니다.");
+        setModalIsOpen(true);
       }
-      setModalIsOpen(true);
     }
   };
 
@@ -131,17 +137,6 @@ const WritePostYT = () => {
             />
           </div>
         )}
-        {/* <div className={styles["form-group"]}>
-          <label htmlFor="title">제목</label>
-          <input
-            type="text"
-            id="title"
-            value={title}
-            onChange={HandleTitleChange}
-            required
-            className={styles.input}
-          />
-        </div> */}
         <div className={styles["form-group"]}>
           <label htmlFor="content">내용</label>
           <textarea

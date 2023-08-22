@@ -60,3 +60,15 @@ class NoticeDetailAPIView(APIView):
         notice = self.get_object(pk)
         notice.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+# 수정필요할수있음
+class IncreaseViews(APIView):
+    def post(self, request, post_id):
+        try:
+            post = Notice.objects.get(pk=post_id)
+            post.views_count += 1
+            post.save()
+            return Response({"message": "Views count increased successfully."}, status=status.HTTP_200_OK)
+        except Notice.DoesNotExist:
+            return Response({"message": "Post not found."}, status=status.HTTP_404_NOT_FOUND)

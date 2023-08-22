@@ -13,10 +13,18 @@ class Notice(models.Model):
         upload_to='notice_images/', null=True, blank=True)
     image_url = models.URLField(max_length=800, null=True, blank=True)
     video_url = models.URLField(
-        max_length=200, null=True, blank=True)  # 비디오 URL 필드 추가
+        max_length=800, null=True, blank=True)
+    views_count = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.title
+
+    def increase_views(self):
+        self.views_count += 1
+        self.save()
+
+    class Meta:
+        ordering = ['-created_at']
 
     def save(self, *args, **kwargs):
         if not self.image_url and self.image:

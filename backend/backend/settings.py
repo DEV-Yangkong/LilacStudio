@@ -22,14 +22,16 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'localhost:3000',]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
-    "django.contrib.auth",          # 추가
+    "django.contrib.auth",
     "django.contrib.contenttypes",
-    "django.contrib.sessions",     # 추가
+    "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "corsheaders",
-    "notice_board",
     "rest_framework",
+    # 추가한 앱들 아래에 작성 #
+    "notice_board",
+    "youtube",
 ]
 
 

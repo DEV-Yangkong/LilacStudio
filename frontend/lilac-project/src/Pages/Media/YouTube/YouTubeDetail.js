@@ -22,24 +22,43 @@ const YouTubeDetail = () => {
   const [videoError, setVideoError] = useState(false);
 
   useEffect(() => {
-    const fetchPostDetail = async () => {
-      try {
-        const response = await axios.get(
-          `http://127.0.0.1:8000/api/v1/youtube/${postId}/`
-        );
-        setSelectedPost(response.data);
-        setIsLoading(false);
-      } catch (error) {
-        console.error("Error fetching post detail:", error);
-      }
-    };
+    if (!selectedPost) {
+      const fetchPostDetail = async () => {
+        try {
+          const response = await axios.get(
+            `http://127.0.0.1:8000/api/v1/youtube/post/${postId}/`
+          );
+          setSelectedPost(response.data);
 
-    fetchPostDetail();
-  }, [postId]);
+          // 상세 페이지 로드 시 조회수 증가 요청 보냄
+          try {
+            const increaseResponse = await axios.post(
+              `http://127.0.0.1:8000/api/v1/youtube/post/${postId}/increase-views/`
+            );
+            if (increaseResponse.status === 200) {
+              // 조회수 증가 요청 성공 시 상태 업데이트
+              setSelectedPost((prevState) => ({
+                ...prevState,
+                views_count: prevState.views_count + 1,
+              }));
+            }
+          } catch (error) {
+            console.error("Error increasing views:", error);
+          }
+        } catch (error) {
+          console.error("Error fetching post detail:", error);
+        } finally {
+          setIsLoading(false);
+        }
+      };
+      fetchPostDetail();
+    }
+  }, [postId, selectedPost]);
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
+
   // 필요할수도있음 나중에 서버 구현하고 테스트
   // const EmbeddedCode = GenerateEmbedCode(
   //   isEditMode ? editedPost.video_url : selectedPost.video_url,
