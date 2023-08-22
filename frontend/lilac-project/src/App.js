@@ -67,7 +67,10 @@ function App() {
           {/* 미디어 */}
           <Route path="/media" element={<Media />} />
           <Route path="/media/youtube" element={<YouTube />} />
-          <Route path="/media/youtube/detail" element={<YouTubeDetail />} />
+          <Route
+            path="/media/youtube/detail/:postId"
+            element={<YouTubeDetail />}
+          />
           <Route
             path="/media/youtube/write-post-yt"
             element={<WritePostYT />}
