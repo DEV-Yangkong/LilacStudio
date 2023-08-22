@@ -10,6 +10,7 @@ import {
   HandleSaveClick,
   HandleDelete,
 } from "../../../modules/HandleFunction/HandleActions";
+import ButtonGroup from "../../../modules/ButtonGroup/ButtonGroup";
 
 const YouTubeDetail = () => {
   const { postId } = useParams();
@@ -138,69 +139,35 @@ const YouTubeDetail = () => {
           )}
         </div>
       </div>
-      <div className={styles["button-container"]}>
-        {isEditMode ? (
-          <>
-            <button
-              className={styles["save-button"]}
-              onClick={() =>
-                HandleSaveClick(
-                  setIsEditMode,
-                  setEditedPost,
-                  editedPost,
-                  postId,
-                  setSelectedPost,
-                  // setVideoError,
-                  navigate,
-                  (postId) =>
-                    `http://127.0.0.1:8000/api/v1/youtube/post/${postId}/`
-                )
-              }
-            >
-              저장
-            </button>
-            <button
-              className={styles["cancel-button"]}
-              onClick={() => setIsEditMode(false)}
-            >
-              취소
-            </button>
-          </>
-        ) : (
-          <>
-            <button
-              className={styles["edit-button"]}
-              onClick={() =>
-                HandleEditClick(setIsEditMode, setEditedPost, selectedPost)
-              }
-            >
-              수정
-            </button>
-            <button
-              className={styles["delete-button"]}
-              onClick={() =>
-                HandleDelete(
-                  postId,
-                  setIsDeleteModalVisible,
-                  isDeleteModalVisible,
-                  navigate,
-                  "/news/notice-board",
-                  (postId) =>
-                    `http://127.0.0.1:8000/api/v1/youtube/post/${postId}/`
-                )
-              }
-            >
-              삭제
-            </button>
-            <button
-              className={styles["list-button"]}
-              onClick={() => navigate("/media/youtube")}
-            >
-              목록
-            </button>
-          </>
-        )}
-      </div>
+      <ButtonGroup
+        isEditMode={isEditMode}
+        handleEditModeClick={() =>
+          HandleEditClick(setIsEditMode, setEditedPost, selectedPost)
+        }
+        handleSaveClick={() =>
+          HandleSaveClick(
+            setIsEditMode,
+            setEditedPost,
+            editedPost,
+            postId,
+            setSelectedPost,
+            navigate,
+            (postId) => `http://127.0.0.1:8000/api/v1/youtube/post/${postId}/`
+          )
+        }
+        handleCancelClick={() => setIsEditMode(false)}
+        handleDeleteClick={() =>
+          HandleDelete(
+            postId,
+            setIsDeleteModalVisible,
+            isDeleteModalVisible,
+            navigate,
+            "/media/youtube",
+            (postId) => `http://127.0.0.1:8000/api/v1/youtube/post/${postId}/`
+          )
+        }
+        navigateToYouTubeList={() => navigate("/media/youtube")}
+      />
       {isDeleteModalVisible && (
         <AlertModal
           isOpen={isDeleteModalVisible}
