@@ -29,12 +29,29 @@ const NoticeBoardDetail = () => {
             `http://127.0.0.1:8000/api/v1/notice_board/notice/${postId}/`
           );
           setSelectedPost(response.data);
+          setEditedPost(response.data);
+          // 상세 페이지 로드 시 조회수 증가 요청 보냄
+          try {
+            const increaseResponse = await axios.post(
+              `http://127.0.0.1:8000/api/v1/notice_board/notice/${postId}/increase-views/`
+            );
+            if (increaseResponse.status === 200) {
+              setSelectedPost((prevState) => ({
+                ...prevState,
+                views_count: prevState.views_count + 1,
+              }));
+              console.log("Updated view count:", selectedPost.views_count);
+            }
+          } catch (error) {
+            console.error("Error increasing views:", error);
+          }
         } catch (error) {
           console.error("Error fetching post detail:", error);
         } finally {
           setIsLoading(false);
         }
       };
+
       fetchPostDetail();
     }
   }, [postId, selectedPost]);
