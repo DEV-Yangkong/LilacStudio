@@ -44,8 +44,11 @@
   margin-top: 5px;
 }
 
-.post-date {
+.post-date-and-views {
+  display: flex;
+  align-items: center;
   color: #777;
+  gap: 15px;
 }
 
 /* 검색 및 버튼 스타일 */

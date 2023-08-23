@@ -86,12 +86,14 @@ const NoticeBoard = () => {
                 <div className={styles["post-title"]}>{post.title}</div>
               </Link>
               <div className={styles["post-info"]}>
-                <span className={styles["post-date"]}>
-                  {FormatDate(post.created_at)}
-                </span>
-                <span className={styles["post-views"]}>
-                  조회수 {post.views_count}
-                </span>
+                <div className={styles["post-date-and-views"]}>
+                  <span className={styles["post-date"]}>
+                    {FormatDate(post.created_at)}
+                  </span>
+                  <span className={styles["post-views"]}>
+                    조회수 {post.views_count}
+                  </span>
+                </div>
               </div>
             </div>
           ))}
