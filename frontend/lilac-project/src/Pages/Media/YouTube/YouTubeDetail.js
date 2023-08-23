@@ -172,6 +172,7 @@ const YouTubeDetail = () => {
           )
         }
         navigateToYouTubeList={() => navigate("/media/youtube")}
+        isNonEditMode={!isEditMode} // 추가된 부분
       />
 
       {/* 모달 */}
