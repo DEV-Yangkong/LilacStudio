@@ -37,11 +37,11 @@ const YouTubeDetail = () => {
             `http://127.0.0.1:8000/api/v1/youtube/post/${postId}/increase-views/`
           );
           if (increaseResponse.status === 200) {
-            // 조회수 증가 요청 성공 시 상태 업데이트
             setSelectedPost((prevState) => ({
               ...prevState,
               views_count: prevState.views_count + 1,
             }));
+            console.log("Updated view count:", selectedPost.views_count);
           }
         } catch (error) {
           console.error("Error increasing views:", error);

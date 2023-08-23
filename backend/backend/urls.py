@@ -11,19 +11,12 @@ from youtube import views as youtube_views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('accounts/login/', auth_views.LoginView.as_view(), name='login'),
-    path('accounts/logout/', auth_views.LogoutView.as_view(), name='logout'),
-    path('accounts/signup/', backend_views.signup, name='signup'),
+    # 회원계정관리 (추가해야함 아직 미구현)
+    # path("api/v1/accounts/", include("accounts.urls")),
     #     공지사항
-    path('api/v1/notice_board/', notice_board_views.get_notice_board,
-         name='notice_board_api'),
-    path('api/v1/notice_board/notice/<int:pk>/',
-         notice_board_views.NoticeDetailAPIView.as_view(), name='notice_detail_api'),
+    path("api/v1/notice_board/", include("notice_board.urls")),
     #     유튜브
-    path('api/v1/youtube/',
-         youtube_views.get_youtube_posts, name='youtube_api'),
-    path('api/v1/youtube/post/<int:pk>/',
-         youtube_views.YouTubePostDetailAPIView.as_view(), name='youtube_detail_api'),
+    path("api/v1/youtube/", include("youtube.urls")),
 ]
 # 개발환경에서 미디어 파일을 제공하기 위한 URL 설정
 if settings.DEBUG:
