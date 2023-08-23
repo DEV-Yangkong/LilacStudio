@@ -55,7 +55,7 @@
 
 .post-info {
   font-size: 14px;
-  color: #777;
+  color: #444;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -63,7 +63,6 @@
 
 .post-views {
   margin-left: 10px;
-  color: #999;
   font-size: 14px;
 }
 

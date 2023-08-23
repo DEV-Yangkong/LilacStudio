@@ -47,7 +47,7 @@
 .post-date-and-views {
   display: flex;
   align-items: center;
-  color: #777;
+  color: #444;
   gap: 15px;
 }
 
