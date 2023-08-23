@@ -6,11 +6,7 @@ import axios from "axios";
 import Modal from "react-modal";
 import UserImagePreview from "../../../modules/UserImagePreview/UserImagePreview";
 import * as HandleChange from "../../../modules/HandleFunction/HandleChange";
-import {
-  HandleEditClick,
-  HandleSaveClick,
-  HandleDelete,
-} from "../../../modules/HandleFunction/HandleActions";
+import CreateModeButtons from "../../../modules/Button/CreatePost/CreatePost";
 
 const WritePostNB = () => {
   const [title, setTitle] = useState("");
@@ -225,16 +221,10 @@ const WritePostNB = () => {
           />
         </div>
         {/* 버튼 */}
-        <button type="submit" className={styles["submit-button"]}>
-          작성 완료
-        </button>
-        <button
-          type="button"
-          className={styles["cancel-button"]}
-          onClick={HandleCancel}
-        >
-          취소
-        </button>
+        <CreateModeButtons // CreatePost 버튼 컴포넌트 추가
+          handleCompleteClick={HandleSubmit} // 작성 완료 버튼 핸들러
+          handleCancelPost={HandleCancel} // 작성 취소 버튼 핸들러
+        />
         {modalMessage && (
           <div className={styles["modal-message"]}>{modalMessage}</div>
         )}
