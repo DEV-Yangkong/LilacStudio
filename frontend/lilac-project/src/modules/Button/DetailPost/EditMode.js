@@ -1,4 +1,4 @@
-// DetailPageButtons/EditMode.js
+// DetailPost/EditMode.js
 import React from "react";
 import { SaveButton, CancelButton } from "../ButtonComponents";
 

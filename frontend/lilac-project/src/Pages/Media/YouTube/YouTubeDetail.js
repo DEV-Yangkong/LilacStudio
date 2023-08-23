@@ -10,11 +10,11 @@ import {
   HandleSaveClick,
   HandleDelete,
 } from "../../../modules/HandleFunction/HandleActions";
-import ButtonGroup from "../../../modules/Button/ButtonGroup";
+import DetailPostGroup from "../../../modules/Button/DetailPost/DetailPostGroup";
 import {
   EditModeButtons,
   NormalModeButtons,
-} from "../../../modules/Button/DetailPageButtons";
+} from "../../../modules/Button/DetailPost";
 
 const YouTubeDetail = () => {
   const { postId } = useParams();
@@ -144,7 +144,7 @@ const YouTubeDetail = () => {
         </div>
       </div>
       {/* 버튼 */}
-      <ButtonGroup
+      <DetailPostGroup
         isEditMode={isEditMode}
         handleEditModeClick={() =>
           HandleEditClick(setIsEditMode, setEditedPost, selectedPost)
@@ -171,8 +171,8 @@ const YouTubeDetail = () => {
             (postId) => `http://127.0.0.1:8000/api/v1/youtube/post/${postId}/`
           )
         }
-        navigateToYouTubeList={() => navigate("/media/youtube")}
-        isNonEditMode={!isEditMode} // 추가된 부분
+        navigateToButton={() => navigate("/media/youtube")}
+        isNonEditMode={!isEditMode}
       />
 
       {/* 모달 */}

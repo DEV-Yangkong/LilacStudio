@@ -1,24 +1,18 @@
 // DetailPageButtons/NormalMode.js
 import React from "react";
-import {
-  EditButton,
-  DeleteButton,
-  SubmitButton,
-  CancelPostButton,
-} from "../ButtonComponents";
+import { EditButton, DeleteButton } from "../ButtonComponents";
+import NavigateButton from "./NavigateButton";
 
 const NormalModeButtons = ({
   handleEditModeClick,
   handleDeleteClick,
-  handleCompleteClick,
-  handleCancelPost,
+  navigateToButton,
 }) => {
   return (
     <>
       <EditButton onClick={handleEditModeClick} />
       <DeleteButton onClick={handleDeleteClick} />
-      <SubmitButton onClick={handleCompleteClick} />
-      <CancelPostButton onClick={handleCancelPost} />
+      <NavigateButton navigateToButton={navigateToButton} />
     </>
   );
 };
