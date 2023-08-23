@@ -210,6 +210,7 @@ const WritePostNB = () => {
             />
           </div>
         )}
+        {/* 내용 */}
         <div className={styles["form-group"]}>
           <label htmlFor="content">내용</label>
           <textarea

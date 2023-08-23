@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     # 추가한 앱들 아래에 작성 #
     "notice_board",
     "youtube",
+    "update_board",
 ]
 
 
