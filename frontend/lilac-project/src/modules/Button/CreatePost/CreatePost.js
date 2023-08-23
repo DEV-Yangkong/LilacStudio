@@ -1,7 +1,7 @@
 // CreatePost/CreatePost.js
 import React from "react";
-import { SaveButton, CancelPostButton } from "../ButtonComponents";
-import styles from "./ButtonGroup.module.css";
+import { SubmitButton, CancelPostButton } from "../ButtonComponents";
+import styles from "../ButtonGroup.module.css";
 
 const CreateModeButtons = ({
   handleCompleteClick, // 작성 완료 버튼 클릭 핸들러
@@ -9,7 +9,7 @@ const CreateModeButtons = ({
 }) => {
   return (
     <div className={styles["button-container"]}>
-      <SaveButton onClick={handleCompleteClick} />
+      <SubmitButton onClick={handleCompleteClick} />
       <CancelPostButton onClick={handleCancelPost} />
     </div>
   );

@@ -1,8 +1,8 @@
-// // NavigateButton/NavigateButton.js
+// // NavigateToButtons/NavigateToButtons.js
 import React from "react";
 import { ListButton } from "../ButtonComponents";
 
-const NavigateButton = ({ navigateToButton }) => {
+const NavigateToButtons = ({ navigateToButton }) => {
   return (
     <>
       <ListButton onClick={navigateToButton} />
@@ -10,4 +10,4 @@ const NavigateButton = ({ navigateToButton }) => {
   );
 };
 
-export default NavigateButton;
+export default NavigateToButtons;

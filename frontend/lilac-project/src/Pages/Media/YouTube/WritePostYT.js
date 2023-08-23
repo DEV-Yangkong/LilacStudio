@@ -4,7 +4,7 @@ import styles from "./WritePostYT.module.css";
 import AlertModal from "../../../modules/AlertModal/AlertModal";
 import axios from "axios";
 import * as HandleChange from "../../../modules/HandleFunction/HandleChange";
-import ButtonGroup from "../../../modules/Button/ButtonGroup";
+import CreateModeButtons from "../../../modules/Button/CreatePost/CreatePost";
 
 const WritePostYT = () => {
   const [title, setTitle] = useState("");
@@ -146,9 +146,10 @@ const WritePostYT = () => {
             className={styles.textarea}
           />
         </div>
-        <ButtonGroup
-          handleCompleteClick={HandleSubmit} // 작성 완료 버튼 클릭 시 동작
-          handleCancelPost={HandleCancel} // 취소 버튼 클릭 시 동작
+        {/* 버튼 */}
+        <CreateModeButtons // CreatePost 버튼 컴포넌트 추가
+          handleCompleteClick={HandleSubmit} // 작성 완료 버튼 핸들러
+          handleCancelPost={HandleCancel} // 작성 취소 버튼 핸들러
         />
         <AlertModal
           isOpen={modalIsOpen}

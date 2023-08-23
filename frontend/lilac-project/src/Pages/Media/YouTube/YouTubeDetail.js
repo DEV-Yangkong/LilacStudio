@@ -11,10 +11,6 @@ import {
   HandleDelete,
 } from "../../../modules/HandleFunction/HandleActions";
 import DetailPostGroup from "../../../modules/Button/DetailPost/DetailPostGroup";
-import {
-  EditModeButtons,
-  NormalModeButtons,
-} from "../../../modules/Button/DetailPost";
 
 const YouTubeDetail = () => {
   const { postId } = useParams();

@@ -6,6 +6,11 @@ import axios from "axios";
 import Modal from "react-modal";
 import UserImagePreview from "../../../modules/UserImagePreview/UserImagePreview";
 import * as HandleChange from "../../../modules/HandleFunction/HandleChange";
+import {
+  HandleEditClick,
+  HandleSaveClick,
+  HandleDelete,
+} from "../../../modules/HandleFunction/HandleActions";
 
 const WritePostNB = () => {
   const [title, setTitle] = useState("");
@@ -219,6 +224,7 @@ const WritePostNB = () => {
             className={styles.textarea}
           />
         </div>
+        {/* 버튼 */}
         <button type="submit" className={styles["submit-button"]}>
           작성 완료
         </button>

@@ -109,8 +109,9 @@
 }
 
 .cancel-post-button {
-  margin-top: 10px;
-  padding: 10px 20px;
+  margin-top: 20px;
+  margin-right: 10px;
+  padding: 10px 10px;
   font-size: 18px;
   background-color: #ccc;
   color: #fff;
