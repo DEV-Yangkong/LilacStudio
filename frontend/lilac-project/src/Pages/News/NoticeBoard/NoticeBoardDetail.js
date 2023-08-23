@@ -10,7 +10,7 @@ import {
   HandleSaveClick,
   HandleDelete,
 } from "../../../modules/HandleFunction/HandleActions";
-import ButtonGroup from "../../../modules/Button/ButtonGroup";
+import DetailPostGroup from "../../../modules/Button/DetailPost/DetailPostGroup";
 
 const NoticeBoardDetail = () => {
   const { postId } = useParams();
@@ -153,7 +153,8 @@ const NoticeBoardDetail = () => {
           )}
         </div>
       </div>
-      <ButtonGroup
+      {/* 버튼 */}
+      <DetailPostGroup
         isEditMode={isEditMode}
         handleEditModeClick={() =>
           HandleEditClick(setIsEditMode, setEditedPost, selectedPost)
@@ -182,7 +183,8 @@ const NoticeBoardDetail = () => {
               `http://127.0.0.1:8000/api/v1/notice_board/notice/${postId}/`
           )
         }
-        navigateToYouTubeList={() => navigate("/news/notice-board")}
+        navigateToButton={() => navigate("/news/notice-board")}
+        isNonEditMode={!isEditMode}
       />
       {isDeleteModalVisible && (
         <AlertModal
