@@ -44,6 +44,10 @@
   font-size: 18px;
 }
 
+.search-result {
+  font-size: 30px;
+}
+
 /* 작성버튼 */
 
 .write-button-container {
@@ -307,6 +311,7 @@ button.month-button.active {
   margin: 0 10px;
   padding: 0;
   transition: color 0.3s;
+  display: none;
 }
 
 .page-navigation button.active {

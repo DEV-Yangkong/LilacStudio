@@ -18,7 +18,7 @@ const UpdateBoard = () => {
   const [UpdatePosts, setUpdatePosts] = useState([]);
   const [isYearDropdownOpen, setIsYearDropdownOpen] = useState(false);
 
-  const postsPerPage = 9;
+  const postsPerPage = 3;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -61,14 +61,19 @@ const UpdateBoard = () => {
 
   const availableYears = Array.from({ length: 4 }, (_, i) => 2023 - i); // 2020부터 2023까지의 연도 배열 생성
 
-  const totalPageCount = Math.ceil(filteredPosts.length / postsPerPage);
+  const totalPageCount = Math.ceil(
+    filteredPostsByYearAndMonth.length / postsPerPage
+  );
 
   const startIndex = (currentPage - 1) * postsPerPage;
-  const endIndex = Math.min(startIndex + postsPerPage, filteredPosts.length);
-  const postsToShow = filteredPosts.slice(startIndex, endIndex);
+  const endIndex = Math.min(
+    startIndex + postsPerPage,
+    filteredPostsByYearAndMonth.length
+  );
+  const postsToShow = filteredPostsByYearAndMonth.slice(startIndex, endIndex);
 
   const handleYearChange = (year) => {
-    setCurrentYear(year);
+    setCurrentYear(year === "all" ? year : parseInt(year)); // "all"인 경우에는 그대로 사용하고 숫자인 경우에는 정수로 변환합니다
   };
 
   const handleMonthChange = (month) => {
@@ -77,9 +82,13 @@ const UpdateBoard = () => {
 
   // 월별로 해당 월에 포스트가 있는지 여부를 저장하는 배열
   const monthsWithPosts = Array.from({ length: 12 }, (_, i) =>
-    filteredPosts.some(
-      (post) => new Date(post.created_at).getMonth() + 1 === i + 1
-    )
+    filteredPosts.some((post) => {
+      const postDate = new Date(post.created_at);
+      return (
+        postDate.getFullYear() === currentYear &&
+        postDate.getMonth() + 1 === i + 1
+      );
+    })
   );
 
   return (
@@ -165,6 +174,14 @@ const UpdateBoard = () => {
       <div
         className={`${styles["calendar-content"]} ${styles["post-list-separator"]}`}
       >
+        {searchTerm && (
+          <div className={styles["search-result"]}>
+            <p>검색 결과: "{searchTerm}"</p>
+          </div>
+        )}
+        {filteredPosts.length === 0 && searchTerm !== "" && (
+          <div className={styles["no-results"]}>검색 결과가 없습니다.</div>
+        )}
         {/* 연도와 월에 따른 포스트 내용을 보여주는 부분 */}
         {filteredPostsByYearAndMonth.length === 0 ? (
           <div className={styles["no-results"]}>
@@ -197,14 +214,7 @@ const UpdateBoard = () => {
           </div>
         )}
       </div>
-      {searchTerm && (
-        <div className={styles["search-result"]}>
-          <p>검색 결과: "{searchTerm}"</p>
-        </div>
-      )}
-      {filteredPosts.length === 0 && searchTerm !== "" && (
-        <div className={styles["no-results"]}>검색 결과가 없습니다.</div>
-      )}
+
       {scrollButtonVisible && (
         <button className={styles["top-button"]} onClick={ScrollToTop}>
           TOP
