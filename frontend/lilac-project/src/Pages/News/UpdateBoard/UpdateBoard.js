@@ -13,7 +13,10 @@ import {
 const UpdateBoard = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+  const [currentMonth, setCurrentMonth] = useState(new Date().getMonth() + 1);
   const [UpdatePosts, setUpdatePosts] = useState([]);
+  const [isYearDropdownOpen, setIsYearDropdownOpen] = useState(false);
 
   const postsPerPage = 9;
 
@@ -40,11 +43,35 @@ const UpdateBoard = () => {
       post.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const filteredPostsByYearAndMonth = filteredPosts.filter((post) => {
+    const postDate = new Date(post.created_at);
+    return (
+      (currentYear === "all" || postDate.getFullYear() === currentYear) &&
+      postDate.getMonth() + 1 === currentMonth
+    );
+  });
+
+  const toggleYearDropdown = () => {
+    setIsYearDropdownOpen(!isYearDropdownOpen);
+  };
+
+  const closeYearDropdown = () => {
+    setIsYearDropdownOpen(false);
+  };
+
   const totalPageCount = Math.ceil(filteredPosts.length / postsPerPage);
 
   const startIndex = (currentPage - 1) * postsPerPage;
   const endIndex = Math.min(startIndex + postsPerPage, filteredPosts.length);
   const postsToShow = filteredPosts.slice(startIndex, endIndex);
+
+  const handleYearChange = (year) => {
+    setCurrentYear(year);
+  };
+
+  const handleMonthChange = (month) => {
+    setCurrentMonth(month);
+  };
 
   return (
     <div className={styles["update-board"]}>
@@ -68,36 +95,95 @@ const UpdateBoard = () => {
           UPLOAD
         </Link>
       </div>
+      <div className={styles["year-month-selector"]}>
+        <span>연도:</span>
+        <div className={styles["year-dropdown-container"]}>
+          <button
+            className={styles["year-dropdown-button"]}
+            onClick={toggleYearDropdown}
+          >
+            {currentYear} <i className="fa fa-chevron-down"></i>
+          </button>
+          {isYearDropdownOpen && (
+            <div
+              className={styles["year-dropdown-list"]}
+              onBlur={closeYearDropdown}
+            >
+              <label>
+                <input
+                  type="radio"
+                  value="all"
+                  checked={currentYear === "all"}
+                  onChange={() => handleYearChange("all")}
+                />
+                전체
+              </label>
+              {Array.from(
+                { length: 5 },
+                (_, i) => new Date().getFullYear() - i
+              ).map((year) => (
+                <label key={year}>
+                  <input
+                    type="radio"
+                    value={year}
+                    checked={currentYear === year}
+                    onChange={() => handleYearChange(year)}
+                  />
+                  {year}
+                </label>
+              ))}
+            </div>
+          )}
+        </div>
+        <span>월:</span>
+        {Array.from({ length: 12 }, (_, i) => i + 1).map((month) => (
+          <button
+            key={month}
+            className={currentMonth === month ? styles["active"] : ""}
+            onClick={() => handleMonthChange(month)}
+          >
+            {month}월
+          </button>
+        ))}
+      </div>
+      <div className={styles["calendar-content"]}>
+        {/* 연도와 월에 따른 포스트 내용을 보여주는 부분 */}
+        {filteredPostsByYearAndMonth.length === 0 ? (
+          <div className={styles["no-results"]}>
+            해당 월에 게시글이 없습니다.
+          </div>
+        ) : (
+          <div className={styles["post-list"]}>
+            {filteredPostsByYearAndMonth.map((post) => (
+              <div className={styles["post-item"]} key={post.id}>
+                <Link
+                  to={`/news/update-board/update/${post.id}`}
+                  className={styles["post-title-link"]}
+                >
+                  <div className={styles["post-title"]}>{post.title}</div>
+                </Link>
+                <div className={styles["post-info"]}>
+                  <div className={styles["post-date-and-views"]}>
+                    <span className={styles["post-date"]}>
+                      {FormatDate(post.created_at)}
+                    </span>
+                    <span className={styles["post-views"]}>
+                      조회수 {post.views_count}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
       {searchTerm && (
         <div className={styles["search-result"]}>
           <p>검색 결과: "{searchTerm}"</p>
         </div>
       )}
-      {filteredPosts.length === 0 && searchTerm !== "" ? (
+      {filteredPosts.length === 0 && searchTerm !== "" && (
         <div className={styles["no-results"]}>검색 결과가 없습니다.</div>
-      ) : (
-        <div className={styles["post-list"]}>
-          {postsToShow.map((post) => (
-            <div className={styles["post-item"]} key={post.id}>
-              <Link
-                to={`/news/update-board/update/${post.id}`}
-                className={styles["post-title-link"]}
-              >
-                <div className={styles["post-title"]}>{post.title}</div>
-              </Link>
-              <div className={styles["post-info"]}>
-                <div className={styles["post-date-and-views"]}>
-                  <span className={styles["post-date"]}>
-                    {FormatDate(post.created_at)}
-                  </span>
-                  <span className={styles["post-views"]}>
-                    조회수 {post.views_count}
-                  </span>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
       )}
       {scrollButtonVisible && (
         <button className={styles["top-button"]} onClick={ScrollToTop}>
