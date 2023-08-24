@@ -6,9 +6,10 @@
 }
 
 .update-board h1 {
-  font-size: 30px;
+  font-size: 40px;
   font-weight: bold;
-  margin: 0 0 20px;
+  margin-bottom: 40px;
+  margin-top: 40px;
   text-align: center;
 }
 /* 검색 및 버튼 스타일 */
