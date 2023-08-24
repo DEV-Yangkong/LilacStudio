@@ -30,11 +30,13 @@ INSTALLED_APPS = [
     "corsheaders",
     "rest_framework",
     # 추가한 앱들 아래에 작성 #
+    # TeamInfo/
+    # "team_info_main",
     # NEWS/
-    "news.notice_board",
-    "news.update_board",
+    "category_news.notice_board",
+    "category_news.update_board",
     # MEDIA/
-    "media.youtube",
+    "category_media.youtube",
 
 ]
 
