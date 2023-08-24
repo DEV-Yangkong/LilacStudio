@@ -179,10 +179,8 @@ const UpdateBoard = () => {
                 className={styles["post-item"]}
                 key={post.id}
               >
-                <div className={styles["post-content-layout"]}>
-                  <div
-                    className={`${styles["post-date"]} ${styles["larger-font"]}`}
-                  >
+                <div className={styles["post-content-container"]}>
+                  <div className={styles["post-date"]}>
                     {FormatDate(post.created_at)}
                   </div>
                   <div className={styles["post-image-container"]}>
@@ -192,13 +190,7 @@ const UpdateBoard = () => {
                       className={styles["post-image"]}
                     />
                   </div>
-                  <div
-                    className={`${styles["post-title"]} ${
-                      post.title.length > 10 ? styles["long-title"] : ""
-                    }`}
-                  >
-                    {post.title}
-                  </div>
+                  <div className={styles["post-title"]}>{post.title}</div>
                 </div>
               </Link>
             ))}
