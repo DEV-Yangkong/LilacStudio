@@ -1,7 +1,8 @@
 /* 전체 게시판 스타일 */
 .notice-board {
-  margin-top: 20px;
-  padding: 20px;
+  margin: 20px auto;
+  padding: 0 20px;
+  max-width: 1200px;
 }
 
 .notice-board h1 {

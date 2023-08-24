@@ -1,7 +1,8 @@
 /* 전체 게시판 스타일 */
 .update-board {
-  margin-top: 20px;
-  padding: 20px;
+  margin: 20px auto;
+  padding: 0 20px;
+  max-width: 1200px;
 }
 
 .update-board h1 {
@@ -53,7 +54,7 @@
 
 .write-button {
   padding: 8px 12px;
-  margin-left: 1350px;
+  margin-left: 1100px;
   background-color: #fff;
   border: 1px solid #ccc;
   color: #000;
@@ -206,64 +207,115 @@ button.month-button.active {
 .post-list {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-  gap: 10px;
+  gap: 30px;
   margin-top: 20px;
   margin-bottom: 50px;
+  transition: transform 0.3s;
 }
 
 .post-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 1px solid #ddd;
-  padding: 10px;
   cursor: pointer;
+  transition: transform 0.3s;
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+}
+
+.post-item:hover {
+  transform: scale(1.05);
+  z-index: 1;
+  border: 0.8px solid #9f86c0;
+  box-shadow: 0px 4px 8px rgba(159, 134, 192, 0.8);
+}
+
+/* 포스트 내용을 감싸는 컨테이너 */
+.post-content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  padding: 30px;
+  text-align: center; /* 텍스트를 가운데 정렬합니다 */
+}
+
+.post-content-center {
+  display: flex;
+  align-items: center;
+}
+
+.post-content-layout {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.post-date {
+  font-size: 50px;
+  margin-right: 20px;
+  font-weight: lighter;
+  color: #666;
+}
+
+/* 이미지 스타일 */
+.post-image-container {
+  width: 400px;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.post-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .post-title {
-  font-size: 16px;
-  font-weight: bold;
-  margin-top: 10px;
-  text-align: center;
+  font-size: 30px;
+  font-weight: 500;
+  color: #666;
+  max-height: 100px; /* Set a maximum height for the title */
+  overflow: hidden; /* Hide overflow content */
+  white-space: nowrap; /* Prevent text from wrapping */
+  text-overflow: ellipsis; /* Display ellipsis (...) for overflowed text */
 }
 
-.post-title-link {
-  text-decoration: none;
-  color: #333;
-}
-
-.post-info {
-  display: flex;
-  justify-content: space-between;
-  font-size: 12px;
-  align-items: center;
-  margin-top: 5px;
-}
-
-.post-date-and-views {
-  display: flex;
-  align-items: center;
-  color: #444;
-  gap: 15px;
+/* 10글자 초과시 */
+.long-title {
+  font-size: 18px; /* Reduce font size for long titles */
+  max-height: initial; /* Remove max height for long titles */
+  overflow: initial; /* Remove overflow hidden for long titles */
+  white-space: initial; /* Allow text wrapping for long titles */
+  text-overflow: initial; /* Remove ellipsis for long titles */
 }
 
 /* 결과 없음 */
-
 .no-results {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 .no-results img {
-  margin-top: 50px;
-  width: 100px;
+  margin-top: 60px;
+  width: 120px;
   height: auto;
 }
 
 .no-results span {
-  margin-top: 30px;
-  margin-bottom: 150px;
-  font-size: 25px;
+  margin-top: 40px;
+  margin-bottom: 180px;
+  font-size: 30px;
 }
 
 .page-navigation {

@@ -174,24 +174,33 @@ const UpdateBoard = () => {
         ) : (
           <div className={styles["post-list"]}>
             {filteredPostsByYearAndMonth.map((post) => (
-              <div className={styles["post-item"]} key={post.id}>
-                <Link
-                  to={`/news/update-board/update/${post.id}`}
-                  className={styles["post-title-link"]}
-                >
-                  <div className={styles["post-title"]}>{post.title}</div>
-                </Link>
-                <div className={styles["post-info"]}>
-                  <div className={styles["post-date-and-views"]}>
-                    <span className={styles["post-date"]}>
-                      {FormatDate(post.created_at)}
-                    </span>
-                    <span className={styles["post-views"]}>
-                      조회수 {post.views_count}
-                    </span>
+              <Link
+                to={`/news/update-board/update/${post.id}`}
+                className={styles["post-item"]}
+                key={post.id}
+              >
+                <div className={styles["post-content-layout"]}>
+                  <div
+                    className={`${styles["post-date"]} ${styles["larger-font"]}`}
+                  >
+                    {FormatDate(post.created_at)}
+                  </div>
+                  <div className={styles["post-image-container"]}>
+                    <img
+                      src={post.image_url}
+                      alt="Post"
+                      className={styles["post-image"]}
+                    />
+                  </div>
+                  <div
+                    className={`${styles["post-title"]} ${
+                      post.title.length > 10 ? styles["long-title"] : ""
+                    }`}
+                  >
+                    {post.title}
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         )}
