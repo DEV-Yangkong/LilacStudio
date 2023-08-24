@@ -75,6 +75,13 @@ const UpdateBoard = () => {
     setCurrentMonth(month);
   };
 
+  // 월별로 해당 월에 포스트가 있는지 여부를 저장하는 배열
+  const monthsWithPosts = Array.from({ length: 12 }, (_, i) =>
+    filteredPosts.some(
+      (post) => new Date(post.created_at).getMonth() + 1 === i + 1
+    )
+  );
+
   return (
     <div className={styles["update-board"]}>
       <h1>업데이트</h1>
@@ -127,22 +134,32 @@ const UpdateBoard = () => {
             </div>
           )}
         </div>
+
         <div className={styles["month-buttons-container"]}>
-          {Array.from({ length: 12 }, (_, i) => i + 1).map((month) => (
-            <button
-              key={month}
-              className={`${styles["month-button"]} ${
-                currentMonth === month ? styles["active"] : ""
-              }`}
-              onClick={() => handleMonthChange(month)}
-              style={currentMonth === month ? { color: "#9f86c0" } : null}
-            >
-              {month}월
-              {filteredPostsByYearAndMonth.some(
-                (post) => new Date(post.created_at).getMonth() + 1 === month
-              ) && <span className={styles["month-indicator"]}></span>}
-            </button>
-          ))}
+          {Array.from({ length: 12 }, (_, i) => i + 1).map((month) => {
+            const hasPostsInMonth = monthsWithPosts[month - 1];
+            const isActive = currentMonth === month;
+
+            return (
+              <button
+                key={month}
+                className={`${styles["month-button"]} ${
+                  hasPostsInMonth && isActive ? styles["active"] : ""
+                }`}
+                onClick={() => handleMonthChange(month)}
+                style={isActive ? { color: "#9f86c0" } : null}
+              >
+                {month}월
+                {hasPostsInMonth && (
+                  <span
+                    className={`${styles["month-indicator"]} ${
+                      isActive ? styles["visible"] : ""
+                    }`}
+                  ></span>
+                )}
+              </button>
+            );
+          })}
         </div>
       </div>
       <div

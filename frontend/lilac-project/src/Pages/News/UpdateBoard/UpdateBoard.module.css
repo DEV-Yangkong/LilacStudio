@@ -184,6 +184,11 @@ button.month-button.active {
   content: "";
 }
 
+/* 보라색 점 보이도록 스타일 추가 */
+.month-indicator.visible {
+  display: block;
+}
+
 /* 상단 구분 선 */
 .year-month-separator {
   border-top: 2px solid #ccc;
