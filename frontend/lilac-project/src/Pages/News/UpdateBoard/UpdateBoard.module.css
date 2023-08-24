@@ -240,7 +240,7 @@ button.month-button.active {
   justify-content: center;
   flex-grow: 1;
   padding: 30px;
-  text-align: center; /* 텍스트를 가운데 정렬합니다 */
+  text-align: center;
 }
 
 .post-content-center {
@@ -282,19 +282,19 @@ button.month-button.active {
   font-size: 30px;
   font-weight: 500;
   color: #666;
-  max-height: 100px; /* Set a maximum height for the title */
-  overflow: hidden; /* Hide overflow content */
-  white-space: nowrap; /* Prevent text from wrapping */
-  text-overflow: ellipsis; /* Display ellipsis (...) for overflowed text */
+  max-height: 100px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 /* 10글자 초과시 */
 .long-title {
-  font-size: 18px; /* Reduce font size for long titles */
-  max-height: initial; /* Remove max height for long titles */
-  overflow: initial; /* Remove overflow hidden for long titles */
-  white-space: initial; /* Allow text wrapping for long titles */
-  text-overflow: initial; /* Remove ellipsis for long titles */
+  font-size: 18px;
+  max-height: initial;
+  overflow: initial;
+  white-space: initial;
+  text-overflow: initial;
 }
 
 /* 결과 없음 */
