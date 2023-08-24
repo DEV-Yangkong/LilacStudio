@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import styles from "./UpdateBoard.module.css";
 import "font-awesome/css/font-awesome.min.css";
-import FormatDate from "../../../modules/FormatDate/FormatDate";
+import FormatDateNoYear from "../../../modules/FormatDate/FormatDateNoYear";
 import {
   ScrollToTop,
   HandlePageChange,
@@ -198,7 +198,7 @@ const UpdateBoard = () => {
               >
                 <div className={styles["post-content-container"]}>
                   <div className={styles["post-date"]}>
-                    {FormatDate(post.created_at)}
+                    {FormatDateNoYear(post.created_at)}
                   </div>
                   <div className={styles["post-image-container"]}>
                     <img
