@@ -23,11 +23,12 @@ class UpdateAdmin(admin.ModelAdmin):
     link_to_detail.short_description = '상세 페이지'
     link_to_detail.allow_tags = True
 
-    readonly_fields = ('preview_image', 'link_to_detail')  # 읽기 전용 필드 설정
+    readonly_fields = ('preview_image', 'link_to_detail',
+                       'created_at',)  # 읽기 전용 필드 설정
 
     # 여러 기능을 위해 해당 모델 어드민에 설정
     fieldsets = [
-        (None, {'fields': ['title', 'content',
+        (None, {'fields': ['title', 'content', 'created_at',
          'image', 'image_url', 'video_url', 'views_count']}),
         ('미리 보기', {'fields': ['preview_image', 'link_to_detail']}),
     ]

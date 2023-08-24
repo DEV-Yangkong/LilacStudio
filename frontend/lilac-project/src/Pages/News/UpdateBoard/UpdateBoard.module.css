@@ -267,12 +267,18 @@ button.month-button.active {
 .post-title {
   font-size: 30px;
   font-weight: 500;
-  color: #666;
   flex: 1;
   margin-left: 10px;
   word-wrap: break-word;
   width: 500px;
   height: 100px;
+}
+
+.post-content {
+  margin-top: 20px;
+  font-weight: 400;
+  font-size: 18px;
+  color: #666;
 }
 
 /* 결과 없음 */

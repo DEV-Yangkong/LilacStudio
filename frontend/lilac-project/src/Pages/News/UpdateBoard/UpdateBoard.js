@@ -207,7 +207,10 @@ const UpdateBoard = () => {
                       className={styles["post-image"]}
                     />
                   </div>
-                  <div className={styles["post-title"]}>{post.title}</div>
+                  <div className={styles["post-title"]}>
+                    {post.title}
+                    <div className={styles["post-content"]}>{post.content}</div>
+                  </div>
                 </div>
               </Link>
             ))}
