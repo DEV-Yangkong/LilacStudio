@@ -1,23 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import styles from "./YouTubeList.module.css";
+import styles from "./UpdateBoard.module.css";
 import "font-awesome/css/font-awesome.min.css";
 import FormatDate from "../../../modules/FormatDate/FormatDate";
-import {
-  GenerateThumbnailUrl,
-  ExtractVideoId,
-} from "../../../modules/GenerateCode/GenerateThumbnail";
 import {
   ScrollToTop,
   HandlePageChange,
   UseScrollToTop,
 } from "../../../modules/HandleFunction/HandleScroll";
 
-const YouTubeList = () => {
+const UpdateBoard = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [YoutubePosts, setYoutubePosts] = useState([]);
+  const [UpdatePosts, setUpdatePosts] = useState([]);
 
   const postsPerPage = 9;
 
@@ -25,9 +21,9 @@ const YouTubeList = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://127.0.0.1:8000/api/v1/youtube/"
+          "http://127.0.0.1:8000/api/v1/update_board/"
         );
-        setYoutubePosts(response.data);
+        setUpdatePosts(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -38,7 +34,7 @@ const YouTubeList = () => {
 
   const { scrollButtonVisible } = UseScrollToTop();
 
-  const filteredPosts = YoutubePosts.filter(
+  const filteredPosts = UpdatePosts.filter(
     (post) =>
       searchTerm === "" ||
       post.title.toLowerCase().includes(searchTerm.toLowerCase())
@@ -51,8 +47,8 @@ const YouTubeList = () => {
   const postsToShow = filteredPosts.slice(startIndex, endIndex);
 
   return (
-    <div className={styles["youtube-list"]}>
-      <h1>YouTube</h1>
+    <div className={styles["update-board"]}>
+      <h1>업데이트</h1>
       <div className={styles["search-bar"]}>
         <input
           type="text"
@@ -66,7 +62,7 @@ const YouTubeList = () => {
       </div>
       <div className={styles["write-button-container"]}>
         <Link
-          to="/media/youtube/write-post-yt"
+          to="/news/update-board/write-post-ub"
           className={styles["write-button"]}
         >
           UPLOAD
@@ -84,27 +80,20 @@ const YouTubeList = () => {
           {postsToShow.map((post) => (
             <div className={styles["post-item"]} key={post.id}>
               <Link
-                to={`/media/youtube/post/${post.id}`}
+                to={`/news/update-board/update/${post.id}`}
                 className={styles["post-title-link"]}
               >
-                {/* 동영상 썸네일 이미지 표시 */}
-                {post.video_url && (
-                  <div className={styles["post-thumbnail"]}>
-                    <img
-                      src={GenerateThumbnailUrl(post.video_url)}
-                      alt={post.title}
-                    />
-                  </div>
-                )}
                 <div className={styles["post-title"]}>{post.title}</div>
               </Link>
               <div className={styles["post-info"]}>
-                <span className={styles["post-date"]}>
-                  {FormatDate(post.created_at)}
-                </span>
-                <span className={styles["post-views"]}>
-                  조회수 {post.views_count}
-                </span>
+                <div className={styles["post-date-and-views"]}>
+                  <span className={styles["post-date"]}>
+                    {FormatDate(post.created_at)}
+                  </span>
+                  <span className={styles["post-views"]}>
+                    조회수 {post.views_count}
+                  </span>
+                </div>
               </div>
             </div>
           ))}
@@ -136,4 +125,4 @@ const YouTubeList = () => {
   );
 };
 
-export default YouTubeList;
+export default UpdateBoard;

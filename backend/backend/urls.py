@@ -21,6 +21,8 @@ urlpatterns = [
     path("api/v1/notice_board/", include("category_news.notice_board.urls")),
     # NEWS/업데이트
     path("api/v1/update_board/", include("category_news.update_board.urls")),
+    # NEWS/이벤트
+    path("api/v1/event_board/", include("category_news.event_board.urls")),
     # MEDIA/유튜브
     path("api/v1/youtube/", include("category_media.youtube.urls")),
 

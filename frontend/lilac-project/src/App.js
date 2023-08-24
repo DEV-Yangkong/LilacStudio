@@ -15,9 +15,18 @@ import Home from "./Pages/Home/Home";
 import TeamIntroduction from "./Pages/TeamIntroduction/TeamIntroduction";
 // 새소식
 import News from "./Pages/News/News";
+// 새소식/공지사항
 import NoticeBoard from "./Pages/News/NoticeBoard/NoticeBoard";
 import NoticeBoardDetail from "./Pages/News/NoticeBoard/NoticeBoardDetail";
 import WritePostNB from "./Pages/News/NoticeBoard/WritePostNB";
+// 새소식/업데이트
+import UpdateBoard from "./Pages/News/UpdateBoard/UpdateBoard";
+import UpdateBoardDetail from "./Pages/News/UpdateBoard/UpdateBoard";
+import WritePostUB from "./Pages/News/UpdateBoard/WritePostUB";
+// 새소식/이벤트
+import EventBoard from "./Pages/News/EventBoard/EventBoard";
+import EventBoardDetail from "./Pages/News/EventBoard/EventBoard";
+import WritePostEB from "./Pages/News/EventBoard/WritePostEB";
 // 게임정보
 import GameInfo from "./Pages/GameInfo/GameInfo";
 // 커뮤니티
@@ -52,6 +61,7 @@ function App() {
 
           {/* 새 소식 */}
           <Route path="/news" element={<News />} />
+          {/* 새 소식 / 공지사항 */}
           <Route path="/news/notice-board" element={<NoticeBoard />} />
           <Route
             path="/news/notice-board/notice/:postId"
@@ -60,6 +70,26 @@ function App() {
           <Route
             path="/news/notice-board/write-post-nb"
             element={<WritePostNB />}
+          />
+          {/* 새 소식 / 업데이트 */}
+          <Route path="/news/update-board" element={<UpdateBoard />} />
+          <Route
+            path="/news/update-board/update/:postId"
+            element={<UpdateBoardDetail />}
+          />
+          <Route
+            path="/news/update-board/write-post-ub"
+            element={<WritePostUB />}
+          />
+          {/* 새 소식 / 이벤트 */}
+          <Route path="/news/event-board" element={<EventBoard />} />
+          <Route
+            path="/news/event-board/event/:postId"
+            element={<EventBoardDetail />}
+          />
+          <Route
+            path="/news/event-board/write-post-eb"
+            element={<WritePostEB />}
           />
 
           {/* 게임 정보 */}
@@ -72,7 +102,7 @@ function App() {
           <Route path="/media" element={<Media />} />
           <Route path="/media/youtube" element={<YouTube />} />
           <Route
-            path="/media/youtube/detail/:postId"
+            path="/media/youtube/post/:postId"
             element={<YouTubeDetail />}
           />
           <Route

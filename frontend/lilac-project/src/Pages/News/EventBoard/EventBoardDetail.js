@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import styles from "./YouTubeDetail.module.css";
+import styles from "./EventDetail.module.css";
 import AlertModal from "../../../modules/AlertModal/AlertModal";
 import GenerateEmbedCode from "../../../modules/GenerateCode/GenerateEmbedCode";
 import FormatDate from "../../../modules/FormatDate/FormatDate";
@@ -12,7 +12,7 @@ import {
 } from "../../../modules/HandleFunction/HandleActions";
 import DetailPostGroup from "../../../modules/Button/DetailPost/DetailPostGroup";
 
-const YouTubeDetail = () => {
+const EventBoardDetail = () => {
   const { postId } = useParams();
   const navigate = useNavigate();
   const [selectedPost, setSelectedPost] = useState(null);
@@ -26,7 +26,7 @@ const YouTubeDetail = () => {
     const fetchPostDetail = async () => {
       try {
         const response = await axios.get(
-          `http://127.0.0.1:8000/api/v1/youtube/post/${postId}/`
+          `http://127.0.0.1:8000/api/v1/event_board/event/${postId}/`
         );
         setSelectedPost(response.data);
         setEditedPost(response.data);
@@ -34,7 +34,7 @@ const YouTubeDetail = () => {
         // 상세 페이지 로드 시 조회수 증가 요청 보냄
         try {
           const increaseResponse = await axios.post(
-            `http://127.0.0.1:8000/api/v1/youtube/post/${postId}/increase-views/`
+            `http://127.0.0.1:8000/api/v1/event_board/event/${postId}/increase-views/`
           );
           if (increaseResponse.status === 200) {
             setSelectedPost((prevState) => ({
@@ -67,7 +67,7 @@ const YouTubeDetail = () => {
 
   return (
     <div
-      className={`${styles["youtube-detail"]} ${
+      className={`${styles["event-board-detail"]} ${
         isEditMode ? styles["edit-mode"] : ""
       }`}
     >
@@ -92,7 +92,7 @@ const YouTubeDetail = () => {
           조회수 {selectedPost.views_count}
         </span>
       </div>
-      <div className={styles["Youtube-content-container"]}>
+      <div className={styles["notice-content-container"]}>
         {/* 동영상 컨테이너 */}
         <div className={styles["video-content-container"]}>
           {/* 동영상 편집 */}
@@ -153,7 +153,8 @@ const YouTubeDetail = () => {
             postId,
             setSelectedPost,
             navigate,
-            (postId) => `http://127.0.0.1:8000/api/v1/youtube/post/${postId}/`
+            (postId) =>
+              `http://127.0.0.1:8000/api/v1/event_board/event/${postId}/`
           )
         }
         handleCancelClick={() => setIsEditMode(false)}
@@ -163,11 +164,12 @@ const YouTubeDetail = () => {
             setIsDeleteModalVisible,
             isDeleteModalVisible,
             navigate,
-            "/media/youtube",
-            (postId) => `http://127.0.0.1:8000/api/v1/youtube/post/${postId}/`
+            "/news/event-board",
+            (postId) =>
+              `http://127.0.0.1:8000/api/v1/event_board/event/${postId}/`
           )
         }
-        navigateToButton={() => navigate("/media/youtube")}
+        navigateToButton={() => navigate("/news/event-board")}
         isNonEditMode={!isEditMode}
       />
 
@@ -183,4 +185,4 @@ const YouTubeDetail = () => {
   );
 };
 
-export default YouTubeDetail;
+export default EventBoardDetail;

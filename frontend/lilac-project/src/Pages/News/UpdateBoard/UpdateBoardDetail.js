@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import styles from "./YouTubeDetail.module.css";
+import styles from "./UpdateBoardDetail.module.css";
 import AlertModal from "../../../modules/AlertModal/AlertModal";
-import GenerateEmbedCode from "../../../modules/GenerateCode/GenerateEmbedCode";
 import FormatDate from "../../../modules/FormatDate/FormatDate";
+import GenerateEmbedCode from "../../../modules/GenerateCode/GenerateEmbedCode";
 import {
   HandleEditClick,
   HandleSaveClick,
@@ -12,7 +12,7 @@ import {
 } from "../../../modules/HandleFunction/HandleActions";
 import DetailPostGroup from "../../../modules/Button/DetailPost/DetailPostGroup";
 
-const YouTubeDetail = () => {
+const UpdateBoardDetail = () => {
   const { postId } = useParams();
   const navigate = useNavigate();
   const [selectedPost, setSelectedPost] = useState(null);
@@ -20,41 +20,41 @@ const YouTubeDetail = () => {
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const [editedPost, setEditedPost] = useState({});
-  const [videoError, setVideoError] = useState(false);
 
   useEffect(() => {
-    const fetchPostDetail = async () => {
-      try {
-        const response = await axios.get(
-          `http://127.0.0.1:8000/api/v1/youtube/post/${postId}/`
-        );
-        setSelectedPost(response.data);
-        setEditedPost(response.data);
-
-        // 상세 페이지 로드 시 조회수 증가 요청 보냄
+    if (!selectedPost) {
+      const fetchPostDetail = async () => {
         try {
-          const increaseResponse = await axios.post(
-            `http://127.0.0.1:8000/api/v1/youtube/post/${postId}/increase-views/`
+          const response = await axios.get(
+            `http://127.0.0.1:8000/api/v1/update_board/update/${postId}/`
           );
-          if (increaseResponse.status === 200) {
-            setSelectedPost((prevState) => ({
-              ...prevState,
-              views_count: prevState.views_count + 1,
-            }));
-            console.log("Updated view count:", selectedPost.views_count);
+          setSelectedPost(response.data);
+          setEditedPost(response.data);
+          // 상세 페이지 로드 시 조회수 증가 요청 보냄
+          try {
+            const increaseResponse = await axios.post(
+              `http://127.0.0.1:8000/api/v1/update_board/update/${postId}/increase-views/`
+            );
+            if (increaseResponse.status === 200) {
+              setSelectedPost((prevState) => ({
+                ...prevState,
+                views_count: prevState.views_count + 1,
+              }));
+              console.log("Updated view count:", selectedPost.views_count);
+            }
+          } catch (error) {
+            console.error("Error increasing views:", error);
           }
         } catch (error) {
-          console.error("Error increasing views:", error);
+          console.error("Error fetching post detail:", error);
+        } finally {
+          setIsLoading(false);
         }
-      } catch (error) {
-        console.error("Error fetching post detail:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+      };
 
-    fetchPostDetail();
-  }, [postId]);
+      fetchPostDetail();
+    }
+  }, [postId, selectedPost]);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -66,11 +66,7 @@ const YouTubeDetail = () => {
   );
 
   return (
-    <div
-      className={`${styles["youtube-detail"]} ${
-        isEditMode ? styles["edit-mode"] : ""
-      }`}
-    >
+    <div className={styles["update-board-detail"]}>
       <h2>
         {isEditMode ? (
           <input
@@ -92,7 +88,50 @@ const YouTubeDetail = () => {
           조회수 {selectedPost.views_count}
         </span>
       </div>
-      <div className={styles["Youtube-content-container"]}>
+      <div className={styles["update-content-container"]}>
+        {/* 이미지 편집 */}
+        {isEditMode && (
+          <div className={styles["form-group"]}>
+            <label htmlFor="image_Url">이미지 주소</label>
+            <input
+              type="url"
+              value={editedPost.image_url || ""}
+              onChange={(e) =>
+                setEditedPost({ ...editedPost, image_url: e.target.value })
+              }
+              className={styles.input}
+            />
+          </div>
+        )}
+        {/* 이미지 컨테이너 */}
+        <div className={styles["post-image-container"]}>
+          {!isEditMode && (
+            <>
+              {selectedPost.image && typeof selectedPost.image === "string" && (
+                <img
+                  src={`http://127.0.0.1:8000${selectedPost.image}`}
+                  alt="Post-Img"
+                  className={styles["post-image"]}
+                />
+              )}
+              {selectedPost.image_url && (
+                <img
+                  src={selectedPost.image_url}
+                  alt="URL-Img"
+                  className={styles["post-image"]}
+                />
+              )}
+            </>
+          )}
+          {isEditMode && editedPost.image_url && (
+            <img
+              src={editedPost.image_url}
+              alt="URL-Img"
+              className={styles["post-image"]}
+            />
+          )}
+        </div>
+
         {/* 동영상 컨테이너 */}
         <div className={styles["video-content-container"]}>
           {/* 동영상 편집 */}
@@ -114,14 +153,6 @@ const YouTubeDetail = () => {
             <div className={styles["video-container"]}>
               {/* 비디오 플레이어 또는 임베드 코드 표시 */}
               {EmbeddedCode}
-              {/* 비디오 URL 오류 시 모달 표시 */}
-              {videoError && (
-                <AlertModal
-                  isOpen={videoError}
-                  onClose={() => setVideoError(false)}
-                  message="유효하지 않은 비디오 URL입니다."
-                />
-              )}
             </div>
           )}
         </div>
@@ -153,7 +184,8 @@ const YouTubeDetail = () => {
             postId,
             setSelectedPost,
             navigate,
-            (postId) => `http://127.0.0.1:8000/api/v1/youtube/post/${postId}/`
+            (postId) =>
+              `http://127.0.0.1:8000/api/v1/update_board/update/${postId}/`
           )
         }
         handleCancelClick={() => setIsEditMode(false)}
@@ -163,15 +195,14 @@ const YouTubeDetail = () => {
             setIsDeleteModalVisible,
             isDeleteModalVisible,
             navigate,
-            "/media/youtube",
-            (postId) => `http://127.0.0.1:8000/api/v1/youtube/post/${postId}/`
+            "/news/update-board",
+            (postId) =>
+              `http://127.0.0.1:8000/api/v1/update_board/update/${postId}/`
           )
         }
-        navigateToButton={() => navigate("/media/youtube")}
+        navigateToButton={() => navigate("/news/update-board")}
         isNonEditMode={!isEditMode}
       />
-
-      {/* 모달 */}
       {isDeleteModalVisible && (
         <AlertModal
           isOpen={isDeleteModalVisible}
@@ -183,4 +214,4 @@ const YouTubeDetail = () => {
   );
 };
 
-export default YouTubeDetail;
+export default UpdateBoardDetail;

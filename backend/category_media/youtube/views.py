@@ -53,7 +53,7 @@ class IncreaseViews(APIView):
     def get(self, request, post_id):
         try:
             post = YouTubePost.objects.get(pk=post_id)
-            post.increase_views()  # or post.views_count += 1; post.save()
+            post.increase_views()
             return Response({"message": "Views count increased successfully."}, status=status.HTTP_200_OK)
         except YouTubePost.DoesNotExist:
             return Response({"message": "Post not found."}, status=status.HTTP_404_NOT_FOUND)

@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     # NEWS/
     "category_news.notice_board",
     "category_news.update_board",
+    "category_news.event_board",
     # MEDIA/
     "category_media.youtube",
 

@@ -25,7 +25,11 @@ const Header = () => {
       label: "새소식",
       path: "/news",
       items: ["공지사항", "업데이트", "이벤트"],
-      itemPaths: ["/news/notice-board", "/news/update", "/news/event"],
+      itemPaths: [
+        "/news/notice-board",
+        "/news/update-board",
+        "/news/event-board",
+      ],
     },
     {
       label: "게임정보",
