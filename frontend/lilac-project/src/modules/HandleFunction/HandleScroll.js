@@ -11,7 +11,7 @@ export const UseScrollToTop = () => {
   const [scrollButtonVisible, setScrollButtonVisible] = useState(false);
 
   const RangeScroll = () => {
-    if (window.pageYOffset > 130) {
+    if (window.pageYOffset > 160) {
       setScrollButtonVisible(true);
     } else {
       setScrollButtonVisible(false);
