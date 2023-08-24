@@ -97,7 +97,9 @@ const UpdateBoard = () => {
           UPLOAD
         </Link>
       </div>
-      <div className={styles["year-month-selector"]}>
+      <div
+        className={`${styles["year-month-selector"]} ${styles["year-month-separator"]}`}
+      >
         <span className={styles["current-year"]}>{currentYear}</span>
         <div className={styles["year-dropdown-container"]}>
           <button
@@ -138,11 +140,14 @@ const UpdateBoard = () => {
           </button>
         ))}
       </div>
-      <div className={styles["calendar-content"]}>
+      <div
+        className={`${styles["calendar-content"]} ${styles["post-list-separator"]}`}
+      >
         {/* 연도와 월에 따른 포스트 내용을 보여주는 부분 */}
         {filteredPostsByYearAndMonth.length === 0 ? (
           <div className={styles["no-results"]}>
-            해당 월에 게시글이 없습니다.
+            <img src="/images/warning.png" alt="warning_img" />
+            <span>해당 게시글이 없습니다.</span>
           </div>
         ) : (
           <div className={styles["post-list"]}>

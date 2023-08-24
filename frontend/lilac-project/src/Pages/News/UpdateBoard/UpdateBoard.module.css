@@ -10,6 +10,69 @@
   margin: 0 0 20px;
   text-align: center;
 }
+/* 검색 및 버튼 스타일 */
+.search-bar {
+  position: relative;
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.search-bar input {
+  padding: 5px 10px;
+  width: 200px;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.search-bar input:hover,
+.search-bar input:focus {
+  border: 1.5px solid #9f86c0;
+}
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  color: #666;
+}
+
+.search-icon i {
+  font-size: 18px;
+}
+
+/* 작성버튼 */
+
+.write-button-container {
+  position: relative;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.write-button {
+  padding: 8px 12px;
+  margin-left: 1350px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  color: #000;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: inline-block;
+  margin-top: 10px;
+  margin-bottom: 50px;
+}
+
+.write-button:hover {
+  background-color: #9f86c0;
+  color: #fff;
+}
 
 /* 달력 부분 스타일 */
 .year-month-selector {
@@ -101,6 +164,18 @@ button.month-button.active {
   color: #9f86c0;
 }
 
+/* 상단 구분 선 */
+.year-month-separator {
+  border-top: 2px solid #ccc;
+  margin-top: 20px;
+}
+
+/* 하단 구분 선 */
+.post-list-separator {
+  border-top: 1px solid #ccc;
+  margin-top: 20px;
+}
+
 /* 포스트리스트 */
 
 .post-list {
@@ -108,6 +183,7 @@ button.month-button.active {
   grid-template-columns: repeat(1, 1fr);
   gap: 10px;
   margin-top: 20px;
+  margin-bottom: 50px;
 }
 
 .post-item {
@@ -143,65 +219,26 @@ button.month-button.active {
   gap: 15px;
 }
 
-/* 검색 및 버튼 스타일 */
-.search-bar {
-  position: relative;
-  margin-top: 20px;
+/* 결과 없음 */
+
+.no-results {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
 }
 
-.search-bar input {
-  padding: 5px 10px;
-  width: 200px;
-  border: 1.5px solid #ccc;
-  border-radius: 8px;
-  transition: border-color 0.3s ease-in-out;
+.no-results img {
+  margin-top: 50px;
+  width: 100px;
+  height: auto;
 }
 
-.search-bar input:hover,
-.search-bar input:focus {
-  border: 1.5px solid #9f86c0;
-}
-
-.search-icon {
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
-  color: #666;
-}
-
-.search-icon i {
-  font-size: 18px;
-}
-
-.write-button-container {
-  position: relative;
-  margin-top: 10px;
-  text-align: center;
-}
-
-.write-button {
-  padding: 8px 12px;
-  margin-left: 1350px;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  color: #000;
-  border-radius: 5px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  display: inline-block;
-  margin-top: 10px;
-}
-
-.write-button:hover {
-  background-color: #9f86c0;
-  color: #fff;
+.no-results span {
+  margin-top: 30px;
+  margin-bottom: 150px;
+  font-size: 25px;
 }
 
 .page-navigation {
