@@ -59,6 +59,8 @@ const UpdateBoard = () => {
     setIsYearDropdownOpen(false);
   };
 
+  const availableYears = Array.from({ length: 4 }, (_, i) => 2023 - i); // 2020부터 2023까지의 연도 배열 생성
+
   const totalPageCount = Math.ceil(filteredPosts.length / postsPerPage);
 
   const startIndex = (currentPage - 1) * postsPerPage;
@@ -96,51 +98,41 @@ const UpdateBoard = () => {
         </Link>
       </div>
       <div className={styles["year-month-selector"]}>
-        <span>연도:</span>
+        <span className={styles["current-year"]}>{currentYear}</span>
         <div className={styles["year-dropdown-container"]}>
           <button
             className={styles["year-dropdown-button"]}
             onClick={toggleYearDropdown}
           >
-            {currentYear} <i className="fa fa-chevron-down"></i>
+            <i className="fa fa-chevron-down"></i>
           </button>
           {isYearDropdownOpen && (
             <div
               className={styles["year-dropdown-list"]}
               onBlur={closeYearDropdown}
             >
-              <label>
-                <input
-                  type="radio"
-                  value="all"
-                  checked={currentYear === "all"}
-                  onChange={() => handleYearChange("all")}
-                />
-                전체
-              </label>
-              {Array.from(
-                { length: 5 },
-                (_, i) => new Date().getFullYear() - i
-              ).map((year) => (
-                <label key={year}>
-                  <input
-                    type="radio"
-                    value={year}
-                    checked={currentYear === year}
-                    onChange={() => handleYearChange(year)}
-                  />
-                  {year}
-                </label>
-              ))}
+              <div className={styles["year-dropdown-scroll"]} tabIndex={0}>
+                {availableYears.map((year) => (
+                  <div
+                    key={year}
+                    className={styles["year-option"]}
+                    onClick={() => handleYearChange(year)}
+                  >
+                    {year}
+                  </div>
+                ))}
+              </div>
             </div>
           )}
         </div>
-        <span>월:</span>
         {Array.from({ length: 12 }, (_, i) => i + 1).map((month) => (
           <button
             key={month}
-            className={currentMonth === month ? styles["active"] : ""}
+            className={`${styles["month-button"]} ${
+              currentMonth === month ? styles["active"] : ""
+            }`}
             onClick={() => handleMonthChange(month)}
+            style={currentMonth === month ? { color: "#9f86c0" } : null}
           >
             {month}월
           </button>
