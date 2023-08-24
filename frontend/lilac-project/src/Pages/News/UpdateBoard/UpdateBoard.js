@@ -127,18 +127,23 @@ const UpdateBoard = () => {
             </div>
           )}
         </div>
-        {Array.from({ length: 12 }, (_, i) => i + 1).map((month) => (
-          <button
-            key={month}
-            className={`${styles["month-button"]} ${
-              currentMonth === month ? styles["active"] : ""
-            }`}
-            onClick={() => handleMonthChange(month)}
-            style={currentMonth === month ? { color: "#9f86c0" } : null}
-          >
-            {month}월
-          </button>
-        ))}
+        <div className={styles["month-buttons-container"]}>
+          {Array.from({ length: 12 }, (_, i) => i + 1).map((month) => (
+            <button
+              key={month}
+              className={`${styles["month-button"]} ${
+                currentMonth === month ? styles["active"] : ""
+              }`}
+              onClick={() => handleMonthChange(month)}
+              style={currentMonth === month ? { color: "#9f86c0" } : null}
+            >
+              {month}월
+              {filteredPostsByYearAndMonth.some(
+                (post) => new Date(post.created_at).getMonth() + 1 === month
+              ) && <span className={styles["month-indicator"]}></span>}
+            </button>
+          ))}
+        </div>
       </div>
       <div
         className={`${styles["calendar-content"]} ${styles["post-list-separator"]}`}

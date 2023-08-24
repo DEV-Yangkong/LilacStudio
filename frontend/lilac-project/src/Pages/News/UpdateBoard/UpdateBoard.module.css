@@ -158,10 +158,30 @@ button.month-button {
   font-size: 18px;
   font-weight: bold;
   transition: color 0.3s;
+  position: relative;
 }
 
 button.month-button.active {
   color: #9f86c0;
+}
+
+/* 월 선택 버튼과 작은 점 컨테이너 */
+.month-button-container {
+  display: flex;
+  align-items: center;
+}
+
+/* 작은 보라색 점 */
+.month-indicator {
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  background-color: #9f86c0;
+  border-radius: 50%;
+  content: "";
 }
 
 /* 상단 구분 선 */
