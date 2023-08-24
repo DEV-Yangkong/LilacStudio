@@ -21,7 +21,7 @@ import NoticeBoardDetail from "./Pages/News/NoticeBoard/NoticeBoardDetail";
 import WritePostNB from "./Pages/News/NoticeBoard/WritePostNB";
 // 새소식/업데이트
 import UpdateBoard from "./Pages/News/UpdateBoard/UpdateBoard";
-import UpdateBoardDetail from "./Pages/News/UpdateBoard/UpdateBoard";
+import UpdateBoardDetail from "./Pages/News/UpdateBoard/UpdateBoardDetail";
 import WritePostUB from "./Pages/News/UpdateBoard/WritePostUB";
 // 새소식/이벤트
 import EventBoard from "./Pages/News/EventBoard/EventBoard";

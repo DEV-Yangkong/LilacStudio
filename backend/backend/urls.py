@@ -6,7 +6,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 # 추가한 앱 #
 from category_news.notice_board import views as notice_board_views
-from category_news.update_board import views as notice_board_views
+from category_news.update_board import views as update_board_views
+from category_news.event_board import views as event_board_views
 from category_media.youtube import views as youtube_views
 
 
