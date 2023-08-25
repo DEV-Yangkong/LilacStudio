@@ -25,7 +25,7 @@ import UpdateBoardDetail from "./Pages/News/UpdateBoard/UpdateBoardDetail";
 import WritePostUB from "./Pages/News/UpdateBoard/WritePostUB";
 // 새소식/이벤트
 import EventBoard from "./Pages/News/EventBoard/EventBoard";
-import EventBoardDetail from "./Pages/News/EventBoard/EventBoard";
+import EventBoardDetail from "./Pages/News/EventBoard/EventBoardDetail";
 import WritePostEB from "./Pages/News/EventBoard/WritePostEB";
 // 게임정보
 import GameInfo from "./Pages/GameInfo/GameInfo";

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import styles from "./EventDetail.module.css";
+import styles from "./EventBoardDetail.module.css";
 import AlertModal from "../../../modules/AlertModal/AlertModal";
 import GenerateEmbedCode from "../../../modules/GenerateCode/GenerateEmbedCode";
 import FormatDate from "../../../modules/FormatDate/FormatDate";
