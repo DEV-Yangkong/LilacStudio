@@ -5,12 +5,12 @@ import axios from "axios";
 export const HandleEditClick = (setIsEditMode, setEditedPost, selectedPost) => {
   setIsEditMode(true);
   setEditedPost({
-    Title: selectedPost.title,
-    SubTitle: selectedPost.subtitle,
-    Content: selectedPost.content,
-    Image: selectedPost.image,
-    ImageUrl: selectedPost.image_url,
-    VideoUrl: selectedPost.video_url,
+    title: selectedPost.title,
+    subtitle: selectedPost.subtitle,
+    content: selectedPost.content,
+    image: selectedPost.image,
+    image_url: selectedPost.image_url,
+    video_url: selectedPost.video_url,
   });
 };
 
@@ -24,8 +24,8 @@ export const HandleSaveClick = async (
   updateApiPath
 ) => {
   try {
-    if (!editedPost.VideoUrl) {
-      editedPost.VideoUrl = ""; // video_url을 빈 문자열로 설정
+    if (!editedPost.videoUrl) {
+      editedPost.videoUrl = ""; // video_url을 빈 문자열로 설정
     }
 
     const response = await axios.put(updateApiPath(postId), editedPost);
