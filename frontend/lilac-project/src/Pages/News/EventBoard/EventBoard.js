@@ -5,10 +5,6 @@ import styles from "./EventBoard.module.css";
 import "font-awesome/css/font-awesome.min.css";
 import FormatDate from "../../../modules/FormatDate/FormatDate";
 import {
-  GenerateThumbnailUrl,
-  ExtractVideoId,
-} from "../../../modules/GenerateCode/GenerateThumbnail";
-import {
   ScrollToTop,
   HandlePageChange,
   UseScrollToTop,
@@ -87,15 +83,13 @@ const EventBoard = () => {
                 to={`/news/event-board/event/${post.id}`}
                 className={styles["post-title-link"]}
               >
-                {/* 동영상 썸네일 이미지 표시 */}
-                {post.video_url && (
-                  <div className={styles["post-thumbnail"]}>
-                    <img
-                      src={GenerateThumbnailUrl(post.video_url)}
-                      alt={post.title}
-                    />
-                  </div>
-                )}
+                <div className={styles["post-image-container"]}>
+                  <img
+                    src={post.image_url}
+                    alt="Post"
+                    className={styles["post-image"]}
+                  />
+                </div>
                 <div className={styles["post-title"]}>{post.title}</div>
               </Link>
               <div className={styles["post-info"]}>

@@ -3,7 +3,8 @@ from .models import Event
 
 
 class EventAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'created_at', 'views_count')  # 보여질 필드 설정
+    list_display = ('id', 'title', 'image_url',
+                    'created_at', 'views_count')  # 보여질 필드 설정
     search_fields = ('title',)  # 검색 기능 추가
     list_filter = ('created_at',)  # 필터 기능 추가
     actions = ['increase_views']
@@ -12,7 +13,8 @@ class EventAdmin(admin.ModelAdmin):
 
     # 여러 기능을 위해 해당 모델 어드민에 설정
     fieldsets = [
-        (None, {'fields': ['title', 'content', 'video_url', 'views_count']}),
+        (None, {'fields': ['title', 'image_url',
+         'content', 'video_url', 'views_count']}),
         ('미리 보기', {'fields': ['preview_image', 'link_to_detail']}),
     ]
 

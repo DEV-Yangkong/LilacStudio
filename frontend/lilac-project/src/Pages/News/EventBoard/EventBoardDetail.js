@@ -73,13 +73,15 @@ const EventBoardDetail = () => {
     >
       <h2>
         {isEditMode ? (
-          <input
-            className={styles["edit-title-input"]}
-            value={editedPost.title}
-            onChange={(e) =>
-              setEditedPost({ ...editedPost, title: e.target.value })
-            }
-          />
+          <div className={styles["form-group"]}>
+            <label htmlFor="title">제목</label>
+            <input
+              className={styles.input}
+              onChange={(e) =>
+                setEditedPost({ ...editedPost, title: e.target.value })
+              }
+            />
+          </div>
         ) : (
           selectedPost.title
         )}
@@ -92,7 +94,49 @@ const EventBoardDetail = () => {
           조회수 {selectedPost.views_count}
         </span>
       </div>
-      <div className={styles["notice-content-container"]}>
+      <div className={styles["event-content-container"]}>
+        {/* 이미지 편집 */}
+        {isEditMode && (
+          <div className={styles["form-group"]}>
+            <label htmlFor="image_Url">이미지 주소</label>
+            <input
+              type="url"
+              value={editedPost.image_url || ""}
+              onChange={(e) =>
+                setEditedPost({ ...editedPost, image_url: e.target.value })
+              }
+              className={styles.input}
+            />
+          </div>
+        )}
+        {/* 이미지 컨테이너 */}
+        <div className={styles["post-image-container"]}>
+          {!isEditMode && (
+            <>
+              {selectedPost.image && typeof selectedPost.image === "string" && (
+                <img
+                  src={`http://127.0.0.1:8000${selectedPost.image}`}
+                  alt="Post-Img"
+                  className={styles["post-image"]}
+                />
+              )}
+              {selectedPost.image_url && (
+                <img
+                  src={selectedPost.image_url}
+                  alt="URL-Img"
+                  className={styles["post-image"]}
+                />
+              )}
+            </>
+          )}
+          {isEditMode && editedPost.image_url && (
+            <img
+              src={editedPost.image_url}
+              alt="URL-Img"
+              className={styles["post-image"]}
+            />
+          )}
+        </div>
         {/* 동영상 컨테이너 */}
         <div className={styles["video-content-container"]}>
           {/* 동영상 편집 */}

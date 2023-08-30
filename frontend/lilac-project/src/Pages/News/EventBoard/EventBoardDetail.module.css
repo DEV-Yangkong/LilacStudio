@@ -82,13 +82,33 @@
   margin-top: 30px;
 }
 
-.edit-title-input {
+.post-image-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+.post-image {
+  max-width: 100%;
+  width: 600px;
+  height: auto;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.image-url-container {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.image-url-input {
   flex-grow: 1;
-  width: 750px;
+  width: 560px;
   padding: 10px 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  font-size: 20px;
+  font-size: 14px;
 }
 
 .post-content textarea {
@@ -100,31 +120,33 @@
   border-radius: 5px;
   font-size: 14px;
   margin-bottom: 20px;
+  margin-top: 30px;
 }
 
 .form-group {
   margin-top: 50px;
   width: 100%;
-  text-align: center; /* 중앙 정렬을 위한 스타일 추가 */
+  text-align: center;
 }
 
 .form-group label {
   font-size: 18px;
   margin-bottom: 8px;
-  display: inline-block; /* 라벨을 인라인 블록으로 설정하여 중앙 정렬을 위한 스타일 추가 */
+  display: inline-block;
   color: #333;
+  margin-right: 10px;
 }
 
 .form-group input,
 .form-group textarea {
-  width: 500px;
+  width: 700px;
   padding: 10px;
   font-size: 16px;
   border: 1.5px solid #ccc;
   border-radius: 5px;
   box-sizing: border-box;
   transition: border-color 0.3s ease-in-out;
-  max-width: 500px;
+  /* max-width: 800px; */
   max-height: 300px;
 }
 

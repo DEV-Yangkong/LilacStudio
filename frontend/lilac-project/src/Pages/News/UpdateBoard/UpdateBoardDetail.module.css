@@ -107,24 +107,6 @@
   font-size: 14px;
 }
 
-/* .edit-title-input {
-  flex-grow: 1;
-  width: 750px;
-  padding: 10px 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 20px;
-}
-
-.edit-subtitle-input {
-  flex-grow: 1;
-  width: 750px;
-  padding: 10px 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 20px;
-} */
-
 .post-content textarea {
   flex-grow: 1;
   width: 560px;
