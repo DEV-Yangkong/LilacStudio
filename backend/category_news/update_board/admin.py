@@ -13,7 +13,7 @@ class UpdateChangeList(ChangeList):
 
 @admin.register(Update)
 class UpdateAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'created_at', 'views_count')
+    list_display = ('id', 'title', 'subtitle', 'created_at', 'views_count')
     search_fields = ('title',)
     list_filter = ('created_at',)
     actions = ['increase_views']
@@ -35,7 +35,7 @@ class UpdateAdmin(admin.ModelAdmin):
 
     readonly_fields = ('preview_image', 'link_to_detail', 'created_at')
     fieldsets = [
-        (None, {'fields': ['title', 'content', 'created_at',
+        (None, {'fields': ['title', 'subtitle', 'content', 'created_at',
                            'image', 'image_url', 'video_url', 'views_count']}),
         ('미리 보기', {'fields': ['preview_image', 'link_to_detail']}),
     ]

@@ -15,7 +15,34 @@ const WritePostEB = () => {
   const [modalMessage, setModalMessage] = useState("");
   const [isPostSuccess, setIsPostSuccess] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
+  const [userImageType, setUserImageType] = useState("url"); // 이미지 URL과 파일 첨부 옵션
+  const [userImageUrl, setUserImageUrl] = useState("");
+  const [userImageFile, setUserImageFile] = useState(null);
   const navigate = useNavigate();
+
+  // 이미지 미리보기 업데이트 함수
+  const updateImagePreview = () => {
+    if (userImageType === "url") {
+      setPreviewImageUrl(userImageUrl); // previewImageUrl로 변경
+    } else if (userImageType === "file" && userImageFile) {
+      const imageURL = URL.createObjectURL(userImageFile);
+      setPreviewImageUrl(imageURL); // previewImageUrl로 변경
+    } else {
+      setPreviewImageUrl(""); // previewImageUrl로 변경
+    }
+  };
+
+  // 이미지 URL 및 파일 변경 시 호출될 핸들러
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setUserImageFile(file);
+    updateImagePreview();
+  };
+
+  useEffect(() => {
+    // 이미지 URL 및 파일이 변경될 때마다 미리보기 업데이트
+    updateImagePreview();
+  }, [userImageType, userImageUrl, userImageFile]);
 
   useEffect(() => {
     // axios 요청 전에 CSRF 토큰 설정
@@ -43,6 +70,13 @@ const WritePostEB = () => {
     formData.append("title", title);
     formData.append("content", content);
     formData.append("video_url", videoUrl);
+
+    // 이미지 URL 또는 파일을 FormData에 추가
+    if (userImageType === "url") {
+      formData.append("image_url", userImageUrl);
+    } else if (userImageType === "file" && userImageFile) {
+      formData.append("image", userImageFile);
+    }
 
     try {
       const response = await axios.post(
@@ -136,6 +170,48 @@ const WritePostEB = () => {
             />
           </div>
         )}
+        {/* 이미지 URL 및 파일 첨부 인풋 추가 */}
+        <div className={styles["form-group"]}>
+          <label htmlFor="userImageType">이미지 타입 선택</label>
+          <select
+            id="userImageType"
+            value={userImageType}
+            onChange={(e) => setUserImageType(e.target.value)}
+          >
+            <option value="url">URL</option>
+            <option value="file">첨부</option>
+          </select>
+        </div>
+        {userImageType === "url" ? (
+          <div className={styles["form-group"]}>
+            <label htmlFor="userImageUrl">이미지 URL</label>
+            <input
+              type="url"
+              id="userImageUrl"
+              value={userImageUrl}
+              onChange={(e) => setUserImageUrl(e.target.value)}
+              className={styles.input}
+            />
+          </div>
+        ) : userImageType === "file" ? (
+          <div className={styles["form-group"]}>
+            <label htmlFor="userImageFile">이미지 첨부</label>
+            <input
+              type="file"
+              id="userImageFile"
+              accept="image/*"
+              onChange={(e) =>
+                HandleChange.HandleImageChange(
+                  e,
+                  setUserImageFile,
+                  setUserImageType,
+                  setUserImageUrl
+                )
+              }
+              className={styles.input}
+            />
+          </div>
+        ) : null}
         <div className={styles["form-group"]}>
           <label htmlFor="content">내용</label>
           <textarea

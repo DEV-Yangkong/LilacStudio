@@ -12,6 +12,10 @@ export const HandleTitleChange = (e, setTitle) => {
   setTitle(e.target.value);
 };
 
+export const HandleSubTitleChange = (e, setSubTitle) => {
+  setSubTitle(e.target.value);
+};
+
 export const HandleContentChange = (e, setContent) => {
   setContent(e.target.value);
 };

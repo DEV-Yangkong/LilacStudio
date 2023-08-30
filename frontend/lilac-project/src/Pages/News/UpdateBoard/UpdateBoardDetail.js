@@ -67,17 +67,36 @@ const UpdateBoardDetail = () => {
 
   return (
     <div className={styles["update-board-detail"]}>
-      <h2>
+      <h1>
         {isEditMode ? (
-          <input
-            className={styles["edit-title-input"]}
-            value={editedPost.title}
-            onChange={(e) =>
-              setEditedPost({ ...editedPost, title: e.target.value })
-            }
-          />
+          <div className={styles["form-group"]}>
+            <label htmlFor="title">제목</label>
+            <input
+              className={styles.input}
+              value={editedPost.title}
+              onChange={(e) =>
+                setEditedPost({ ...editedPost, title: e.target.value })
+              }
+            />
+          </div>
         ) : (
           selectedPost.title
+        )}
+      </h1>
+      <h2>
+        {isEditMode ? (
+          <div className={styles["form-group"]}>
+            <label htmlFor="subtitle">부제목</label>
+            <input
+              className={styles.input}
+              value={editedPost.subtitle}
+              onChange={(e) =>
+                setEditedPost({ ...editedPost, subtitle: e.target.value })
+              }
+            />
+          </div>
+        ) : (
+          selectedPost.subtitle
         )}
       </h2>
       <div className={styles["post-info"]}>

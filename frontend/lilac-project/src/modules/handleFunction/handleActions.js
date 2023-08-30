@@ -6,6 +6,7 @@ export const HandleEditClick = (setIsEditMode, setEditedPost, selectedPost) => {
   setIsEditMode(true);
   setEditedPost({
     Title: selectedPost.title,
+    SubTitle: selectedPost.subtitle,
     Content: selectedPost.content,
     Image: selectedPost.image,
     ImageUrl: selectedPost.image_url,

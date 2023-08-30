@@ -10,10 +10,11 @@ import CreateModeButtons from "../../../modules/Button/CreatePost/CreatePost";
 
 const WritePostUB = () => {
   const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const [subtitle, setSubTitle] = useState("");
   const [videoUrl, setVideoUrl] = useState("");
   const [thumbnailUrl, setThumbnailUrl] = useState("");
   const [userImageType, setUserImageType] = useState("url");
+  const [content, setContent] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const [isPostSuccess, setIsPostSuccess] = useState(false);
@@ -48,6 +49,7 @@ const WritePostUB = () => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("title", title);
+    formData.append("subtitle", subtitle);
     formData.append("content", content);
     formData.append("video_url", videoUrl || "");
 
@@ -131,6 +133,17 @@ const WritePostUB = () => {
             id="title"
             value={title}
             onChange={(e) => HandleChange.HandleTitleChange(e, setTitle)}
+            required
+            className={styles.input}
+          />
+        </div>
+        <div className={styles["form-group"]}>
+          <label htmlFor="subtitle">부제목</label>
+          <input
+            type="text"
+            id="subtitle"
+            value={subtitle}
+            onChange={(e) => HandleChange.HandleSubTitleChange(e, setSubTitle)}
             required
             className={styles.input}
           />

@@ -7,10 +7,20 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-.update-board-detail h2 {
-  font-size: 28px;
-  margin-bottom: 25px;
+.update-board-detail h1 {
+  font-size: 35px;
+  margin-top: 30px;
+  margin-bottom: 10px;
   color: #333;
+  font-family: "Noto Sans KR", sans-serif;
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+
+.update-board-detail h2 {
+  font-size: 18px;
+  margin-bottom: 25px;
+  color: #666;
   font-family: "Noto Sans KR", sans-serif;
   letter-spacing: 1.5px;
   font-weight: 500;
@@ -46,16 +56,18 @@
 .post-content {
   font-size: 16px;
   line-height: 1.6;
-  color: #444;
+  color: #333;
   margin: 0 0 0 5px;
   padding: 10px 10px;
   text-align: justify;
   font-family: "Noto Sans KR", sans-serif;
+  margin-left: 10px;
 }
 
 .post-info {
   font-size: 14px;
-  color: #666;
+  color: #555;
+  margin-left: 10px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -95,7 +107,7 @@
   font-size: 14px;
 }
 
-.edit-title-input {
+/* .edit-title-input {
   flex-grow: 1;
   width: 750px;
   padding: 10px 10px;
@@ -103,6 +115,15 @@
   border-radius: 5px;
   font-size: 20px;
 }
+
+.edit-subtitle-input {
+  flex-grow: 1;
+  width: 750px;
+  padding: 10px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 20px;
+} */
 
 .post-content textarea {
   flex-grow: 1;
@@ -119,26 +140,27 @@
 .form-group {
   margin-top: 50px;
   width: 100%;
-  text-align: center; /* 중앙 정렬을 위한 스타일 추가 */
+  text-align: center;
 }
 
 .form-group label {
   font-size: 18px;
   margin-bottom: 8px;
-  display: inline-block; /* 라벨을 인라인 블록으로 설정하여 중앙 정렬을 위한 스타일 추가 */
+  display: inline-block;
   color: #333;
+  margin-right: 10px;
 }
 
 .form-group input,
 .form-group textarea {
-  width: 500px;
+  width: 700px;
   padding: 10px;
   font-size: 16px;
   border: 1.5px solid #ccc;
   border-radius: 5px;
   box-sizing: border-box;
   transition: border-color 0.3s ease-in-out;
-  max-width: 500px;
+  /* max-width: 800px; */
   max-height: 300px;
 }
 
