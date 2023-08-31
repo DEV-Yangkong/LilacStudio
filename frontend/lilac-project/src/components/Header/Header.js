@@ -52,7 +52,7 @@ const Header = () => {
       label: "미디어",
       path: "/media",
       items: ["유튜브", "갤러리"],
-      itemPaths: ["/media/youtube", "/media/gallery"],
+      itemPaths: ["/media/youtube", "/media/gallery-board"],
     },
     {
       label: "웹샵",

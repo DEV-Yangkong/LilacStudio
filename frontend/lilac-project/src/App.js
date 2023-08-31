@@ -48,7 +48,10 @@ import YouTube from "./Pages/Media/YouTube/YouTubeList";
 import YouTubeDetail from "./Pages/Media/YouTube/YouTubeDetail";
 import WritePostYT from "./Pages/Media/YouTube/WritePostYT";
 // 미디어 / 갤러리
-import Gallery from "./Pages/Media/Gallery/Gallery";
+import GalleryBoard from "./Pages/Media/GalleryBoard/GalleryBoard";
+import GalleryBoardDetail from "./Pages/Media/GalleryBoard/GalleryBoardDetail";
+import WritePostGB from "./Pages/Media/GalleryBoard/WritePostGB";
+
 // 웹샵
 import WebShop from "./Pages/WebShop/WebShop";
 import CashItems from "./Pages/WebShop/CashItems/CashItems";
@@ -143,7 +146,15 @@ function App() {
             element={<WritePostYT />}
           />
           {/* 미디어 / 갤러리 */}
-          <Route path="/media/gallery" element={<Gallery />} />
+          <Route path="/media/gallery-board" element={<GalleryBoard />} />
+          <Route
+            path="/media/gallery-board/gallery/:postId"
+            element={<GalleryBoardDetail />}
+          />
+          <Route
+            path="/media/gallery-board/write-post-gb"
+            element={<WritePostGB />}
+          />
 
           {/* 웹샵 */}
           <Route path="/web-shop" element={<WebShop />} />

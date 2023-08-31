@@ -26,6 +26,8 @@ urlpatterns = [
     path("api/v1/event_board/", include("category_news.event_board.urls")),
     # MEDIA/유튜브
     path("api/v1/youtube/", include("category_media.youtube.urls")),
+    # MEDIA/갤러리
+    path("api/v1/gallery_board/", include("category_media.gallery_board.urls")),
 
 ]
 # 개발환경에서 미디어 파일을 제공하기 위한 URL 설정

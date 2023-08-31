@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "category_news.event_board",
     # MEDIA/
     "category_media.youtube",
+    "category_media.gallery_board",
 
 ]
 
