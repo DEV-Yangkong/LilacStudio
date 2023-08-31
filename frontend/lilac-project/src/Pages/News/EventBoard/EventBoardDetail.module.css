@@ -8,11 +8,11 @@
 }
 
 .event-board-detail h2 {
-  font-size: 28px;
+  font-size: 48px;
   margin-bottom: 25px;
   color: #333;
   font-family: "Noto Sans KR", sans-serif;
-  letter-spacing: 1.5px;
+  letter-spacing: 1.8px;
   font-weight: 500;
 }
 
@@ -54,16 +54,16 @@
 }
 
 .post-info {
-  font-size: 14px;
-  color: #666;
+  color: #333;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
+  margin-top: 30px;
+  font-size: 20px;
 }
 
 .post-views {
   margin-left: 10px;
-  font-size: 14px;
 }
 
 .video-url-container {

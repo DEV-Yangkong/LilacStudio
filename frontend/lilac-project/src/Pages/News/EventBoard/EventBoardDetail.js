@@ -21,6 +21,8 @@ const EventBoardDetail = () => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [editedPost, setEditedPost] = useState({});
   const [videoError, setVideoError] = useState(false);
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
 
   useEffect(() => {
     const fetchPostDetail = async () => {
@@ -30,6 +32,8 @@ const EventBoardDetail = () => {
         );
         setSelectedPost(response.data);
         setEditedPost(response.data);
+        setStartDate(response.data.start_date); // 시작 날짜 설정
+        setEndDate(response.data.end_date); // 끝나는 날짜 설정
 
         // 상세 페이지 로드 시 조회수 증가 요청 보냄
         try {
@@ -88,7 +92,8 @@ const EventBoardDetail = () => {
       </h2>
       <div className={styles["post-info"]}>
         <span className={styles["post-date"]}>
-          {FormatDate(selectedPost.created_at)}
+          이벤트 기간 : {FormatDate(selectedPost.start_date)} ~{" "}
+          {FormatDate(selectedPost.end_date)}
         </span>
         <span className={styles["post-views"]}>
           조회수 {selectedPost.views_count}

@@ -24,8 +24,8 @@ export const HandleSaveClick = async (
   updateApiPath
 ) => {
   try {
-    if (!editedPost.videoUrl) {
-      editedPost.videoUrl = ""; // video_url을 빈 문자열로 설정
+    if (!editedPost.video_url) {
+      editedPost.video_url = ""; // video_url을 빈 문자열로 설정
     }
 
     const response = await axios.put(updateApiPath(postId), editedPost);
