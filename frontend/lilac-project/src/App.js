@@ -29,6 +29,10 @@ import EventBoardDetail from "./Pages/News/EventBoard/EventBoardDetail";
 import WritePostEB from "./Pages/News/EventBoard/WritePostEB";
 // 게임정보
 import GameInfo from "./Pages/GameInfo/GameInfo";
+// 게임정보/개발중인 게임
+import DevelopingGame from "./Pages/GameInfo/DevelopingGame/DevelopingGame";
+// 게임정보/출시된 게임
+import ReleasedGame from "./Pages/GameInfo/ReleasedGame/ReleasedGame";
 // 커뮤니티
 import Community from "./Pages/Community/Community";
 // 미디어
@@ -81,6 +85,7 @@ function App() {
             path="/news/update-board/write-post-ub"
             element={<WritePostUB />}
           />
+
           {/* 새 소식 / 이벤트 */}
           <Route path="/news/event-board" element={<EventBoard />} />
           <Route
@@ -94,6 +99,10 @@ function App() {
 
           {/* 게임 정보 */}
           <Route path="/game-info" element={<GameInfo />} />
+          {/* 게임 정보 / 개발중인 게임 */}
+          <Route path="/game-info/developing" element={<DevelopingGame />} />
+          {/* 게임 정보 / 출시된 게임 */}
+          <Route path="/game-info/released" element={<ReleasedGame />} />
 
           {/* 커뮤니티 */}
           <Route path="/community" element={<Community />} />
