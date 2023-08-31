@@ -40,19 +40,19 @@ const Header = () => {
     {
       label: "커뮤니티",
       path: "/community",
-      items: ["공략", "자유", "갤러리", "팬아트"],
+      items: ["자유게시판", "공략", "팬아트"],
       itemPaths: [
-        "/community/guide",
-        "/community/free",
-        "/community/gallery",
+        "/community/free-board",
+        "/community/guide-board",
+
         "/community/fan-art",
       ],
     },
     {
       label: "미디어",
       path: "/media",
-      items: ["유튜브"],
-      itemPaths: ["/media/youtube"],
+      items: ["유튜브", "갤러리"],
+      itemPaths: ["/media/youtube", "/media/gallery"],
     },
     {
       label: "웹샵",
@@ -65,9 +65,9 @@ const Header = () => {
       path: "/customer-service",
       items: ["버그제보", "FAQ", "신고", "고객센터", "건의사항"],
       itemPaths: [
-        "/customer-service/bug-report",
+        "/customer-service/bug-reports",
         "/customer-service/faq",
-        "/customer-service/report",
+        "/customer-service/reports",
         "/customer-service/contact",
         "/customer-service/suggestions",
       ],
