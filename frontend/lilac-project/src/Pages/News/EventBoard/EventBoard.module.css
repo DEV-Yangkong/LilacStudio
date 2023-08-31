@@ -67,7 +67,56 @@
 
 .post-date {
   margin-right: 10px;
-  margin-left: -10px;
+}
+
+.post-d-day {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bolder;
+  color: #333;
+  width: 160px;
+  height: 90px;
+}
+
+/* 예정 상태 스타일 */
+.upcoming {
+  background-color: #00b894;
+  color: white;
+  padding: 10px 12px;
+  font-size: 15px;
+  border-radius: 5px;
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+/* 진행 중 상태 스타일 */
+.progress {
+  background-color: #0984e3;
+  color: white;
+  padding: 13px 13px;
+  font-size: 18px;
+  border-radius: 5px;
+  border-radius: 50%;
+  margin-left: 50px;
+}
+
+.progress span {
+  font-size: 13px;
+}
+
+/* 종료 상태 스타일 */
+.completed {
+  background-color: #d63031;
+  color: white;
+  padding: 10px 12px;
+  font-size: 15px;
+  border-radius: 5px;
+  margin-left: 20px;
+  margin-top: 10px;
 }
 
 .search-bar {

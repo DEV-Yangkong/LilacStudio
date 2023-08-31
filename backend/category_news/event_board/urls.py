@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import get_event_board, EventDetailAPIView, IncreaseViews
+from .views import get_event_board, EventDetailAPIView, IncreaseViews, CalculateDday
 
 app_name = 'category_news.event_board'
 
@@ -8,5 +8,6 @@ urlpatterns = [
     path('event/<int:pk>/', EventDetailAPIView.as_view(),
          name='event_detail_api'),  # 주소 변경
     path('event/<int:post_id>/increase-views/',
-         IncreaseViews.as_view(), name='increase-views'),  # 주소 변경
+         IncreaseViews.as_view(), name='increase-views'),
+     path('event/<int:post_id>/calculate-d-day/', CalculateDday.as_view(), name='calculate-d-day'),
 ]

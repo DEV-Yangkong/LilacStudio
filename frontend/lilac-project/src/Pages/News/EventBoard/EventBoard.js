@@ -14,6 +14,7 @@ const EventBoard = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [EventPosts, setEventPosts] = useState([]);
+  const [currentDate, setCurrentDate] = useState(new Date());
 
   const postsPerPage = 9;
 
@@ -30,21 +31,52 @@ const EventBoard = () => {
     };
 
     fetchData();
+    setCurrentDate(new Date());
   }, []);
 
+  // 상단으로 이동
   const { scrollButtonVisible } = UseScrollToTop();
 
+  // 검색 기능
   const filteredPosts = EventPosts.filter(
     (post) =>
       searchTerm === "" ||
       post.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  // 페이지 네이션
   const totalPageCount = Math.ceil(filteredPosts.length / postsPerPage);
-
   const startIndex = (currentPage - 1) * postsPerPage;
   const endIndex = Math.min(startIndex + postsPerPage, filteredPosts.length);
   const postsToShow = filteredPosts.slice(startIndex, endIndex);
+
+  //이벤트기간과 디데이 계산
+  const calculateDday = (startDate, endDate) => {
+    const now = new Date(); // 현재 날짜와 시간 가져오기
+    console.log("post.start_date:", startDate);
+    console.log("post.end_date:", endDate);
+    const startTargetDate = new Date(startDate);
+    const endTargetDate = new Date(endDate);
+
+    if (now < startTargetDate) {
+      return <div className={styles["upcoming"]}>이벤트 준비중</div>;
+    } else if (now >= startTargetDate && now <= endTargetDate) {
+      const timeDiffToEnd = endTargetDate.getTime() - now.getTime();
+      const dDay = Math.floor(timeDiffToEnd / (1000 * 60 * 60 * 24));
+
+      if (dDay === 0) {
+        return <div className={styles["progress"]}>진행중</div>;
+      } else {
+        return (
+          <div className={styles["progress"]}>
+            D-{dDay} <br /> <span>진행중</span>
+          </div>
+        );
+      }
+    } else {
+      return <div className={styles["completed"]}>이벤트 종료</div>;
+    }
+  };
 
   return (
     <div className={styles["event-board"]}>
@@ -94,11 +126,14 @@ const EventBoard = () => {
               </Link>
               <div className={styles["post-info"]}>
                 <span className={styles["post-date"]}>
-                  {FormatDate(post.created_at)}
+                  시작일: {FormatDate(post.start_date)}
                 </span>
-                <span className={styles["post-views"]}>
-                  조회수 {post.views_count}
+                <span className={styles["post-date"]}>
+                  종료일: {FormatDate(post.end_date)}
                 </span>
+              </div>
+              <div className={styles["post-d-day"]}>
+                {calculateDday(post.start_date, post.end_date)}
               </div>
             </div>
           ))}

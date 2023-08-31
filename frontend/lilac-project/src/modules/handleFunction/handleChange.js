@@ -8,8 +8,24 @@ export const SetUserImageUrl = (url, setUserImageUrl) => {
   setUserImageUrl(url);
 };
 
+export const SetStartDate = (date, SetStartDate) => {
+  SetStartDate(date);
+};
+
+export const SetEndDate = (date, SetEndDate) => {
+  SetEndDate(date);
+};
+
 export const HandleTitleChange = (e, setTitle) => {
   setTitle(e.target.value);
+};
+
+export const HandleStartDateChange = (e, setStartDate) => {
+  setStartDate(e.target.value);
+};
+
+export const HandleEndDateChange = (e, setStartDate) => {
+  setStartDate(e.target.value);
 };
 
 export const HandleSubTitleChange = (e, setSubTitle) => {

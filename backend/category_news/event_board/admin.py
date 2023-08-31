@@ -4,9 +4,9 @@ from .models import Event
 
 class EventAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'image_url',
-                    'created_at', 'views_count')  # 보여질 필드 설정
+                    'created_at', 'start_date', 'end_date', 'views_count')  # 보여질 필드 설정
     search_fields = ('title',)  # 검색 기능 추가
-    list_filter = ('created_at',)  # 필터 기능 추가
+    list_filter = ('created_at', 'start_date', 'end_date')  # 필터 기능 추가
     actions = ['increase_views']
 
     readonly_fields = ('preview_image', 'link_to_detail')  # 읽기 전용 필드 설정
@@ -14,7 +14,7 @@ class EventAdmin(admin.ModelAdmin):
     # 여러 기능을 위해 해당 모델 어드민에 설정
     fieldsets = [
         (None, {'fields': ['title', 'image_url',
-         'content', 'video_url', 'views_count']}),
+         'content', 'video_url', 'views_count', 'start_date', 'end_date']}),
         ('미리 보기', {'fields': ['preview_image', 'link_to_detail']}),
     ]
 

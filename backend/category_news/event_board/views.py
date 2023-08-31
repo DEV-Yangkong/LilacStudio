@@ -6,6 +6,7 @@ from .serializers import EventSerializer
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.status import HTTP_200_OK
+from datetime import datetime
 
 
 @api_view(['GET', 'POST'])
@@ -64,5 +65,32 @@ class IncreaseViews(APIView):
             post.views_count += 1
             post.save()
             return Response({"message": "Views count increased successfully."}, status=status.HTTP_200_OK)
+        except Event.DoesNotExist:
+            return Response({"message": "Post not found."}, status=status.HTTP_404_NOT_FOUND)
+
+
+class CalculateDday(APIView):
+    def get(self, request, post_id):
+        try:
+            post = Event.objects.get(pk=post_id)
+            current_date = datetime.now().date()
+
+            if current_date < post.start_date:
+                d_day = (post.start_date - current_date).days
+                status_text = "이벤트 준비중"
+            elif current_date >= post.start_date and current_date <= post.end_date:
+                d_day = (post.end_date - current_date).days
+                if d_day == 0:
+                    status_text = "진행 중"
+                else:
+                    status_text = f"D-{d_day} 진행 중"
+            else:
+                status_text = "이벤트 종료"
+
+            return Response(
+                {"d_day": d_day, "status_text": status_text,
+                    "current_date": current_date},
+                status=status.HTTP_200_OK
+            )
         except Event.DoesNotExist:
             return Response({"message": "Post not found."}, status=status.HTTP_404_NOT_FOUND)
