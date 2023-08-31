@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./TeamIntroduction.module.css";
-import { FaInstagram, FaGithub } from "react-icons/fa";
+import { FaInstagram, FaGithub, FaEnvelope, FaPhone } from "react-icons/fa";
 
 const TeamIntroduction = () => {
   const memberBackgroundColors = [
@@ -40,9 +40,9 @@ const TeamIntroduction = () => {
         <h2>라일락 스튜디오에 오신 것을 환영합니다!</h2>
         <p>우리의 열정적인 인디 게임 개발을 만나보세요.</p>
       </div>
-      <div className={styles["frontEndDescription"]}>
+      {/* <div className={styles["description"]}>
         <h2>" 사이트 개발자 "</h2>
-      </div>
+      </div> */}
       {/* 웹 개발자 정보 */}
       <div className={styles["team-members"]}>
         {/* 양예은 팀원 정보 */}
@@ -54,9 +54,9 @@ const TeamIntroduction = () => {
             <img src="/images/DEV-Yangkong.png" alt="양콩" />
           </div>
           <div className={styles["team-member-content"]}>
-            <h4>양예은(양콩)</h4>
-            <p className={styles["role"]}>💛 WEB FullStack 💛</p>
-            <p className={styles["roleDevelop"]}>" null "</p>
+            <h4>양콩</h4>
+            <p className={styles["role"]}>💛 WEB 💛</p>
+            <p className={styles["roleDevelop"]}>" 사이트 개발 담당 "</p>
             <div className={styles["social-links"]}>
               <a
                 href="https://www.instagram.com/hi._.yangkong/"
@@ -77,17 +77,6 @@ const TeamIntroduction = () => {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* 게임 개발자 정보 */}
-      <div className={styles["backEndDescription"]}>
-        <h2>" 게임 개발자 "</h2>
-        <p>null</p>
-        <div className={styles[("backEndDescription", "addParagraph")]}>
-          <p>null</p>
-        </div>
-      </div>
-      <div className={styles["team-members"]}>
         {/* 고원준 팀원 정보 */}
         <div className={styles["team-member"]}>
           <div
@@ -97,9 +86,9 @@ const TeamIntroduction = () => {
             <img src="/images/won.png" alt="고원준" />
           </div>
           <div className={styles["team-member-content"]}>
-            <h4>고원준</h4>
+            <h4>다랑어</h4>
             <p className={styles["role"]}>💙 GAME 💙</p>
-            <p className={styles["roleDevelop"]}>" null "</p>
+            <p className={styles["roleDevelop"]}>" 그래픽 "</p>
             <div className={styles["social-links"]}>
               <a
                 href="https://www.instagram.com/1.jun_lilac/"
@@ -109,14 +98,14 @@ const TeamIntroduction = () => {
               >
                 <FaInstagram size={35} />
               </a>
-              {/* <a
-                href="https://github.com/"
-                className={styles["github"]}
+              <a
+                href="mailto:dev.yangkong@gmail.com"
+                className={styles["email"]}
                 target="_blank"
                 rel="noreferrer"
               >
-                <FaGithub size={35} />
-              </a> */}
+                <FaEnvelope size={30} />
+              </a>
             </div>
           </div>
         </div>
@@ -131,7 +120,7 @@ const TeamIntroduction = () => {
           <div className={styles["team-member-content"]}>
             <h4>정민근</h4>
             <p className={styles["role"]}>💙 GAME 💙</p>
-            <p className={styles["roleDevelop"]}>" null "</p>
+            <p className={styles["roleDevelop"]}>" 프로그래밍 "</p>
             <div className={styles["social-links"]}>
               <a
                 href="https://www.instagram.com/ming_gi_0.0/"
@@ -141,14 +130,46 @@ const TeamIntroduction = () => {
               >
                 <FaInstagram size={35} />
               </a>
-              {/* <a
-                href="https://github.com/"
-                className={styles["github"]}
+              <a
+                href="mailto:dev.yangkong@gmail.com"
+                className={styles["email"]}
                 target="_blank"
                 rel="noreferrer"
               >
-                <FaGithub size={35} />
-              </a> */}
+                <FaEnvelope size={30} />
+              </a>
+            </div>
+          </div>
+        </div>
+        {/* 정민근 팀원 정보 */}
+        <div className={styles["team-member"]}>
+          <div
+            className={styles["team-member-container"]}
+            style={{ backgroundColor: memberBackgroundColors[2] }}
+          >
+            <img src="/images/min.png" alt="민근" />
+          </div>
+          <div className={styles["team-member-content"]}>
+            <h4>박준재</h4>
+            <p className={styles["role"]}>💙 GAME 💙</p>
+            <p className={styles["roleDevelop"]}>" 프로그래밍 "</p>
+            <div className={styles["social-links"]}>
+              <a
+                href="mailto:dev.yangkong@gmail.com"
+                className={styles["email"]}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <FaEnvelope size={30} />
+              </a>
+              <a
+                href="tel:010-1234-5678"
+                className={styles["phone"]}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <FaPhone size={30} />
+              </a>
             </div>
           </div>
         </div>

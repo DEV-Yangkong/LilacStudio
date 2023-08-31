@@ -15,7 +15,7 @@ const GalleryBoard = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [GalleryPosts, setGalleryPosts] = useState([]);
 
-  const postsPerPage = 9;
+  const postsPerPage = 4;
 
   useEffect(() => {
     const fetchData = async () => {
