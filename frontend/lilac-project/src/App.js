@@ -33,6 +33,9 @@ import GameInfo from "./Pages/GameInfo/GameInfo";
 import DevelopingGame from "./Pages/GameInfo/DevelopingGame/DevelopingGame";
 // 게임정보/출시된 게임
 import ReleasedGame from "./Pages/GameInfo/ReleasedGame/ReleasedGame";
+// 게임정보/게임 매칭 테스트
+import MyGameMatch from "./Pages/GameInfo/MyGameMatch/MyGameMatch";
+import QuizPage from "./Pages/GameInfo/MyGameMatch/QuizPage";
 // 커뮤니티
 import Community from "./Pages/Community/Community";
 // 커뮤니티/자유게시판
@@ -123,6 +126,9 @@ function App() {
           <Route path="/game-info/developing" element={<DevelopingGame />} />
           {/* 게임 정보 / 출시된 게임 */}
           <Route path="/game-info/released" element={<ReleasedGame />} />
+          {/* 게임 정보 / 게임 매칭 테스트 */}
+          <Route path="/game-info/my-game-match" element={<MyGameMatch />} />
+          <Route path="/game-info/my-game-match/quiz" element={<QuizPage />} />
 
           {/* 커뮤니티 */}
           <Route path="/community" element={<Community />} />

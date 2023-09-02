@@ -34,8 +34,12 @@ const Header = () => {
     {
       label: "게임정보",
       path: "/game-info",
-      items: ["개발중인 게임", "출시된 게임"],
-      itemPaths: ["/game-info/developing", "/game-info/released"],
+      items: ["개발중인 게임", "출시된 게임", "게임 매칭 테스트"],
+      itemPaths: [
+        "/game-info/developing",
+        "/game-info/released",
+        "/game-info/my-game-match",
+      ],
     },
     {
       label: "커뮤니티",
