@@ -1,3 +1,9 @@
 [build]
-  command = "npm run build"
-  publish = "build"
+  command = "npm run build" # 빌드 명령어
+  publish = "build"         # 빌드된 파일이 저장되는 디렉토리
+
+[context.production]
+  command = "npm run build" # 프로덕션 환경에서 사용할 빌드 명령어
+
+[context.deploy-preview]
+  command = "npm run build" # 데모 빌드 명령어
